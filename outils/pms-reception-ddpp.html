@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procédure PMS : Contrôle à la Réception | GRETA GIP-FIPAN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pms-header {
+      background: linear-gradient(135deg, #0055A4, #003a78);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .pms-status {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    .pms-legal {
+      background: #e8f4fd;
+      border-left: 5px solid #0055A4;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    .pms-box {
+      background: white;
+      border: 2px solid #0055A4;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pms-box h3 {
+      color: #0055A4;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .proof-badge {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+    .who { color: #0055A4; font-weight: 600; }
+    .when { color: #F39200; font-weight: 600; }
+    .how { color: #28a745; font-weight: 600; }
+    .proof { color: #dc3545; font-weight: 600; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    table th {
+      background: #0055A4;
+      color: white;
+      padding: 0.8rem;
+      text-align: left;
+    }
+    table td {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+    }
+    table tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    .nc-trigger {
+      background: #ffebee;
+      border-left: 4px solid #dc3545;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="header-modern">
+    <div class="header-content">
+      <div class="logos-header">
+        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
+        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+      </div>
+      <h1>Procédure PMS : Contrôle à la Réception</h1>
+      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+    </div>
+  </header>
+
+<div class="pms-header">
+  <h1>📦 PROCÉDURE PMS : CONTRÔLE À LA RÉCEPTION</h1>
+  <p><strong>Document constitutif du Plan de Maîtrise Sanitaire</strong></p>
+  <p>Version 18.0 - 21/01/2025 | Créé par Benoît Deflandre - GRETA GIP-FIPAN</p>
+</div>
+
+<main class="container">
+
+  <div class="pms-status">
+    <h2>📋 STATUT DU DOCUMENT</h2>
+    <p><strong>Nature :</strong> Procédure opérationnelle obligatoire</p>
+    <p><strong>Affichage :</strong> Zone de réception (visible personnel et livreurs)</p>
+    <p><strong>Usage en contrôle DDPP :</strong> ✅ Document opposable - Preuve de maîtrise du CCP "Réception"</p>
+  </div>
+
+  <div class="pms-legal">
+    <h2>⚖️ BASE RÉGLEMENTAIRE</h2>
+    <p><strong>Règlement CE 852/2004</strong> - Annexe II, Chapitre IX :</p>
+    <p>"Les exploitants du secteur alimentaire ne doivent accepter aucune matière première [...] dont on sait ou dont on a lieu de penser qu'elle est contaminée."</p>
+    <p><strong>Arrêté du 21 décembre 2009</strong> - Températures de transport et réception</p>
+  </div>
+
+  <div class="pms-box">
+    <h3>🎯 OBJECTIF OPÉRATIONNEL</h3>
+    <p><strong>S'assurer que seuls des produits conformes entrent dans l'établissement, afin de maîtriser le danger sanitaire dès l'amont.</strong></p>
+    <p>Cette procédure définit les 6 contrôles OBLIGATOIRES à effectuer à chaque livraison.</p>
+  </div>
+
+  <div class="pms-box">
+    <h3 class="who">👤 QUI EST RESPONSABLE ?</h3>
+    <table>
+      <tr>
+        <th>Fonction</th>
+        <th>Nom/Désignation</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><strong>Responsable réception</strong></td>
+        <td><input type="text" placeholder="[À REMPLIR]" style="width:100%; padding:0.3rem;"></td>
+        <td>Effectue les contrôles, accepte ou refuse la livraison</td>
+      </tr>
+      <tr>
+        <td><strong>Responsable PMS</strong></td>
+        <td><input type="text" placeholder="[À REMPLIR]" style="width:100%; padding:0.3rem;"></td>
+        <td>Vérifie enregistrements, traite les non-conformités</td>
+      </tr>
+    </table>
+    <p><strong>⚠️ IMPORTANT :</strong> Ces noms DOIVENT être remplis et affichés. Un inspecteur DDPP demandera "Qui est responsable de la réception ?"</p>
+  </div>
+
+  <div class="pms-box">
+    <h3 class="when">🕐 QUAND EFFECTUER LES CONTRÔLES ?</h3>
+    <ul>
+      <li><strong>Systématiquement</strong> à chaque livraison, avant déchargement</li>
+      <li><strong>Avant</strong> la signature du bon de livraison</li>
+      <li><strong>En présence</strong> du livreur</li>
+    </ul>
+    <p><span class="proof">PREUVE ATTENDUE EN INSPECTION :</span> Registre des livraisons coché quotidiennement</p>
+  </div>
+
+  <div class="pms-box">
+    <h3 class="how">🔧 COMMENT PROCÉDER - 6 CONTRÔLES OBLIGATOIRES</h3>
+    
+    <h4>1️⃣ CONTRÔLE TEMPÉRATURE</h4>
+    <table>
+      <tr>
+        <th>Type produit</th>
+        <th>Température exigée</th>
+        <th>Instrument</th>
+      </tr>
+      <tr>
+        <td>Produits frais</td>
+        <td>≤ +4°C</td>
+        <td rowspan="3">Sonde thermomètre désinfectée</td>
+      </tr>
+      <tr>
+        <td>Viandes hachées</td>
+        <td>≤ +2°C</td>
+      </tr>
+      <tr>
+        <td>Produits surgelés</td>
+        <td>≤ -18°C</td>
+      </tr>
+    </table>
+    <div class="nc-trigger">
+      <strong>🚨 DÉCLENCHEUR NON-CONFORMITÉ MAJEURE :</strong>
+      <ul>
+        <li>Température > +6°C pour produits frais → <strong>REFUS IMMÉDIAT</strong></li>
+        <li>Température > -15°C pour surgelés → <strong>REFUS IMMÉDIAT</strong></li>
+      </ul>
+    </div>
+
+    <h4>2️⃣ CONTRÔLE DLC / DLUO</h4>
+    <p><strong>Vérifier :</strong></p>
+    <ul>
+      <li>Date limite lisible et non dépassée</li>
+      <li>Durée résiduelle ≥ 2/3 de la durée totale</li>
+      <li>Étiquetage conforme (langue française, mentions obligatoires)</li>
+    </ul>
+    <div class="nc-trigger">
+      <strong>🚨 DÉCLENCHEUR NC MAJEURE :</strong> Produit périmé → <strong>REFUS OBLIGATOIRE</strong>
+    </div>
+
+    <h4>3️⃣ CONTRÔLE EMBALLAGES</h4>
+    <p><strong>Vérifier :</strong></p>
+    <ul>
+      <li>Intégrité (pas de déchirures, perforations)</li>
+      <li>Propreté (absence de souillures)</li>
+      <li>Absence de bombements (conserves)</li>
+      <li>Étanchéité préservée</li>
+    </ul>
+
+    <h4>4️⃣ CONTRÔLE TRAÇABILITÉ</h4>
+    <p><strong>Exiger :</strong></p>
+    <ul>
+      <li>Numéro de lot visible sur chaque colis</li>
+      <li>Identification du fournisseur (nom, agrément sanitaire)</li>
+      <li>Espèce animale mentionnée (si produits carnés)</li>
+      <li>Origine géographique (si exigée)</li>
+    </ul>
+    <div class="nc-trigger">
+      <strong>🚨 DÉCLENCHEUR NC MAJEURE :</strong> Absence de numéro de lot → <strong>REFUS si impossibilité de tracer</strong>
+    </div>
+
+    <h4>5️⃣ CONTRÔLE VÉHICULE</h4>
+    <p><strong>Observer :</strong></p>
+    <ul>
+      <li>Propreté générale de la zone de chargement</li>
+      <li>Absence de nuisibles (insectes, rongeurs, traces)</li>
+      <li>Séparation secteurs (si transport mixte alimentaire/non-alimentaire)</li>
+      <li>Fonctionnement du groupe frigorifique (enregistreur de température)</li>
+    </ul>
+    <p><strong>Action si NC :</strong> Signaler au fournisseur + enregistrer dans registre NC</p>
+
+    <h4>6️⃣ CONTRÔLE CONFORMITÉ COMMANDE</h4>
+    <p><strong>Vérifier :</strong></p>
+    <ul>
+      <li>Quantités livrées = quantités commandées</li>
+      <li>Références produits correctes</li>
+      <li>Qualité conforme aux spécifications</li>
+    </ul>
+  </div>
+
+  <div class="pms-box">
+    <h3 class="proof">📄 PREUVES À CONSTITUER (EXIGIBLES EN CONTRÔLE DDPP)</h3>
+    
+    <h4>Documents à présenter à l'inspecteur :</h4>
+    <ol>
+      <li><strong>Registre des réceptions</strong> (complété quotidiennement)
+        <ul>
+          <li>Date, fournisseur, produits, températures relevées, conformité (OUI/NON)</li>
+          <li>Signature du responsable réception</li>
+        </ul>
+      </li>
+      <li><strong>Bons de livraison</strong> (conservés 6 mois minimum)
+        <ul>
+          <li>En cas de refus : mention manuscrite "REFUSÉ - Motif : [température/DLC/...]"</li>
+          <li>Signature du livreur exigée</li>
+        </ul>
+      </li>
+      <li><strong>Registre des non-conformités</strong>
+        <ul>
+          <li>Tout refus = NC enregistrée avec actions correctives</li>
+        </ul>
+      </li>
+      <li><strong>Coordonnées fournisseurs agréés</strong>
+        <ul>
+          <li>Liste à jour avec numéros d'agrément sanitaire</li>
+        </ul>
+      </li>
+    </ol>
+
+    <span class="proof-badge">✅ PREUVE PMS COMPLÈTE</span>
+  </div>
+
+  <div class="pms-box">
+    <h3>🚨 PROCÉDURE EN CAS DE NON-CONFORMITÉ</h3>
+    
+    <h4>ÉTAPE 1 : REFUS DE LA LIVRAISON</h4>
+    <ol>
+      <li><strong>NE PAS DÉCHARGER</strong> les produits non conformes</li>
+      <li><strong>NOTER</strong> sur le bon de livraison : "REFUSÉ - Motif : [détailler]"</li>
+      <li><strong>FAIRE SIGNER</strong> le livreur (preuve du refus)</li>
+      <li><strong>PHOTOGRAPHIER</strong> si possible (thermomètre, emballage défectueux)</li>
+    </ol>
+
+    <h4>ÉTAPE 2 : ENREGISTREMENT</h4>
+    <p>Ouvrir immédiatement une <strong>fiche de non-conformité</strong> dans le registre NC :</p>
+    <ul>
+      <li>N° NC-AAAA-XXX</li>
+      <li>Type : Réception</li>
+      <li>Description précise</li>
+      <li>Action immédiate : Refus livraison</li>
+      <li>Action corrective : Contact fournisseur pour nouvelle livraison conforme</li>
+    </ul>
+
+    <h4>ÉTAPE 3 : COMMUNICATION FOURNISSEUR</h4>
+    <p>Contacter le fournisseur dans les <strong>24 heures</strong> :</p>
+    <ul>
+      <li>Expliquer le motif du refus</li>
+      <li>Exiger une nouvelle livraison conforme</li>
+      <li>Si récidive : évaluer le maintien du fournisseur</li>
+    </ul>
+  </div>
+
+  <div class="pms-legal">
+    <h2>📊 INDICATEURS DE PERFORMANCE (KPI)</h2>
+    <p>Pour démontrer la maîtrise de ce CCP en inspection :</p>
+    <table>
+      <tr>
+        <th>Indicateur</th>
+        <th>Cible</th>
+        <th>Suivi</th>
+      </tr>
+      <tr>
+        <td>Taux de livraisons contrôlées</td>
+        <td>100%</td>
+        <td>Mensuel</td>
+      </tr>
+      <tr>
+        <td>Taux de refus pour NC température</td>
+        <td>< 2%</td>
+        <td>Mensuel</td>
+      </tr>
+      <tr>
+        <td>Temps moyen de traitement NC</td>
+        <td>< 24h</td>
+        <td>Par NC</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="pms-status">
+    <h2>🔄 RÉVISION DE LA PROCÉDURE</h2>
+    <p><strong>Fréquence de révision :</strong> Annuelle ou en cas de modification réglementaire</p>
+    <p><strong>Prochaine révision prévue :</strong> Janvier 2026</p>
+    <p><strong>Responsable révision :</strong> Responsable PMS</p>
+  </div>
+
+  <p style="text-align: center; margin-top: 2rem;">
+    <a href="../index.html" class="btn-retour">← Retour au Hub PMS</a>
+  </p>
+
+</main>
+
+<footer>
+  <p><strong>© Benoît Deflandre - GRETA du Var / GIP FIPAN - Académie de Nice</strong></p>
+  <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a> - 2025</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TD PMS - Travaux Dirigés Complets | GRETA GIP-FIPAN</title>
+  
+  <style>
+    :root {
+      --bleu-gip: #0055a4;
+      --bleu-fonce: #003a78;
+      --orange-gip: #f39200;
+      --gris-fond: #f5f6f8;
+      --blanc-carte: #ffffff;
+      --texte-fonce: #2c3e50;
+      --vert: #28a745;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Marianne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--gris-fond);
+      color: var(--texte-fonce);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--bleu-fonce) 0%, var(--bleu-gip) 50%, #0066cc 100%);
+      color: white;
+      padding: 1.5rem 1rem;
+      border-bottom: 5px solid var(--orange-gip);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .logos { display: flex; align-items: center; gap: 1rem; }
+    .logos img { height: 50px; }
+    
+    .header-text h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .header-text p { font-size: 0.9rem; opacity: 0.9; }
+    
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+    
+    .intro-card {
+      background: var(--blanc-carte);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #dde1e7;
+      margin-bottom: 2rem;
+    }
+    
+    .intro-card h2 {
+      color: var(--bleu-gip);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .alert-info {
+      background: #e8f4fd;
+      border-left: 5px solid var(--bleu-gip);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+    
+    .progress-container {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 100px;
+      z-index: 100;
+    }
+    
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-step {
+      flex: 1;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .progress-step.completed {
+      background: var(--vert);
+    }
+    
+    .progress-step.active {
+      background: var(--orange-gip);
+    }
+    
+    .progress-label {
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    
+    .step-card {
+      background: var(--blanc-carte);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: 1px solid #dde1e7;
+      margin-bottom: 2rem;
+      display: none;
+    }
+    
+    .step-card.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .step-card h3 {
+      color: var(--bleu-gip);
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--orange-gip);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .form-group {
+      margin: 1.5rem 0;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--texte-fonce);
+    }
+    
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #dde1e7;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--bleu-gip);
+      box-shadow: 0 0 0 3px rgba(0,85,164,0.1);
+    }
+    
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    
+    table th {
+      background: var(--bleu-gip);
+      color: white;
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #dde1e7;
+    }
+    
+    table input[type="text"],
+    table select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #dde1e7;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .diagnostic-grid {
+      display: grid;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .diagnostic-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      align-items: center;
+    }
+    
+    .diagnostic-row label {
+      font-weight: 600;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background: var(--bleu-gip);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--bleu-fonce);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,85,164,0.3);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--bleu-gip);
+      border: 2px solid var(--bleu-gip);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bleu-gip);
+      color: white;
+    }
+    
+    .btn-success {
+      background: var(--vert);
+      color: white;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .info-box {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    
+    footer {
+      background: var(--texte-fonce);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    
+    footer a {
+      color: var(--orange-gip);
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .diagnostic-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .progress-bar {
+        flex-wrap: wrap;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+    
+    @media print {
+      header, .progress-container, .btn-group, footer {
+        display: none !important;
+      }
+      
+      .step-card {
+        display: block !important;
+        page-break-after: always;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="branding">
+        <div class="logos">
+          <img src="images/logo-republique.png" alt="République Française" class="logo-rf">
+          <img src="images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+        </div>
+        <div class="header-text">
+          <h1>🧾 TD PMS - Travaux Dirigés</h1>
+          <p>GRETA GIP-FIPAN • Académie de Nice</p>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">🏠 Accueil</a>
+        <a href="cours-pms.html">📖 Cours</a>
+        <a href="questionnaire-pms.html">✅ Quiz</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- Introduction -->
+    <div class="intro-card">
+      <h2>🎯 Construire son Plan de Maîtrise Sanitaire</h2>
+      
+      <div class="alert-info">
+        <p><strong>Objectif de la journée :</strong> À la fin du TD, vous serez capable de structurer et rédiger les éléments essentiels de votre PMS, adaptés à votre activité de restauration.</p>
+      </div>
+      
+      <div class="form-group">
+        <label>👤 Nom / Prénom :</label>
+        <input type="text" id="nom" placeholder="Votre nom complet">
+      </div>
+      
+      <div class="form-group">
+        <label>🍽️ Établissement :</label>
+        <input type="text" id="etablissement" placeholder="Nom de votre restaurant / établissement">
+      </div>
+      
+      <div class="form-group">
+        <label>📅 Date :</label>
+        <input type="date" id="date">
+      </div>
+      
+      <div class="info-box">
+        <p><strong>💡 Conseil :</strong> Vos réponses sont automatiquement sauvegardées dans votre navigateur. Vous pouvez revenir compléter ce TD ultérieurement.</p>
+      </div>
+    </div>
+
+    <!-- Barre de progression -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-step completed" data-step="1"></div>
+        <div class="progress-step" data-step="2"></div>
+        <div class="progress-step" data-step="3"></div>
+        <div class="progress-step" data-step="4"></div>
+        <div class="progress-step" data-step="5"></div>
+        <div class="progress-step" data-step="6"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Étape 1/6 : Diagnostic Initial</div>
+    </div>
+
+    <!-- ÉTAPE 1: Diagnostic Initial -->
+    <div class="step-card active" id="step1">
+      <h3>🕘 Étape 1 : Diagnostic Initial (9h00-9h30)</h3>
+      
+      <p style="margin-bottom: 1.5rem;">
+        <strong>Objectif :</strong> Faire le point sur votre niveau actuel en matière de PMS.
+      </p>
+      
+      <div class="diagnostic-grid">
+        <div class="diagnostic-row">
+          <label><strong>Domaine</strong></label>
+          <label>Déjà en place</label>
+          <label>À améliorer</label>
+          <label>Absent</label>
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Plan de nettoyage et désinfection</label>
+          <input type="checkbox" name="diag_nettoyage" value="place">
+          <input type="checkbox" name="diag_nettoyage" value="ameliorer">
+          <input type="checkbox" name="diag_nettoyage" value="absent">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Suivi des températures</label>
+          <input type="checkbox" name="diag_temperatures" value="place">
+          <input type="checkbox" name="diag_temperatures" value="ameliorer">
+          <input type="checkbox" name="diag_temperatures" value="absent">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Traçabilité produits</label>
+          <input type="checkbox" name="diag_tracabilite" value="place">
+          <input type="checkbox" name="diag_tracabilite" value="ameliorer">
+          <input type="checkbox" name="diag_tracabilite" value="absent">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Procédures hygiène du personnel</label>
+          <input type="checkbox" name="diag_personnel" value="place">
+          <input type="checkbox" name="diag_personnel" value="ameliorer">
+          <input type="checkbox" name="diag_personnel" value="absent">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Méthode HACCP</label>
+          <input type="checkbox" name="diag_haccp" value="place">
+          <input type="checkbox" name="diag_haccp" value="ameliorer">
+          <input type="checkbox" name="diag_haccp" value="absent">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>💬 Commentaires / Points à améliorer en priorité :</label>
+        <textarea id="diag_commentaires" placeholder="Notez vos observations..."></textarea>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="nextStep(2)">Étape suivante →</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2: Structurer son PMS -->
+    <div class="step-card" id="step2">
+      <h3>🧱 Étape 2 : Structurer son PMS (9h30-10h45)</h3>
+      
+      <p style="margin-bottom: 1.5rem;">
+        <strong>Objectif :</strong> Identifier les composantes de votre PMS et planifier leur rédaction.
+      </p>
+      
+      <div class="alert-info">
+        <p><strong>Sommaire-type à personnaliser</strong> : Cochez les parties que vous aurez rédigées pendant la journée.</p>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Partie du PMS</th>
+            <th>Objectif</th>
+            <th style="width: 80px; text-align: center;">Fait ?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Présentation de l'établissement</strong></td>
+            <td>Identification, locaux, activités</td>
+            <td style="text-align: center;"><input type="checkbox" name="struct_presentation"></td>
+          </tr>
+          <tr>
+            <td><strong>Bonnes pratiques d'hygiène (BPH)</strong></td>
+            <td>Nettoyage, personnel, locaux</td>
+            <td style="text-align: center;"><input type="checkbox" name="struct_bph"></td>
+          </tr>
+          <tr>
+            <td><strong>Plan HACCP</strong></td>
+            <td>Analyse des dangers et CCP</td>
+            <td style="text-align: center;"><input type="checkbox" name="struct_haccp"></td>
+          </tr>
+          <tr>
+            <td><strong>Traçabilité et enregistrements</strong></td>
+            <td>Fiches, relevés, archivage</td>
+            <td style="text-align: center;"><input type="checkbox" name="struct_tracabilite"></td>
+          </tr>
+          <tr>
+            <td><strong>Non-conformités / gestion de crise</strong></td>
+            <td>Actions correctives, TIAC, rappel</td>
+            <td style="text-align: center;"><input type="checkbox" name="struct_nc"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="form-group">
+        <label>🎯 Mes priorités pour finaliser mon PMS :</label>
+        <textarea id="struct_priorites" placeholder="Ex: Finaliser le plan HACCP, créer les fiches de traçabilité..."></textarea>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="nextStep(1)">← Étape précédente</button>
+        <button class="btn btn-primary" onclick="nextStep(3)">Étape suivante →</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3: Bonnes Pratiques d'Hygiène -->
+    <div class="step-card" id="step3">
+      <h3>🧴 Étape 3 : Bonnes Pratiques d'Hygiène (11h00-12h15)</h3>
+      
+      <p style="margin-bottom: 1.5rem;">
+        <strong>Objectif :</strong> Rédiger vos procédures fondamentales de BPH.
+      </p>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">🧽 Mon plan de nettoyage et de désinfection</h4>
+      
+      <table id="tablePND">
+        <thead>
+          <tr>
+            <th>Zone / Matériel</th>
+            <th>Produit utilisé</th>
+            <th>Fréquence</th>
+            <th>Responsable</th>
+            <th>Vérification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="pnd_zone_1" placeholder="Ex: Plan de travail"></td>
+            <td><input type="text" name="pnd_produit_1" placeholder="Ex: Détergent + désinfectant"></td>
+            <td><input type="text" name="pnd_freq_1" placeholder="Ex: Après chaque usage"></td>
+            <td><input type="text" name="pnd_resp_1" placeholder="Ex: Équipe cuisine"></td>
+            <td><input type="text" name="pnd_verif_1" placeholder="Ex: Chef"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="pnd_zone_2"></td>
+            <td><input type="text" name="pnd_produit_2"></td>
+            <td><input type="text" name="pnd_freq_2"></td>
+            <td><input type="text" name="pnd_resp_2"></td>
+            <td><input type="text" name="pnd_verif_2"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="pnd_zone_3"></td>
+            <td><input type="text" name="pnd_produit_3"></td>
+            <td><input type="text" name="pnd_freq_3"></td>
+            <td><input type="text" name="pnd_resp_3"></td>
+            <td><input type="text" name="pnd_verif_3"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="pnd_zone_4"></td>
+            <td><input type="text" name="pnd_produit_4"></td>
+            <td><input type="text" name="pnd_freq_4"></td>
+            <td><input type="text" name="pnd_resp_4"></td>
+            <td><input type="text" name="pnd_verif_4"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">✋ Mon protocole hygiène du personnel</h4>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Décrivez les procédures : lavage des mains, tenue, gants, bijoux interdits, etc.</p>
+      
+      <div class="form-group">
+        <textarea id="protocole_personnel" placeholder="Ex: Lavage des mains obligatoire en 7 étapes...
+- Avant toute manipulation d'aliments
+- Après passage aux toilettes
+- Après manipulation de déchets
+..."></textarea>
+      </div>
+      
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="verif_bph">
+          <label for="verif_bph">✅ Vérifié par le formateur</label>
+        </div>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="nextStep(2)">← Étape précédente</button>
+        <button class="btn btn-primary" onclick="nextStep(4)">Étape suivante →</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 4: Méthode HACCP -->
+    <div class="step-card" id="step4">
+      <h3>🔬 Étape 4 : Méthode HACCP (13h30-14h45)</h3>
+      
+      <p style="margin-bottom: 1.5rem;">
+        <strong>Objectif :</strong> Identifier les dangers et les Points Critiques de Contrôle (CCP) sur un cas concret.
+      </p>
+      
+      <div class="info-box">
+        <p><strong>💡 Rappel :</strong> Un CCP est une étape où une mesure de contrôle est essentielle pour prévenir, éliminer ou réduire un danger à un niveau acceptable.</p>
+      </div>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">🧠 Mon tableau HACCP simplifié</h4>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Étape du process</th>
+            <th>Danger identifié</th>
+            <th>CCP ?</th>
+            <th>Limite critique</th>
+            <th>Action corrective</th>
+            <th>Enregistrement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="haccp_etape_1" placeholder="Ex: Cuisson"></td>
+            <td><input type="text" name="haccp_danger_1" placeholder="Ex: Bactéries pathogènes"></td>
+            <td style="width: 80px;">
+              <select name="haccp_ccp_1">
+                <option value="">-</option>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+              </select>
+            </td>
+            <td><input type="text" name="haccp_limite_1" placeholder="Ex: T° ≥ 63°C à cœur"></td>
+            <td><input type="text" name="haccp_action_1" placeholder="Ex: Prolonger cuisson"></td>
+            <td><input type="text" name="haccp_enreg_1" placeholder="Ex: Fiche T°"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="haccp_etape_2"></td>
+            <td><input type="text" name="haccp_danger_2"></td>
+            <td>
+              <select name="haccp_ccp_2">
+                <option value="">-</option>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+              </select>
+            </td>
+            <td><input type="text" name="haccp_limite_2"></td>
+            <td><input type="text" name="haccp_action_2"></td>
+            <td><input type="text" name="haccp_enreg_2"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="haccp_etape_3"></td>
+            <td><input type="text" name="haccp_danger_3"></td>
+            <td>
+              <select name="haccp_ccp_3">
+                <option value="">-</option>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+              </select>
+            </td>
+            <td><input type="text" name="haccp_limite_3"></td>
+            <td><input type="text" name="haccp_action_3"></td>
+            <td><input type="text" name="haccp_enreg_3"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="haccp_etape_4"></td>
+            <td><input type="text" name="haccp_danger_4"></td>
+            <td>
+              <select name="haccp_ccp_4">
+                <option value="">-</option>
+                <option value="oui">Oui</option>
+                <option value="non">Non</option>
+              </select>
+            </td>
+            <td><input type="text" name="haccp_limite_4"></td>
+            <td><input type="text" name="haccp_action_4"></td>
+            <td><input type="text" name="haccp_enreg_4"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="checkbox-group" style="margin-top: 1.5rem;">
+        <div class="checkbox-item">
+          <input type="checkbox" id="verif_haccp">
+          <label for="verif_haccp">✅ Vérifié par le formateur</label>
+        </div>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="nextStep(3)">← Étape précédente</button>
+        <button class="btn btn-primary" onclick="nextStep(5)">Étape suivante →</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 5: Traçabilité & NC -->
+    <div class="step-card" id="step5">
+      <h3>📦 Étape 5 : Traçabilité & Non-Conformités (15h00-16h15)</h3>
+      
+      <p style="margin-bottom: 1.5rem;">
+        <strong>Objectif :</strong> Documenter les suivis et la gestion des incidents.
+      </p>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">📋 Ma fiche de traçabilité</h4>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Fournisseur</th>
+            <th>Date réception</th>
+            <th>DLC / DLUO</th>
+            <th>Température</th>
+            <th>Signature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="trac_produit_1" placeholder="Ex: Poulet frais"></td>
+            <td><input type="text" name="trac_fournisseur_1" placeholder="Ex: METRO"></td>
+            <td><input type="date" name="trac_date_1"></td>
+            <td><input type="text" name="trac_dlc_1" placeholder="Ex: 20/01/2025"></td>
+            <td><input type="text" name="trac_temp_1" placeholder="Ex: +2°C"></td>
+            <td><input type="text" name="trac_sign_1" placeholder="Initiales"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="trac_produit_2"></td>
+            <td><input type="text" name="trac_fournisseur_2"></td>
+            <td><input type="date" name="trac_date_2"></td>
+            <td><input type="text" name="trac_dlc_2"></td>
+            <td><input type="text" name="trac_temp_2"></td>
+            <td><input type="text" name="trac_sign_2"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="trac_produit_3"></td>
+            <td><input type="text" name="trac_fournisseur_3"></td>
+            <td><input type="date" name="trac_date_3"></td>
+            <td><input type="text" name="trac_dlc_3"></td>
+            <td><input type="text" name="trac_temp_3"></td>
+            <td><input type="text" name="trac_sign_3"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">🚨 Ma fiche de non-conformité</h4>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Problème constaté</th>
+            <th>Action immédiate</th>
+            <th>Cause probable</th>
+            <th>Mesure corrective</th>
+            <th>Vérification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="nc_probleme_1" placeholder="Ex: T° chambre froide 8°C"></td>
+            <td><input type="text" name="nc_immediate_1" placeholder="Ex: Déplacer produits"></td>
+            <td><input type="text" name="nc_cause_1" placeholder="Ex: Porte mal fermée"></td>
+            <td><input type="text" name="nc_corrective_1" placeholder="Ex: Régler fermeture"></td>
+            <td><input type="text" name="nc_verif_1" placeholder="Ex: Contrôle 2h"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="nc_probleme_2"></td>
+            <td><input type="text" name="nc_immediate_2"></td>
+            <td><input type="text" name="nc_cause_2"></td>
+            <td><input type="text" name="nc_corrective_2"></td>
+            <td><input type="text" name="nc_verif_2"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="checkbox-group" style="margin-top: 1.5rem;">
+        <div class="checkbox-item">
+          <input type="checkbox" id="verif_trac">
+          <label for="verif_trac">✅ Vérifié par le formateur</label>
+        </div>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="nextStep(4)">← Étape précédente</button>
+        <button class="btn btn-primary" onclick="nextStep(6)">Étape suivante →</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 6: Validation Finale -->
+    <div class="step-card" id="step6">
+      <h3>✅ Étape 6 : Validation et Synthèse (16h15-17h00)</h3>
+      
+      <div class="alert-info">
+        <p><strong>Félicitations !</strong> Vous avez complété tous les exercices. Prenez un moment pour valider votre travail.</p>
+      </div>
+      
+      <h4 style="color: var(--bleu-gip); margin-top: 2rem; margin-bottom: 1rem;">📝 Auto-évaluation finale</h4>
+      
+      <div class="diagnostic-grid">
+        <div class="diagnostic-row">
+          <label><strong>J'ai compris...</strong></label>
+          <label>Oui</label>
+          <label>Partiellement</label>
+          <label>À revoir</label>
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>La structure d'un PMS</label>
+          <input type="checkbox" name="eval_structure" value="oui">
+          <input type="checkbox" name="eval_structure" value="partiel">
+          <input type="checkbox" name="eval_structure" value="revoir">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>Les Bonnes Pratiques d'Hygiène</label>
+          <input type="checkbox" name="eval_bph" value="oui">
+          <input type="checkbox" name="eval_bph" value="partiel">
+          <input type="checkbox" name="eval_bph" value="revoir">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>La méthode HACCP et les CCP</label>
+          <input type="checkbox" name="eval_haccp_final" value="oui">
+          <input type="checkbox" name="eval_haccp_final" value="partiel">
+          <input type="checkbox" name="eval_haccp_final" value="revoir">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>La traçabilité et les enregistrements</label>
+          <input type="checkbox" name="eval_tracabilite" value="oui">
+          <input type="checkbox" name="eval_tracabilite" value="partiel">
+          <input type="checkbox" name="eval_tracabilite" value="revoir">
+        </div>
+        
+        <div class="diagnostic-row">
+          <label>La gestion des non-conformités</label>
+          <input type="checkbox" name="eval_nc" value="oui">
+          <input type="checkbox" name="eval_nc" value="partiel">
+          <input type="checkbox" name="eval_nc" value="revoir">
+        </div>
+      </div>
+      
+      <div class="form-group" style="margin-top: 2rem;">
+        <label>💬 Mes questions / Points à approfondir :</label>
+        <textarea id="eval_questions" placeholder="Notez les points que vous souhaitez approfondir..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>🎯 Mon plan d'action pour mon établissement :</label>
+        <textarea id="eval_plan_action" placeholder="Ex: Finaliser mon plan de nettoyage d'ici la fin du mois, former l'équipe sur HACCP..."></textarea>
+      </div>
+      
+      <div class="alert-info" style="margin-top: 2rem;">
+        <p><strong>📥 Pour aller plus loin :</strong></p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li>Consultez le cours PMS complet</li>
+          <li>Testez-vous avec le questionnaire d'évaluation</li>
+          <li>Téléchargez la version PDF des TD pour impression</li>
+        </ul>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="nextStep(5)">← Étape précédente</button>
+        <button class="btn btn-success" onclick="window.print()">🖨️ Imprimer mon TD</button>
+        <a href="#" class="btn btn-secondary" target="_blank">📄 Version PDF</a>
+        <a href="questionnaire-pms.html" class="btn btn-primary">Passer au questionnaire →</a>
+      </div>
+    </div>
+
+  
+<div style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
+  <a href="index.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; display: inline-block; 
+     background: var(--bleu-gip, #0055a4); color: white; text-decoration: none; border-radius: 999px; 
+     font-weight: 600; transition: all 0.3s;"
+     onmouseover="this.style.background='var(--bleu-fonce, #003a78)'"
+     onmouseout="this.style.background='var(--bleu-gip, #0055a4)'">
+    🏠 Retour à l'accueil
+  </a>
+</div>
+</main>
+
+  <footer>
+    <p><strong>GRETA du Var / GIP FIPAN</strong></p>
+    <p>Académie de Nice • Formation continue professionnelle</p>
+    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+  </footer>
+
+  <script>
+    // Navigation entre étapes
+    function nextStep(stepNumber) {
+      // Cacher toutes les étapes
+      document.querySelectorAll('.step-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // Afficher l'étape demandée
+      document.getElementById('step' + stepNumber).classList.add('active');
+      
+      // Mettre à jour la barre de progression
+      updateProgress(stepNumber);
+      
+      // Sauvegarder l'étape
+      localStorage.setItem('currentStep', stepNumber);
+      
+      // Sauvegarder les données
+      saveData();
+      
+      // Scroll en haut
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Mise à jour barre de progression
+    function updateProgress(stepNumber) {
+      const progressSteps = document.querySelectorAll('.progress-step');
+      const progressLabel = document.getElementById('progressLabel');
+      
+      const stepLabels = [
+        'Diagnostic Initial',
+        'Structurer son PMS',
+        'Bonnes Pratiques d\'Hygiène',
+        'Méthode HACCP',
+        'Traçabilité & NC',
+        'Validation Finale'
+      ];
+      
+      progressSteps.forEach((step, index) => {
+        const stepNum = index + 1;
+        if (stepNum < stepNumber) {
+          step.classList.add('completed');
+          step.classList.remove('active');
+        } else if (stepNum === stepNumber) {
+          step.classList.add('active');
+          step.classList.remove('completed');
+        } else {
+          step.classList.remove('completed', 'active');
+        }
+      });
+      
+      progressLabel.textContent = `Étape ${stepNumber}/6 : ${stepLabels[stepNumber - 1]}`;
+    }
+    
+    // Sauvegarde automatique
+    function saveData() {
+      const inputs = document.querySelectorAll('input[type="text"], input[type="date"], textarea, select');
+      inputs.forEach(input => {
+        if (input.id || input.name) {
+          localStorage.setItem(input.id || input.name, input.value);
+        }
+      });
+      
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        if (checkbox.id || checkbox.name) {
+          localStorage.setItem(checkbox.id || checkbox.name, checkbox.checked);
+        }
+      });
+    }
+    
+    // Restauration des données
+    function loadData() {
+      const inputs = document.querySelectorAll('input[type="text"], input[type="date"], textarea, select');
+      inputs.forEach(input => {
+        if (input.id || input.name) {
+          const savedValue = localStorage.getItem(input.id || input.name);
+          if (savedValue) input.value = savedValue;
+        }
+      });
+      
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        if (checkbox.id || checkbox.name) {
+          const savedValue = localStorage.getItem(checkbox.id || checkbox.name);
+          if (savedValue === 'true') checkbox.checked = true;
+        }
+      });
+      
+      // Restaurer l'étape
+      const savedStep = localStorage.getItem('currentStep');
+      if (savedStep) {
+        nextStep(parseInt(savedStep));
+      }
+    }
+    
+    // Gestion des checkbox exclusifs (une seule cochée par ligne)
+    document.querySelectorAll('.diagnostic-row').forEach(row => {
+      const checkboxes = row.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          if (this.checked) {
+            checkboxes.forEach(cb => {
+              if (cb !== this) cb.checked = false;
+            });
+          }
+        });
+      });
+    });
+    
+    // Auto-save toutes les 30 secondes
+    setInterval(saveData, 30000);
+    
+    // Charger les données au démarrage
+    window.addEventListener('load', loadData);
+    
+    // Sauvegarder avant de quitter
+    window.addEventListener('beforeunload', saveData);
+  </script>
+
+
+<!-- Bouton retour haut -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+        style="position: fixed; bottom: 20px; right: 20px; background: var(--bleu-gip, #0055a4); 
+               color: white; border: none; border-radius: 50%; width: 50px; height: 50px; 
+               font-size: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+  

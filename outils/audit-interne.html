@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audit Interne PMS | GRETA GIP-FIPAN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body>
+  <header class="header-modern">
+    <div class="header-content">
+      <div class="logos-header">
+        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
+        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+      </div>
+      <h1>Audit Interne PMS</h1>
+      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+    </div>
+  </header>
+  <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
+
+
+  <main>
+    
+    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    
+    <div class="intro-card">
+      <h2>✅ Grille d'Audit Interne PMS</h2>
+      <p>
+        Outil d'auto-évaluation pour vérifier la conformité de votre Plan de Maîtrise Sanitaire 
+        selon les exigences réglementaires et les bonnes pratiques professionnelles.
+      </p>
+      <div class="alert-info">
+        <p><strong>📋 Utilisation :</strong> Répondez à chaque critère en sélectionnant le niveau de conformité. Le score s'affichera automatiquement en fin d'audit.</p>
+      </div>
+    </div>
+
+    <form id="auditForm">
+      
+      <!-- SECTION 1 : Hygiène du personnel -->
+      <div class="audit-section">
+        <h2>1️⃣ Hygiène du Personnel (BPH)</h2>
+        
+        <div class="audit-item">
+          <label>Tenue professionnelle complète et propre</label>
+          <select name="item1" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Lavage des mains : procédure affichée et appliquée</label>
+          <select name="item2" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Absence de bijoux, montre, vernis</label>
+          <select name="item3" required>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Formation hygiène du personnel (attestation)</label>
+          <select name="item4" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION 2 : Températures -->
+      <div class="audit-section">
+        <h2>2️⃣ Maîtrise des Températures (CCP)</h2>
+        
+        <div class="audit-item">
+          <label>Relevés quotidiens des températures</label>
+          <select name="item5" required>
+            <option value="">--</option>
+            <option value="3">✅ Conforme (3 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Températures respectées (réception, stockage, service)</label>
+          <select name="item6" required>
+            <option value="">--</option>
+            <option value="3">✅ Conforme (3 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Thermomètres étalonnés et fonctionnels</label>
+          <select name="item7" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Actions correctives en cas de dérive</label>
+          <select name="item8" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION 3 : Traçabilité -->
+      <div class="audit-section">
+        <h2>3️⃣ Traçabilité</h2>
+        
+        <div class="audit-item">
+          <label>Bons de livraison archivés (6 mois min)</label>
+          <select name="item9" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Numéros de lot identifiés et conservés</label>
+          <select name="item10" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Procédure de rappel produit disponible</label>
+          <select name="item11" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION 4 : HACCP -->
+      <div class="audit-section">
+        <h2>4️⃣ Plan HACCP</h2>
+        
+        <div class="audit-item">
+          <label>Document HACCP complet et à jour</label>
+          <select name="item12" required>
+            <option value="">--</option>
+            <option value="3">✅ Conforme (3 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>CCP identifiés avec limites critiques</label>
+          <select name="item13" required>
+            <option value="">--</option>
+            <option value="3">✅ Conforme (3 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Surveillance des CCP documentée</label>
+          <select name="item14" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION 5 : Nettoyage -->
+      <div class="audit-section">
+        <h2>5️⃣ Plan de Nettoyage & Désinfection</h2>
+        
+        <div class="audit-item">
+          <label>Planning de nettoyage affiché et suivi</label>
+          <select name="item15" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Produits homologués et fiches techniques disponibles</label>
+          <select name="item16" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Contrôles d'efficacité réalisés</label>
+          <select name="item17" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION 6 : Non-conformités -->
+      <div class="audit-section">
+        <h2>6️⃣ Gestion des Non-Conformités</h2>
+        
+        <div class="audit-item">
+          <label>Registre des NC tenu à jour</label>
+          <select name="item18" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Actions correctives mises en œuvre</label>
+          <select name="item19" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+
+        <div class="audit-item">
+          <label>Délais de clôture respectés</label>
+          <select name="item20" required>
+            <option value="">--</option>
+            <option value="2">✅ Conforme (2 pts)</option>
+            <option value="1">⚡ Partiel (1 pt)</option>
+            <option value="0">❌ NC (0 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary">
+          📊 Calculer le Score
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Résultats -->
+    <div class="score-box" id="scoreBox">
+      <h3>Résultat de l'Audit</h3>
+      <div class="score-value" id="scoreValue">-</div>
+      <div class="score-interpretation" id="scoreInterp">-</div>
+      <p id="scoreDetail">-</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p><strong>GRETA du Var / GIP FIPAN</strong></p>
+    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('auditForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      let totalScore = 0;
+      let maxScore = 44; // Total points possibles
+      
+      for (let value of formData.values()) {
+        totalScore += parseInt(value);
+      }
+      
+      const percentage = Math.round((totalScore / maxScore) * 100);
+      
+      document.getElementById('scoreValue').textContent = percentage + '%';
+      document.getElementById('scoreDetail').textContent = `${totalScore} / ${maxScore} points`;
+      
+      let interpretation = '';
+      let color = '';
+      
+      if (percentage >= 90) {
+        interpretation = '✅ EXCELLENT - PMS conforme et maîtrisé';
+        color = '#28a745';
+      } else if (percentage >= 75) {
+        interpretation = '✓ BON - Quelques améliorations à apporter';
+        color = '#ffc107';
+      } else if (percentage >= 50) {
+        interpretation = '⚡ MOYEN - Mise en conformité nécessaire';
+        color = '#ff9800';
+      } else {
+        interpretation = '❌ INSUFFISANT - PMS à restructurer';
+        color = '#dc3545';
+      }
+      
+      document.getElementById('scoreInterp').textContent = interpretation;
+      document.querySelector('.score-box').style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
+      document.getElementById('scoreBox').classList.add('visible');
+      document.getElementById('scoreBox').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

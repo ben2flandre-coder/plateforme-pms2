@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculateur de Criticité HACCP | GRETA GIP-FIPAN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/calculateur.js" defer></script>
+</head>
+<body>
+  <header class="header-modern">
+    <div class="header-content">
+      <div class="logos-header">
+        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
+        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+      </div>
+      <h1>Calculateur de Criticité HACCP</h1>
+      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+    </div>
+  </header>
+  <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
+
+
+  <main>
+    
+    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    
+    <div class="intro-card">
+      <h2>📊 Évaluation de la Criticité d'un Danger HACCP</h2>
+      <p>
+        Cet outil permet de calculer automatiquement le score de criticité d'un danger identifié 
+        dans votre analyse HACCP selon la formule : <strong>Criticité = Fréquence × Gravité × Maîtrise</strong>
+      </p>
+      <div class="alert-info">
+        <p><strong>💡 Méthodologie :</strong> Cette évaluation vous aide à déterminer si un danger doit être considéré comme un CCP (Point Critique de Contrôle), un PRPo (Programme Prérequis Opérationnel) ou un PRP (Programme Prérequis de base).</p>
+      </div>
+    </div>
+
+    <div class="calculator-container">
+      <h3>🔬 Évaluation du Danger</h3>
+      
+      <div class="form-group">
+        <label for="frequence">1. Fréquence d'apparition du danger</label>
+        <select id="frequence">
+          <option value="">Sélectionnez...</option>
+          <option value="1">1 - RARE : survient exceptionnellement (< 1 fois/an)</option>
+          <option value="2">2 - OCCASIONNELLE : survient parfois (1 à 12 fois/an)</option>
+          <option value="3">3 - FRÉQUENTE : survient régulièrement (> 1 fois/mois)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="gravite">2. Gravité des conséquences pour la santé</label>
+        <select id="gravite">
+          <option value="">Sélectionnez...</option>
+          <option value="1">1 - FAIBLE : inconfort mineur, symptômes passagers</option>
+          <option value="2">2 - MOYENNE : symptômes marqués mais réversibles</option>
+          <option value="3">3 - GRAVE : hospitalisation, séquelles, décès possible</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="maitrise">3. Niveau de maîtrise actuel</label>
+        <select id="maitrise">
+          <option value="">Sélectionnez...</option>
+          <option value="1">1 - MAÎTRISÉ : mesures efficaces et vérifiées</option>
+          <option value="2">2 - PARTIELLEMENT MAÎTRISÉ : mesures présentes mais à renforcer</option>
+          <option value="3">3 - NON MAÎTRISÉ : absence ou insuffisance de mesures</option>
+        </select>
+      </div>
+
+      <div>
+        <button onclick="calculer()" class="btn btn-primary">
+          🧮 Calculer la Criticité
+        </button>
+        <button onclick="reinitialiser()" class="btn btn-secondary">
+          🔄 Réinitialiser
+        </button>
+        <button onclick="afficherHistorique()" class="btn btn-secondary">
+          📊 Historique
+        </button>
+      </div>
+    </div>
+
+    <!-- RÉSULTATS -->
+    <div id="resultats">
+      
+      <div class="result-box">
+        <h3>Résultat de l'Analyse</h3>
+        <div class="score" id="score">-</div>
+        <div class="classification" id="classification">-</div>
+        
+        <div>
+          <ul>
+            <li><strong>Fréquence :</strong> <span id="freqVal">-</span></li>
+            <li><strong>Gravité :</strong> <span id="gravVal">-</span></li>
+            <li><strong>Maîtrise :</strong> <span id="maitVal">-</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="result-details">
+        <h4>📋 Interprétation Réglementaire</h4>
+        <p id="interpretation">-</p>
+      </div>
+
+      <div class="result-details">
+        <h4>💡 Justification Technique</h4>
+        <p id="justification">-</p>
+      </div>
+
+      <div class="result-details">
+        <h4>✅ Recommandations d'Actions</h4>
+        <p id="recommandation">-</p>
+      </div>
+
+      <div>
+        <button onclick="exporterAnalyse()" class="btn btn-primary">
+          📄 Exporter l'Analyse (TXT)
+        </button>
+      </div>
+
+      <!-- Tableau de référence -->
+      <div>
+        <h4>📊 Grille de Classification</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Classification</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 à 27</td>
+              <td>CCP CRITIQUE</td>
+              <td>Surveillance renforcée obligatoire + Limites critiques + Actions correctives documentées</td>
+            </tr>
+            <tr>
+              <td>8 à 14</td>
+              <td>POINT SENSIBLE (PRPo)</td>
+              <td>Surveillance régulière + Mesures de maîtrise spécifiques + Enregistrements</td>
+            </tr>
+            <tr>
+              <td>1 à 7</td>
+              <td>DANGER MAÎTRISÉ (PRP)</td>
+              <td>Bonnes Pratiques d'Hygiène (BPH) suffisantes + Surveillance de routine</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p><strong>GRETA du Var / GIP FIPAN</strong></p>
+    <p>Académie de Nice • Formation continue professionnelle</p>
+    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+    <p>Calculateur HACCP V18 - Conforme CE 852/2004</p>
+  </footer>
+
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+          class="scroll-top" id="scrollTopBtn"
+          title="Retour en haut">
+    ↑
+  </button>
+
+  <script>
+    // Afficher/masquer le bouton scroll top
+    window.addEventListener('scroll', function() {
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+  </script>
+
+</body>
+</html>

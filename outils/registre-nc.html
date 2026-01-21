@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registre Non-Conformités | GRETA GIP-FIPAN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body>
+  <header class="header-modern">
+    <div class="header-content">
+      <div class="logos-header">
+        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
+        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+      </div>
+      <h1>Registre Non-Conformités</h1>
+      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+    </div>
+  </header>
+  <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
+
+
+  <main>
+    
+    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    
+    <div class="intro-card">
+      <h2>🚨 Registre des Non-Conformités PMS</h2>
+      <p>
+        Outil de traçabilité réglementaire pour l'enregistrement et le suivi des non-conformités 
+        détectées dans le cadre du Plan de Maîtrise Sanitaire.
+      </p>
+      <div class="alert-info">
+        <p><strong>⚖️ Obligation réglementaire :</strong> Le registre des NC doit être tenu à jour en permanence et conservé 1 an minimum. Il peut être consulté lors d'un contrôle DDPP.</p>
+      </div>
+    </div>
+
+    <!-- Formulaire d'enregistrement NC -->
+    <div class="nc-form">
+      <h2>📝 Déclarer une Non-Conformité</h2>
+      
+      <form id="ncForm">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ncDate">Date de détection *</label>
+            <input type="date" id="ncDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="ncType">Type de NC *</label>
+            <select id="ncType" required>
+              <option value="">-- Sélectionnez --</option>
+              <option value="Température">❄️ Température hors limites</option>
+              <option value="Hygiène">🧼 Hygiène personnel/locaux</option>
+              <option value="Traçabilité">📦 Traçabilité</option>
+              <option value="Réception">🚚 Réception marchandises</option>
+              <option value="Nettoyage">🧽 Nettoyage/Désinfection</option>
+              <option value="DLC">📅 DLC dépassée</option>
+              <option value="Allergène">🥜 Allergène</option>
+              <option value="Nuisible">🐀 Nuisible</option>
+              <option value="Autre">❓ Autre</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="ncGravite">Gravité *</label>
+            <select id="ncGravite" required>
+              <option value="">-- Sélectionnez --</option>
+              <option value="Critique">🔴 Critique (danger immédiat)</option>
+              <option value="Majeure">🟠 Majeure (risque sanitaire)</option>
+              <option value="Mineure">🟡 Mineure (amélioration)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ncDescription">Description de la NC *</label>
+          <textarea id="ncDescription" rows="3" required
+                    placeholder="Décrivez précisément la non-conformité constatée..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ncCause">Cause identifiée</label>
+            <input type="text" id="ncCause" placeholder="Ex: Panne chambre froide, Formation insuffisante...">
+          </div>
+          
+          <div class="form-group">
+            <label for="ncDetecteur">Détecté par *</label>
+            <input type="text" id="ncDetecteur" required placeholder="Nom du détecteur">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ncActionImmediate">Action immédiate mise en œuvre *</label>
+          <textarea id="ncActionImmediate" rows="2" required
+                    placeholder="Ex: Produits isolés et éliminés, Température rétablie, Nettoyage immédiat..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="ncActionCorrective">Action corrective à mettre en œuvre *</label>
+          <textarea id="ncActionCorrective" rows="2" required
+                    placeholder="Ex: Révision procédure, Formation personnel, Vérification équipement..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ncResponsable">Responsable du suivi *</label>
+            <input type="text" id="ncResponsable" required placeholder="Nom du responsable">
+          </div>
+          
+          <div class="form-group">
+            <label for="ncEcheance">Échéance de clôture *</label>
+            <input type="date" id="ncEcheance" required>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary">
+            ✅ Enregistrer la NC
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Liste des NC enregistrées -->
+    <div class="nc-list">
+      <div>
+        <h2>📋 Non-Conformités Enregistrées</h2>
+        <div>
+          <button onclick="filtrerNC('toutes')" class="btn btn-secondary">Toutes</button>
+          <button onclick="filtrerNC('ouvertes')" class="btn btn-secondary">Ouvertes</button>
+          <button onclick="filtrerNC('closes')" class="btn btn-secondary">Clôturées</button>
+          <button onclick="exporterNC()" class="btn btn-download">📥 Exporter</button>
+        </div>
+      </div>
+      
+      <div id="ncContainer">
+        <p>
+          Aucune non-conformité enregistrée. Utilisez le formulaire ci-dessus pour déclarer une NC.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p><strong>GRETA du Var / GIP FIPAN</strong></p>
+    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+  </footer>
+
+  <script>
+    // Récupérer les NC depuis localStorage
+    function getNC() {
+      try {
+        return JSON.parse(localStorage.getItem('registreNC') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    // Sauvegarder les NC
+    function saveNC(ncList) {
+      try {
+        localStorage.setItem('registreNC', JSON.stringify(ncList));
+      } catch (e) {
+        console.error('Erreur sauvegarde:', e);
+      }
+    }
+
+    // Générer numéro NC
+    function generateNCNumber() {
+      const ncList = getNC();
+      const year = new Date().getFullYear();
+      const count = ncList.filter(nc => nc.numero.startsWith(`NC-${year}`)).length + 1;
+      return `NC-${year}-${String(count).padStart(3, '0')}`;
+    }
+
+    // Afficher les NC
+    function afficherNC(filter = 'toutes') {
+      const ncList = getNC();
+      const container = document.getElementById('ncContainer');
+      
+      let filtered = ncList;
+      if (filter === 'ouvertes') {
+        filtered = ncList.filter(nc => nc.statut === 'Ouverte');
+      } else if (filter === 'closes') {
+        filtered = ncList.filter(nc => nc.statut === 'Clôturée');
+      }
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '<p>Aucune non-conformité à afficher.</p>';
+        return;
+      }
+      
+      container.innerHTML = filtered.map(nc => `
+        <div class="nc-item ${nc.statut === 'Clôturée' ? 'resolved' : ''}">
+          <div class="nc-header">
+            <div class="nc-number">${nc.numero}</div>
+            <span class="nc-status ${nc.statut === 'Clôturée' ? 'closed' : 'open'}">
+              ${nc.statut === 'Clôturée' ? '✅ Clôturée' : '🔴 Ouverte'}
+            </span>
+          </div>
+          
+          <div class="nc-details">
+            <div class="nc-detail-item"><strong>Date :</strong> ${nc.date}</div>
+            <div class="nc-detail-item"><strong>Type :</strong> ${nc.type}</div>
+            <div class="nc-detail-item"><strong>Gravité :</strong> ${nc.gravite}</div>
+            <div class="nc-detail-item"><strong>Description :</strong> ${nc.description}</div>
+            <div class="nc-detail-item"><strong>Cause :</strong> ${nc.cause || '-'}</div>
+            <div class="nc-detail-item"><strong>Action immédiate :</strong> ${nc.actionImmediate}</div>
+            <div class="nc-detail-item"><strong>Action corrective :</strong> ${nc.actionCorrective}</div>
+            <div class="nc-detail-item"><strong>Responsable :</strong> ${nc.responsable}</div>
+            <div class="nc-detail-item"><strong>Échéance :</strong> ${nc.echeance}</div>
+            <div class="nc-detail-item"><strong>Détecté par :</strong> ${nc.detecteur}</div>
+          </div>
+          
+          ${nc.statut === 'Ouverte' ? `
+            <button onclick="cloturerNC('${nc.numero}')" class="btn btn-primary">
+              ✅ Clôturer cette NC
+            </button>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    // Soumettre le formulaire
+    document.getElementById('ncForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nc = {
+        numero: generateNCNumber(),
+        date: document.getElementById('ncDate').value,
+        type: document.getElementById('ncType').value,
+        gravite: document.getElementById('ncGravite').value,
+        description: document.getElementById('ncDescription').value,
+        cause: document.getElementById('ncCause').value,
+        detecteur: document.getElementById('ncDetecteur').value,
+        actionImmediate: document.getElementById('ncActionImmediate').value,
+        actionCorrective: document.getElementById('ncActionCorrective').value,
+        responsable: document.getElementById('ncResponsable').value,
+        echeance: document.getElementById('ncEcheance').value,
+        statut: 'Ouverte',
+        dateEnregistrement: new Date().toISOString()
+      };
+      
+      const ncList = getNC();
+      ncList.unshift(nc);
+      saveNC(ncList);
+      
+      alert(`✅ Non-conformité ${nc.numero} enregistrée avec succès`);
+      this.reset();
+      afficherNC();
+      
+      document.getElementById('ncContainer').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Clôturer une NC
+    function cloturerNC(numero) {
+      if (!confirm(`Confirmer la clôture de la NC ${numero} ?`)) return;
+      
+      const ncList = getNC();
+      const nc = ncList.find(n => n.numero === numero);
+      if (nc) {
+        nc.statut = 'Clôturée';
+        nc.dateCloture = new Date().toISOString();
+        saveNC(ncList);
+        afficherNC();
+        alert(`✅ NC ${numero} clôturée`);
+      }
+    }
+
+    // Filtrer les NC
+    function filtrerNC(filter) {
+      afficherNC(filter);
+    }
+
+    // Exporter les NC
+    function exporterNC() {
+      const ncList = getNC();
+      if (ncList.length === 0) {
+        alert('Aucune NC à exporter');
+        return;
+      }
+      
+      let texte = '═══════════════════════════════════════\n';
+      texte += '  REGISTRE DES NON-CONFORMITÉS PMS\n';
+      texte += '═══════════════════════════════════════\n\n';
+      texte += `Date d'export : ${new Date().toLocaleDateString('fr-FR')}\n\n`;
+      
+      ncList.forEach(nc => {
+        texte += `─────────────────────────────────────────\n`;
+        texte += `${nc.numero} - ${nc.statut}\n`;
+        texte += `─────────────────────────────────────────\n`;
+        texte += `Date : ${nc.date}\n`;
+        texte += `Type : ${nc.type}\n`;
+        texte += `Gravité : ${nc.gravite}\n`;
+        texte += `Description : ${nc.description}\n`;
+        texte += `Cause : ${nc.cause || '-'}\n`;
+        texte += `Action immédiate : ${nc.actionImmediate}\n`;
+        texte += `Action corrective : ${nc.actionCorrective}\n`;
+        texte += `Responsable : ${nc.responsable}\n`;
+        texte += `Échéance : ${nc.echeance}\n`;
+        texte += `Détecté par : ${nc.detecteur}\n\n`;
+      });
+      
+      texte += '═══════════════════════════════════════\n';
+      texte += 'GRETA du Var / GIP FIPAN\n';
+      texte += 'Académie de Nice\n';
+      texte += '═══════════════════════════════════════\n';
+      
+      const blob = new Blob([texte], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Registre_NC_${new Date().toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Afficher au chargement
+    afficherNC();
+    
+    // Définir la date du jour par défaut
+    document.getElementById('ncDate').valueAsDate = new Date();
+  </script>
+
+</body>
+</html>

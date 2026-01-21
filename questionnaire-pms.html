@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="format-detection" content="telephone=no">
+<title>PMS — Questionnaire interactif | GRETA GIP-FIPAN</title>
+
+<style>
+:root{
+  --bleu:#0055a4;--bleu2:#003a78;--orange:#f39200;
+  --bg:#f5f6f8;--card:#fff;--text:#2f2f2f;--muted:#666;
+  --line:#d9dde7;--soft:#eef3fb;--soft2:#fff8e6;
+  --ok:#1f8f3a;--ko:#b00020;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-text-size-adjust:100%;font-size:16px}
+
+/* Header */
+header{background:linear-gradient(135deg,var(--bleu2),var(--bleu));color:#fff;border-bottom:6px solid var(--orange);padding:20px 16px}
+.wrap{max-width:1100px;margin:0 auto}
+header h1{margin:0;font-size:20px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+header p{margin:8px 0 0;opacity:.92;font-size:14px;line-height:1.5}
+.toolbar{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:12px;background:rgba(0,0,0,.15);font-weight:500}
+
+/* Main */
+main{padding:20px 16px 60px}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.06);padding:18px}
+.card h2{margin:0 0 10px;color:var(--bleu);font-size:18px;font-weight:700}
+.hint{color:var(--muted);font-size:13px;margin:0 0 10px;line-height:1.5}
+
+/* TOC */
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.toc a{text-decoration:none;font-size:13px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;color:var(--bleu2);background:#fff;font-weight:600;transition:all .2s}
+.toc a:hover{border-color:var(--bleu);background:var(--soft)}
+
+/* Section */
+.section-title{margin:16px 0 12px;padding-left:10px;border-left:6px solid var(--bleu)}
+.section-title h3{margin:0;font-size:17px;color:var(--bleu);font-weight:700}
+
+/* Questions */
+.q{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.q:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.q-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.q-title{margin:0;font-size:15px;color:var(--bleu2);font-weight:700;line-height:1.4}
+.q-meta{font-size:11px;color:var(--muted);white-space:nowrap;padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:600}
+
+/* Situation pro - ENRICHIE */
+.situation{
+  margin:12px 0;
+  background:var(--soft);
+  border-left:5px solid var(--bleu);
+  padding:12px 14px;
+  border-radius:10px;
+  font-size:14px;
+  line-height:1.6;
+}
+.situation strong{color:var(--bleu2);font-weight:700}
+
+.question{margin:12px 0 8px;font-weight:700;font-size:15px;color:var(--text)}
+
+/* Choices */
+.choices{margin:0;padding-left:20px;list-style:none}
+.choices li{margin:8px 0;position:relative}
+.choices label{cursor:pointer;display:flex;align-items:flex-start;gap:8px;line-height:1.5;font-size:14px}
+.choices input[type="radio"],.choices input[type="checkbox"]{
+  margin:3px 0 0 0;
+  flex-shrink:0;
+  width:18px;
+  height:18px;
+  cursor:pointer;
+}
+
+/* Textarea */
+.free{
+  width:100%;
+  min-height:100px;
+  resize:vertical;
+  border-radius:10px;
+  border:1px solid var(--line);
+  padding:12px;
+  font:inherit;
+  background:#fff;
+  font-size:15px;
+  line-height:1.5;
+}
+
+/* Settings */
+.setting{margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.setting label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;font-weight:600}
+.setting input[type="text"],.setting input[type="date"],.setting select{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  font:inherit;
+  background:#fff;
+  font-size:15px;
+}
+.lockline{margin-top:10px;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fafbfe;font-size:13px;line-height:1.5}
+.lockline strong{color:var(--bleu2)}
+
+/* Buttons */
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+button{
+  appearance:none;
+  border:none;
+  border-radius:12px;
+  padding:12px 16px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:14px;
+  transition:all .2s;
+  font-family:inherit;
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:var(--bleu);color:#fff}
+.btn-primary:hover:not(:disabled){filter:brightness(.95)}
+.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--bleu2)}
+.btn-ghost:hover{border-color:var(--bleu);background:var(--soft)}
+.btn-orange{background:var(--orange);color:#1e1e1e}
+.btn-orange:hover{filter:brightness(.96)}
+
+/* Score */
+.scoreBox{position:sticky;top:16px}
+@media(max-width:900px){.scoreBox{position:static;margin-top:20px}}
+.scoreLine{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);margin:10px 0}
+.progress{width:100%;height:10px;border-radius:999px;background:#e7eaf2;overflow:hidden;margin-top:10px;border:1px solid var(--line)}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--bleu),var(--orange));transition:width .4s ease}
+
+/* Results */
+.results{margin-top:16px;display:none}
+.results h3{margin:0 0 10px;color:var(--bleu);font-size:17px;font-weight:700}
+.resultCard{background:var(--soft2);border-left:5px solid var(--orange);border-radius:12px;padding:14px;border:1px solid #f1e2bf}
+.badge{display:inline-block;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;margin-right:8px}
+.ok{background:rgba(31,143,58,.12);color:var(--ok);border:1px solid rgba(31,143,58,.25)}
+.ko{background:rgba(176,0,32,.10);color:var(--ko);border:1px solid rgba(176,0,32,.25)}
+.info{background:rgba(0,85,164,.10);color:var(--bleu2);border:1px solid rgba(0,85,164,.18)}
+
+/* Review */
+.review{display:none;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.review-head{padding:12px 14px;background:#f0f3fb;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.review-head strong{color:var(--bleu2);font-size:15px}
+.review-body{padding:14px}
+.review-body .block{margin:12px 0;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fafbfe}
+.review-body .block h4{margin:0 0 8px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.review-body .block p{margin:0;font-size:14px;line-height:1.6}
+.review-nav{display:flex;gap:10px;padding:12px;border-top:1px solid var(--line);background:#fafbfe}
+
+/* Utils */
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+/* Mobile optimizations */
+@media(max-width:640px){
+  header h1{font-size:17px}
+  header p{font-size:13px}
+  .pill{font-size:11px;padding:5px 8px}
+  main{padding:16px 12px 50px}
+  .card{padding:14px}
+  .card h2{font-size:16px}
+  .q-title{font-size:14px}
+  .situation{font-size:13px;padding:10px 12px}
+  .question{font-size:14px}
+  .choices label{font-size:13px}
+  .free{font-size:14px;min-height:90px}
+  .btn-row{flex-direction:column}
+  .btn-row button{width:100%}
+  .setting{padding:10px}
+  .review-body .block{padding:10px}
+}
+
+/* Print */
+@media print{
+  header,.scoreBox,.btn-row,.results,.review{display:none!important}
+  body{background:#fff}
+  .card{box-shadow:none;page-break-inside:avoid}
+  .grid{grid-template-columns:1fr}
+  .q{page-break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1>Plan de Maîtrise Sanitaire (PMS) — Questionnaire interactif</h1>
+    <p>GRETA / GIP-FIPAN • Restauration commerciale & collective • QCM/QCU/réponses courtes • Correction + score</p>
+    <div class="toolbar">
+      <span class="pill"><strong>Export :</strong> Ctrl+P → PDF</span>
+      <span class="pill"><strong>Mobile :</strong> optimisé</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+
+    <section class="card">
+      <h2>Version stagiaire — Situations professionnelles</h2>
+      <p class="hint">
+        Les réponses courtes (Q2, Q7, Q12) sont évaluées via une grille de mots-clés pondérés.
+      </p>
+
+      <!-- Cartouche -->
+      <div class="setting">
+        <label><strong>Cartouche candidat (obligatoire pour correction)</strong></label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+          <div>
+            <label class="small muted">Nom</label>
+            <input id="candLast" type="text" placeholder="NOM" autocomplete="family-name">
+          </div>
+          <div>
+            <label class="small muted">Prénom</label>
+            <input id="candFirst" type="text" placeholder="Prénom" autocomplete="given-name">
+          </div>
+          <div>
+            <label class="small muted">Date</label>
+            <input id="candDate" type="date">
+          </div>
+        </div>
+        <div class="lockline">
+          <strong>Statut :</strong> <span id="lockText">Cartouche incomplet — correction verrouillée.</span>
+        </div>
+      </div>
+
+      <div class="toc">
+        <a href="#q1">1</a><a href="#q2">2</a><a href="#q3">3</a><a href="#q4">4</a><a href="#q5">5</a><a href="#q6">6</a><a href="#q7">7</a>
+        <a href="#q8">8</a><a href="#q9">9</a><a href="#q10">10</a><a href="#q11">11</a><a href="#q12">12</a><a href="#q13">13</a>
+      </div>
+
+      <div class="section-title"><h3>Questionnaire (13 items)</h3></div>
+
+      <!-- Q1 -->
+      <div class="q" id="q1">
+        <div class="q-head">
+          <p class="q-title"><strong>1. PMS —</strong> Perception du PMS par l'exploitant et usage réel</p>
+          <span class="q-meta">QCU • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Contexte professionnel :</strong><br>
+          Lors d'un accompagnement PMS, le gérant d'un restaurant déclare : <em>« Le PMS, c'est surtout un classeur pour la DDPP. Dans la pratique, ça ne change rien à notre façon de travailler. »</em>
+        </div>
+        <div class="question">Quelle affirmation est correcte ?</div>
+        <ul class="choices">
+          <li><label><input type="radio" name="q1" value="A"> A. Le PMS sert uniquement au contrôle officiel</label></li>
+          <li><label><input type="radio" name="q1" value="B"> B. Le PMS est un outil de travail et de maîtrise sanitaire au quotidien</label></li>
+          <li><label><input type="radio" name="q1" value="C"> C. Le PMS sert uniquement à tracer les températures</label></li>
+        </ul>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q" id="q2">
+        <div class="q-head">
+          <p class="q-title"><strong>2. Cadre réglementaire —</strong> Compréhension du Paquet Hygiène (CE 852/2004)</p>
+          <span class="q-meta">Réponse courte • 3 pts</span>
+        </div>
+        <div class="situation">
+          <strong>Contexte professionnel :</strong><br>
+          Pendant une formation HACCP, une responsable de cuisine demande : <em>« Pourquoi parle-t-on toujours du règlement (CE) n°852/2004 ? Concrètement, qu'est-ce qu'il nous impose avec le PMS ? »</em>
+        </div>
+        <div class="question">En une ou deux phrases, expliquez le lien entre ce règlement et le PMS.</div>
+        <textarea class="free" name="q2" placeholder="Votre réponse..."></textarea>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q" id="q3">
+        <div class="q-head">
+          <p class="q-title"><strong>3. BPH —</strong> Hygiène du personnel en situation de production</p>
+          <span class="q-meta">QCM • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Observation terrain :</strong><br>
+          En zone de préparation, un commis porte un bracelet et enchaîne la manipulation de produits crus puis cuits sans se relaver les mains entre les deux opérations.
+        </div>
+        <div class="question">Quelles non-conformités sont présentes ?</div>
+        <ul class="choices">
+          <li><label><input type="checkbox" name="q3" value="A"> A. Le port du bracelet</label></li>
+          <li><label><input type="checkbox" name="q3" value="B"> B. La tenue de travail</label></li>
+          <li><label><input type="checkbox" name="q3" value="C"> C. L'absence de lavage des mains entre cru et cuit</label></li>
+          <li><label><input type="checkbox" name="q3" value="D"> D. Le statut de commis</label></li>
+        </ul>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q" id="q4">
+        <div class="q-head">
+          <p class="q-title"><strong>4. BPH —</strong> Actualisation du Plan de Nettoyage et Désinfection</p>
+          <span class="q-meta">QCU • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Audit interne :</strong><br>
+          Le Plan de Nettoyage et Désinfection (PND) a été rédigé il y a trois ans. Depuis, les produits utilisés et les fréquences de nettoyage ont changé, mais le document n'a jamais été mis à jour.
+        </div>
+        <div class="question">Quelle action est conforme aux exigences PMS ?</div>
+        <ul class="choices">
+          <li><label><input type="radio" name="q4" value="A"> A. Ne rien modifier tant que le nettoyage est effectivement réalisé</label></li>
+          <li><label><input type="radio" name="q4" value="B"> B. Mettre à jour le PND pour refléter la pratique réelle</label></li>
+          <li><label><input type="radio" name="q4" value="C"> C. Supprimer le PND devenu trop contraignant</label></li>
+        </ul>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q" id="q5">
+        <div class="q-head">
+          <p class="q-title"><strong>5. Chaîne du froid —</strong> Gestion d'une dérive de température</p>
+          <span class="q-meta">QCM • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Autocontrôle quotidien :</strong><br>
+          Lors d'un relevé, la chambre froide positive de stockage des viandes affiche +7,8 °C. La mesure est confirmée par un thermomètre indépendant étalonné.
+        </div>
+        <div class="question">Quelles actions sont appropriées ?</div>
+        <ul class="choices">
+          <li><label><input type="checkbox" name="q5" value="A"> A. Ne rien faire, les produits semblent encore corrects</label></li>
+          <li><label><input type="checkbox" name="q5" value="B"> B. Vérifier depuis quand la dérive existe et trier les produits concernés</label></li>
+          <li><label><input type="checkbox" name="q5" value="C"> C. Faire intervenir la maintenance technique</label></li>
+          <li><label><input type="checkbox" name="q5" value="D"> D. Ne rien faire car la température reste inférieure à 10 °C</label></li>
+        </ul>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q" id="q6">
+        <div class="q-head">
+          <p class="q-title"><strong>6. HACCP —</strong> Identification d'un CCP dans un procédé culinaire</p>
+          <span class="q-meta">QCU • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Étude HACCP d'un plat cuisiné :</strong><br>
+          Les étapes suivantes sont identifiées : réception des matières premières → stockage → cuisson → refroidissement → remise en température avant service.
+        </div>
+        <div class="question">Quelle étape correspond à un Point Critique de Contrôle (CCP) majeur ?</div>
+        <ul class="choices">
+          <li><label><input type="radio" name="q6" value="A"> A. Réception</label></li>
+          <li><label><input type="radio" name="q6" value="B"> B. Stockage</label></li>
+          <li><label><input type="radio" name="q6" value="C"> C. Cuisson</label></li>
+          <li><label><input type="radio" name="q6" value="D"> D. Dressage à l'assiette</label></li>
+        </ul>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q" id="q7">
+        <div class="q-head">
+          <p class="q-title"><strong>7. Traçabilité —</strong> Gestion d'une alerte sanitaire (TIAC)</p>
+          <span class="q-meta">Réponse courte • 3 pts</span>
+        </div>
+        <div class="situation">
+          <strong>Alerte sanitaire :</strong><br>
+          Après un signalement de TIAC (Toxi-Infection Alimentaire Collective), les autorités vous demandent d'identifier le lot de viande hachée utilisé dans des lasagnes servies la veille au déjeuner.
+        </div>
+        <div class="question">Quels documents du PMS devez-vous consulter pour assurer une traçabilité complète ?</div>
+        <textarea class="free" name="q7" placeholder="Votre réponse..."></textarea>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q" id="q8">
+        <div class="q-head">
+          <p class="q-title"><strong>8. Non-conformités —</strong> Rupture de maîtrise d'un produit cuit</p>
+          <span class="q-meta">QCM • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Incident en cuisine :</strong><br>
+          Une barquette de poulet cuit est restée trois heures à température ambiante (oubli d'un cuisinier) avant d'être replacée au froid. L'incident est constaté lors d'un contrôle interne.
+        </div>
+        <div class="question">Quelles étapes de gestion de la non-conformité doivent être mises en œuvre ?</div>
+        <ul class="choices">
+          <li><label><input type="checkbox" name="q8" value="A"> A. Enregistrer la non-conformité dans le registre</label></li>
+          <li><label><input type="checkbox" name="q8" value="B"> B. Mélanger avec d'autres lots conformes</label></li>
+          <li><label><input type="checkbox" name="q8" value="C"> C. Décider du sort du produit (mise à l'écart / destruction)</label></li>
+          <li><label><input type="checkbox" name="q8" value="D"> D. Rechercher la cause et prévoir une action préventive</label></li>
+        </ul>
+      </div>
+
+      <!-- Q9 -->
+      <div class="q" id="q9">
+        <div class="q-head">
+          <p class="q-title"><strong>9. Contrôle officiel —</strong> Comportement attendu lors d'un contrôle DDPP</p>
+          <span class="q-meta">QCU • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Visite inopinée :</strong><br>
+          Une inspectrice de la DDPP arrive à l'improviste. Le responsable PMS ne retrouve pas immédiatement un document d'enregistrement des températures et commence à s'agacer visiblement.
+        </div>
+        <div class="question">Quelle attitude professionnelle adopter dans cette situation ?</div>
+        <ul class="choices">
+          <li><label><input type="radio" name="q9" value="A"> A. Rester calme, chercher le document et présenter les preuves disponibles</label></li>
+          <li><label><input type="radio" name="q9" value="B"> B. Refuser le contrôle sans l'avocat de l'entreprise</label></li>
+          <li><label><input type="radio" name="q9" value="C"> C. Affirmer que le prestataire externe gère tout</label></li>
+        </ul>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q" id="q10">
+        <div class="q-head">
+          <p class="q-title"><strong>10. Fournisseurs —</strong> Maîtrise des matières premières</p>
+          <span class="q-meta">QCM • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Changement de fournisseur :</strong><br>
+          Un exploitant change de fournisseur de viande pour une solution moins chère trouvée sur internet, sans vérifier l'agrément sanitaire ni demander les documents techniques (fiches produits, certificats).
+        </div>
+        <div class="question">Quelles obligations relèvent du PMS concernant les fournisseurs ?</div>
+        <ul class="choices">
+          <li><label><input type="checkbox" name="q10" value="A"> A. Vérifier l'agrément sanitaire du fournisseur</label></li>
+          <li><label><input type="checkbox" name="q10" value="B"> B. Obtenir les fiches techniques et informations allergènes</label></li>
+          <li><label><input type="checkbox" name="q10" value="C"> C. Ne rien vérifier si le prix est attractif</label></li>
+          <li><label><input type="checkbox" name="q10" value="D"> D. Intégrer le fournisseur dans le système de traçabilité</label></li>
+        </ul>
+      </div>
+
+      <!-- Q11 -->
+      <div class="q" id="q11">
+        <div class="q-head">
+          <p class="q-title"><strong>11. Formation —</strong> Appropriation du PMS par l'équipe</p>
+          <span class="q-meta">QCU • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Écart pratique/documentation :</strong><br>
+          Le PMS a été mis à jour il y a six mois avec de nouveaux protocoles de cuisson et de refroidissement. Cependant, lors d'un audit, vous constatez que l'équipe continue d'appliquer les anciens protocoles.
+        </div>
+        <div class="question">Comment qualifier cette situation ?</div>
+        <ul class="choices">
+          <li><label><input type="radio" name="q11" value="A"> A. Acceptable car les anciens protocoles fonctionnaient</label></li>
+          <li><label><input type="radio" name="q11" value="B"> B. Problématique car le PMS n'est pas appliqué</label></li>
+          <li><label><input type="radio" name="q11" value="C"> C. Conforme tant que le PMS est à jour</label></li>
+        </ul>
+      </div>
+
+      <!-- Q12 -->
+      <div class="q" id="q12">
+        <div class="q-head">
+          <p class="q-title"><strong>12. Amélioration continue —</strong> Revue périodique du PMS</p>
+          <span class="q-meta">Réponse libre • 4 pts</span>
+        </div>
+        <div class="situation">
+          <strong>Contexte d'amélioration :</strong><br>
+          Aucun incident majeur n'a été relevé dans l'établissement depuis deux ans. Le responsable qualité estime que la revue annuelle du PMS n'est plus nécessaire et propose de la supprimer pour gagner du temps.
+        </div>
+        <div class="question">En tant que référent PMS, quelle recommandation formulez-vous ? Justifiez votre position.</div>
+        <textarea class="free" name="q12" placeholder="Votre recommandation..."></textarea>
+      </div>
+
+      <!-- Q13 -->
+      <div class="q" id="q13">
+        <div class="q-head">
+          <p class="q-title"><strong>13. Nuisibles —</strong> Maîtrise des risques biologiques</p>
+          <span class="q-meta">QCM • 1 pt</span>
+        </div>
+        <div class="situation">
+          <strong>Observation lors d'un audit :</strong><br>
+          Des mouches sont observées en zone froide. Les pièges sont saturés et non datés. Selon le registre, le prestataire de lutte contre les nuisibles n'est pas intervenu depuis cinq mois.
+        </div>
+        <div class="question">Quelles affirmations sont correctes ?</div>
+        <ul class="choices">
+          <li><label><input type="checkbox" name="q13" value="A"> A. Quelques mouches sont tolérées en restauration</label></li>
+          <li><label><input type="checkbox" name="q13" value="B"> B. Le plan nuisibles doit être documenté et suivi</label></li>
+          <li><label><input type="checkbox" name="q13" value="C"> C. L'absence de visite du prestataire constitue une non-conformité</label></li>
+          <li><label><input type="checkbox" name="q13" value="D"> D. L'exploitant reste responsable même avec un prestataire</label></li>
+          <li><label><input type="checkbox" name="q13" value="E"> E. Un piège saturé reste acceptable s'il est en place</label></li>
+        </ul>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="btnCorrect">Corriger & afficher la note</button>
+        <button class="btn-ghost" id="btnReset">Réinitialiser</button>
+        <button class="btn-ghost" id="btnPrint">Imprimer / PDF</button>
+      </div>
+
+      <div class="results" id="results">
+        <h3>Résultats</h3>
+        <div class="resultCard">
+          <p style="margin:0 0 6px">
+            <span class="badge info">Score</span>
+            <strong id="scoreText">—</strong>
+          </p>
+          <p class="muted small" style="margin:0">
+            Total : QCM/QCU (10 pts) + réponses courtes (Q2=3, Q7=3, Q12=4) = <strong>20 points</strong>
+          </p>
+        </div>
+
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn-orange" id="btnReview">Découvrir les corrections</button>
+          <button class="btn-ghost" id="btnShowAll">Afficher toutes les corrections</button>
+          <button class="btn-ghost" id="btnMail">Préparer l'e-mail aux formateurs</button>
+        </div>
+
+        <div class="review" id="review">
+          <div class="review-head">
+            <div>
+              <strong id="reviewTitle">Correction —</strong><br>
+              <span class="small muted" id="reviewMeta">—</span>
+            </div>
+            <span class="badge info" id="reviewBadge">—</span>
+          </div>
+          <div class="review-body" id="reviewBody"></div>
+          <div class="review-nav">
+            <button class="btn-ghost" id="btnPrev">Précédent</button>
+            <button class="btn-primary" id="btnNext">Suivant</button>
+          </div>
+        </div>
+
+        <div class="review" id="allCorrections" style="display:none">
+          <div class="review-head">
+            <strong>Corrections complètes (version formateur)</strong>
+            <span class="badge info">Tout afficher</span>
+          </div>
+          <div class="review-body" id="allBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card scoreBox">
+      <h2>Pilotage</h2>
+      <p class="hint">
+        Réponses courtes : détection par mots-clés/synonymes. Mode Pro recommandé en évaluation.
+      </p>
+
+      <div class="setting">
+        <label><strong>Mode de détection (Q2/Q7/Q12)</strong></label>
+        <select id="matchMode">
+          <option value="pro" selected>Pro (strict) — formulations attendues</option>
+          <option value="standard">Standard — synonymes + racines</option>
+          <option value="permissive">Permissif — tolérance orthographe</option>
+        </select>
+      </div>
+
+      <div class="scoreLine"><span>Barème total</span><strong>20 points</strong></div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+
+      <div style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+        <p style="margin:0 0 8px;font-weight:700">Conseils d'utilisation</p>
+        <ul style="margin:0 0 0 20px;color:var(--muted);font-size:13px;line-height:1.6">
+          <li>Export PDF : <strong>Ctrl+P</strong> → Enregistrer en PDF</li>
+          <li>E-mail : joindre le PDF (pièce jointe manuelle)</li>
+          <li>Mobile : affichage optimisé, testez en conditions réelles</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+<div style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
+  <a href="index.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; display: inline-block; 
+     background: var(--bleu-gip, #0055a4); color: white; text-decoration: none; border-radius: 999px; 
+     font-weight: 600; transition: all 0.3s;"
+     onmouseover="this.style.background='var(--bleu-fonce, #003a78)'"
+     onmouseout="this.style.background='var(--bleu-gip, #0055a4)'">
+    🏠 Retour à l'accueil
+  </a>
+</div>
+</main>
+
+<footer style="background:#e9ecf2;border-top:1px solid var(--line);padding:16px;color:#666;font-size:12px;text-align:center">
+  GRETA / GIP-FIPAN • PMS • Questionnaire web autonome (optimisé mobile)
+</footer>
+
+<script>
+const FORMATEURS_EMAILS = ["benoit.deflandre@ac-nice.fr","rvgelineau.pro@gmail.com"];
+const KEY = {
+  q1:{type:"single",correct:["B"],points:1,corr:"B",
+    just:"Le PMS est un outil opérationnel de maîtrise sanitaire (BPH, HACCP, traçabilité), pas un simple classeur administratif."},
+  q2:{type:"free",points:0,correctText:"Le règlement (CE) 852/2004 impose les BPH et la démarche HACCP ; le PMS en est la traduction concrète et la preuve de mise en œuvre dans l'établissement.",
+    just:"Attendus : citer 852/2004, relier BPH et HACCP, expliquer PMS = mise en œuvre + preuves."},
+  q3:{type:"multi",correct:["A","C"],points:1,corr:"A et C",
+    just:"Bracelet = réservoir microbien. Passage cru→cuit sans lavage = contamination croisée majeure."},
+  q4:{type:"single",correct:["B"],points:1,corr:"B",
+    just:"Un PND obsolète est une non-conformité documentaire et opérationnelle : la preuve doit coller au terrain."},
+  q5:{type:"multi",correct:["B","C"],points:1,corr:"B et C",
+    just:"Dérive confirmée = risque. Analyser durée, trier/isoler, maintenance, tracer la NC."},
+  q6:{type:"single",correct:["C"],points:1,corr:"C",
+    just:"La cuisson est le CCP typique (destruction des dangers biologiques)."},
+  q7:{type:"free",points:0,correctText:"Documents de réception (BL, lots, DLC), fiches de production/fabrication (lot utilisé), planning de service/distribution.",
+    just:"Attendus : traçabilité réception → transformation → service (objectif : retrait/rappel ciblé)."},
+  q8:{type:"multi",correct:["A","C","D"],points:1,corr:"A, C et D",
+    just:"Enregistrer NC, décider du sort (isoler/détruire), analyser cause racine et actions préventives."},
+  q9:{type:"single",correct:["A"],points:1,corr:"A",
+    just:"Transparence et coopération attendues : présenter preuves, engagement correctif si écart."},
+  q10:{type:"multi",correct:["A","B","D"],points:1,corr:"A, B et D",
+    just:"L'exploitant reste responsable : conformité fournisseur, allergènes, traçabilité."},
+  q11:{type:"single",correct:["B"],points:1,corr:"B",
+    just:"PMS non déployé = non-conformité de pilotage : maîtrise jugée sur pratiques réelles."},
+  q12:{type:"free",points:0,correctText:"Maintenir la revue périodique : analyser NC, autocontrôles, audits ; mettre à jour selon changements (carte, équipe, matériel, organisation).",
+    just:"Attendus : amélioration continue + indicateurs + mise à jour. Absence d'incident ≠ preuve durable."},
+  q13:{type:"multi",correct:["B","C","D"],points:1,corr:"B, C et D",
+    just:"Plan documenté/suivi. Prestataire absent = NC. Responsabilité finale = exploitant. Pièges saturés = inefficaces."}
+};
+
+const RUBRIC = {
+  q2:{max:3,items:[
+    {label:"Référence 852/2004 / Paquet Hygiène",points:1,variants:["852/2004","reglement 852","règlement 852","paquet hygiene","paquet hygiène","hygiene alimentaire"]},
+    {label:"BPH / PRP (bonnes pratiques / prérequis)",points:1,variants:["bph","bonnes pratiques","prerequis","prérequis","prp","nettoyage","desinfection","désinfection"]},
+    {label:"Procédures HACCP + PMS = preuves",points:1,variants:["haccp","principes haccp","procedures","procédures","pms","mise en oeuvre","mise en œuvre","preuves","enregistrements"]}
+  ]},
+  q7:{max:3,items:[
+    {label:"Réception : fournisseur + lot + DLC/DDM",points:1,variants:["reception","réception","bon de livraison","bl","lot","numero","numéro","dlc","ddm","fournisseur"]},
+    {label:"Fabrication/production : lien lot → préparation",points:1,variants:["fabrication","production","fiche de production","fiche de fabrication","lot utilise","lot utilisé","ingredients","ingrédients","recette"]},
+    {label:"Service : date/menu/planning",points:1,variants:["service","date","menu","planning","distribution","sortie"]}
+  ]},
+  q12:{max:4,items:[
+    {label:"Revue PMS périodique maintenue",points:1,variants:["revue","annuelle","periodique","périodique","mise a jour","mise à jour"]},
+    {label:"Analyse indicateurs (NC, autocontrôles, audits)",points:1,variants:["indicateur","non conformite","non-conformite","nc","autocontrole","autocontrôle","audit","controle","contrôle","ddpp","retour"]},
+    {label:"Mise à jour selon changements",points:1,variants:["changement","carte","menu","volume","equipe","équipe","materiel","matériel","local","locaux","fournisseur","organisation"]},
+    {label:"Amélioration continue (actions correctives/préventives)",points:1,variants:["amelioration","amélioration","continue","actions correctives","actions preventives","actions préventives","plan action","prevenir","prévenir"]}
+  ]}
+};
+
+let MATCH_MODE = "pro";
+const AUTO_GRADED = ["q1","q3","q4","q5","q6","q8","q9","q10","q11","q13"];
+const RUBRIC_GRADED = ["q2","q7","q12"];
+let reviewItems=[], reviewIndex=0;
+
+function normalizeText(s){
+  return String(s||"").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
+}
+function tokenize(s){ const t=normalizeText(s); return t? t.split(" "):[]; }
+function stemLite(w){
+  let x=w;
+  const suf=["ements","ement","ations","ation","ments","ment","euses","euse","ives","ive","ifs","if","ees","ee","es","s","e"];
+  for(const s of suf){ if(x.length>=6 && x.endsWith(s)){ x=x.slice(0,-s.length); break; } }
+  return x;
+}
+function levenshtein(a,b){
+  if(a===b) return 0;
+  if(!a.length) return b.length;
+  if(!b.length) return a.length;
+  const v0=new Array(b.length+1).fill(0), v1=new Array(b.length+1).fill(0);
+  for(let i=0;i<v0.length;i++) v0[i]=i;
+  for(let i=0;i<a.length;i++){
+    v1[0]=i+1;
+    for(let j=0;j<b.length;j++){
+      const cost=a[i]===b[j]?0:1;
+      v1[j+1]=Math.min(v1[j]+1,v0[j+1]+1,v0[j]+cost);
+    }
+    for(let j=0;j<v0.length;j++) v0[j]=v1[j];
+  }
+  return v1[b.length];
+}
+function tokenMatch(token, variantToken, mode){
+  if(!token||!variantToken) return false;
+  if(token===variantToken) return true;
+  if(mode==="pro") return false;
+  const t1=stemLite(token), t2=stemLite(variantToken);
+  if(t1===t2) return true;
+  if(t1.startsWith(t2)||t2.startsWith(t1)) return true;
+  if(mode==="permissive"){
+    const len=Math.max(token.length, variantToken.length);
+    if(len>=5){
+      const d=levenshtein(token, variantToken);
+      const thr=len>=8?2:1;
+      if(d<=thr) return true;
+    }
+  }
+  return false;
+}
+function containsVariant(answerText, variant, mode){
+  const ans=normalizeText(answerText), v=normalizeText(variant);
+  if(!ans||!v) return false;
+  const vTokens=v.split(" ").filter(Boolean);
+  if(vTokens.length===1){
+    const ansTokens=tokenize(ans); const vt=vTokens[0];
+    return ansTokens.some(t=>tokenMatch(t,vt,mode));
+  }
+  if(mode==="pro") return ans.includes(v);
+  const ansTokens=tokenize(ans);
+  return vTokens.every(vt=>ansTokens.some(at=>tokenMatch(at,vt,mode)));
+}
+function rubricGrade(qid, rawAnswer){
+  const r=RUBRIC[qid];
+  if(!r) return {score:0,max:0,level:"—",found:[],missing:[]};
+  let score=0; const found=[], missing=[];
+  for(const it of r.items){
+    const hit=it.variants.some(v=>containsVariant(rawAnswer||"",v,MATCH_MODE));
+    if(hit){ score+=it.points; found.push(it.label); }
+    else { missing.push(it.label); }
+  }
+  score=Math.min(score,r.max);
+  const ratio=r.max?score/r.max:0;
+  let level="Insuffisant";
+  if(ratio>=.25) level="À consolider";
+  if(ratio>=.60) level="Satisfaisant";
+  if(ratio>=.90) level="Très satisfaisant";
+  return {score,max:r.max,level,found,missing};
+}
+
+function getSelected(name){
+  const radios=[...document.querySelectorAll('input[type="radio"][name="'+name+'"]')];
+  if(radios.length){
+    const r=radios.find(x=>x.checked); return r?[r.value]:[];
+  }
+  const checks=[...document.querySelectorAll('input[type="checkbox"][name="'+name+'"]')];
+  return checks.filter(x=>x.checked).map(x=>x.value).sort();
+}
+function arraysEqual(a,b){
+  if(a.length!==b.length) return false;
+  for(let i=0;i<a.length;i++) if(a[i]!==b[i]) return false;
+  return true;
+}
+function formatUserAnswer(qid){
+  const k=KEY[qid];
+  if(k.type==="free"){
+    const ta=document.querySelector('textarea[name="'+qid+'"]');
+    return ta && ta.value.trim()? ta.value.trim() : "";
+  }
+  const sel=getSelected(qid);
+  return sel.length? sel.join(", ") : "";
+}
+function calcProgress(){
+  let answered=0;
+  for(let i=1;i<=13;i++){
+    const q="q"+i;
+    const sel=getSelected(q);
+    const free=document.querySelector('textarea[name="'+q+'"]');
+    if((sel && sel.length>0) || (free && free.value.trim())) answered++;
+  }
+  document.getElementById("bar").style.width = Math.round((answered/13)*100) + "%";
+}
+document.addEventListener("change", calcProgress);
+document.addEventListener("input", calcProgress);
+
+function getCartouche(){
+  return {
+    last:(document.getElementById("candLast").value||"").trim(),
+    first:(document.getElementById("candFirst").value||"").trim(),
+    date:(document.getElementById("candDate").value||"").trim()
+  };
+}
+function cartoucheOk(){
+  const {last,first,date}=getCartouche();
+  return (last.length>=2 && first.length>=2 && !!date);
+}
+function updateLocks(){
+  const ok = cartoucheOk();
+  document.getElementById("btnCorrect").disabled = !ok;
+  document.getElementById("btnReview").disabled = !ok;
+  document.getElementById("btnShowAll").disabled = !ok;
+  document.getElementById("btnMail").disabled = !ok;
+  document.getElementById("lockText").textContent = ok
+    ? "Cartouche OK — correction et e-mail disponibles."
+    : "Cartouche incomplet — correction verrouillée.";
+}
+function requireCartouche(){
+  if(!cartoucheOk()){
+    alert("Cartouche incomplet : renseignez Nom, Prénom et Date.");
+    document.getElementById("candLast").focus();
+    return false;
+  }
+  return true;
+}
+["candLast","candFirst","candDate"].forEach(id=>{
+  document.getElementById(id).addEventListener("input", updateLocks);
+  document.getElementById(id).addEventListener("change", updateLocks);
+});
+
+function escapeHtml(s){
+  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+
+function computeScore(){
+  let score=0,max=0; reviewItems=[];
+  for(let i=1;i<=13;i++){
+    const qid="q"+i;
+    const k=KEY[qid];
+    const ua=formatUserAnswer(qid);
+    let ok=null, rub=null;
+
+    if(AUTO_GRADED.includes(qid)){
+      max+=k.points;
+      ok=arraysEqual(getSelected(qid).sort(), k.correct.slice().sort());
+      score += ok ? k.points : 0;
+    }
+    if(RUBRIC_GRADED.includes(qid)){
+      rub=rubricGrade(qid,ua);
+      max+=rub.max;
+      score+=rub.score;
+    }
+
+    reviewItems.push({
+      qid,
+      title:document.querySelector("#"+qid+" .q-title")?.innerText || qid,
+      meta:document.querySelector("#"+qid+" .q-meta")?.innerText || "",
+      situation:document.querySelector("#"+qid+" .situation")?.innerText || "",
+      userAnswer: ua || "— (non renseigné)",
+      correctAnswer: (k.type==="free") ? k.correctText : (k.corr || k.correct.join(", ")),
+      justification:k.just,
+      ok,
+      rubric: rub
+    });
+  }
+  return {score,max};
+}
+
+function badgeFor(item){
+  if(item.rubric){
+    const ratio=item.rubric.max? item.rubric.score/item.rubric.max : 0;
+    if(ratio>=.90) return {cls:"ok",txt:"Très satisfaisant"};
+    if(ratio>=.60) return {cls:"info",txt:"Satisfaisant"};
+    if(ratio>=.25) return {cls:"ko",txt:"À consolider"};
+    return {cls:"ko",txt:"Insuffisant"};
+  }
+  return item.ok ? {cls:"ok",txt:"Correct"} : {cls:"ko",txt:"À corriger"};
+}
+
+function showScore(){
+  const {score,max}=computeScore();
+  document.getElementById("scoreText").textContent = score+" / "+max;
+  document.getElementById("results").style.display="block";
+  document.getElementById("review").style.display="none";
+  document.getElementById("allCorrections").style.display="none";
+  document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function renderReview(idx){
+  const it=reviewItems[idx]; reviewIndex=idx;
+  document.getElementById("reviewTitle").textContent = "Correction — "+it.qid.toUpperCase();
+  document.getElementById("reviewMeta").textContent = it.title;
+  const b=badgeFor(it);
+  const badge=document.getElementById("reviewBadge");
+  badge.className = "badge "+b.cls; badge.textContent=b.txt;
+
+  const rubricBlock = it.rubric ? `
+    <div class="block">
+      <h4>Appréciation (réponse courte)</h4>
+      <p>
+        <strong>Mode :</strong> ${escapeHtml(MATCH_MODE)}<br>
+        <strong>Score :</strong> ${it.rubric.score} / ${it.rubric.max} — <strong>${escapeHtml(it.rubric.level)}</strong>
+      </p>
+      <p style="margin-top:8px"><strong>Éléments détectés :</strong><br>${it.rubric.found.length? it.rubric.found.map(x=>"• "+escapeHtml(x)).join("<br>"):"—"}</p>
+      <p style="margin-top:8px"><strong>Éléments manquants :</strong><br>${it.rubric.missing.length? it.rubric.missing.map(x=>"• "+escapeHtml(x)).join("<br>"):"—"}</p>
+    </div>` : "";
+
+  document.getElementById("reviewBody").innerHTML = `
+    <div class="block"><h4>Situation professionnelle</h4><p>${escapeHtml(it.situation).replace(/\n/g,"<br>")}</p></div>
+    <div class="block"><h4>Réponse candidat</h4><p>${escapeHtml(it.userAnswer).replace(/\n/g,"<br>")}</p></div>
+    <div class="block"><h4>Réponse attendue (formateur)</h4><p>${escapeHtml(it.correctAnswer).replace(/\n/g,"<br>")}</p></div>
+    <div class="block"><h4>Justification</h4><p>${escapeHtml(it.justification).replace(/\n/g,"<br>")}</p></div>
+    ${rubricBlock}
+    <p class="small muted" style="margin:8px 2px 0">Item ${idx+1} / ${reviewItems.length}</p>
+  `;
+  document.getElementById("btnPrev").disabled = (idx===0);
+  document.getElementById("btnNext").disabled = (idx===reviewItems.length-1);
+}
+
+function showReview(){
+  if(!reviewItems.length) computeScore();
+  document.getElementById("review").style.display="block";
+  document.getElementById("allCorrections").style.display="none";
+  renderReview(0);
+  document.getElementById("review").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function showAll(){
+  if(!reviewItems.length) computeScore();
+  const all = reviewItems.map((it,idx)=>{
+    const b=badgeFor(it);
+    const rubricMini = it.rubric ? `
+      <p style="margin-top:8px"><strong>Appréciation :</strong> ${escapeHtml(it.rubric.level)} (${it.rubric.score}/${it.rubric.max})</p>
+      <p class="muted small" style="margin-top:6px"><strong>Détecté :</strong> ${it.rubric.found.length? it.rubric.found.map(x=>escapeHtml(x)).join(" | "):"—"}</p>
+    `:"";
+    return `
+      <div class="block">
+        <h4>${it.qid.toUpperCase()} — ${escapeHtml(it.title)} <span class="badge ${b.cls}" style="float:right">${b.txt}</span></h4>
+        <p><strong>Situation :</strong><br>${escapeHtml(it.situation).replace(/\n/g,"<br>")}</p>
+        <p style="margin-top:8px"><strong>Réponse candidat :</strong> ${escapeHtml(it.userAnswer).replace(/\n/g,"<br>")}</p>
+        <p style="margin-top:8px"><strong>Réponse attendue :</strong> ${escapeHtml(it.correctAnswer).replace(/\n/g,"<br>")}</p>
+        <p style="margin-top:8px"><strong>Justification :</strong> ${escapeHtml(it.justification).replace(/\n/g,"<br>")}</p>
+        ${rubricMini}
+        <p class="small muted" style="margin-top:8px">Item ${idx+1}/${reviewItems.length}</p>
+      </div>`;
+  }).join("");
+  document.getElementById("allBody").innerHTML=all;
+  document.getElementById("allCorrections").style.display="block";
+  document.getElementById("review").style.display="none";
+  document.getElementById("allCorrections").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function openMailto(){
+  if(!requireCartouche()) return;
+  showScore();
+  const { last, first, date } = getCartouche();
+  const score = document.getElementById("scoreText")?.textContent || "—";
+  const nom = (last || "").toUpperCase();
+  const prenom = (first || "").trim();
+  const to = FORMATEURS_EMAILS.join(",");
+  const subject = `PMS — ${nom} ${prenom}`;
+  const body = [
+    "Bonjour,",
+    "",
+    "Veuillez trouver ci-joint la copie du questionnaire PMS (PDF)",
+    "concernant le candidat suivant :",
+    "",
+    `Nom : ${nom}`,
+    `Prénom : ${prenom}`,
+    "",
+    "Module évalué : PMS — Plan de Maîtrise Sanitaire",
+    `Date d'évaluation : ${date}`,
+    `Résultat obtenu : ${score}`,
+    "",
+    "Document corrigé via l'outil pédagogique GRETA / GIP-FIPAN.",
+    "",
+    "Merci de bien vouloir intégrer cette évaluation au suivi du candidat.",
+    "",
+    "Cordialement,",
+    "",
+    "Benoît DEFLANDRE",
+    "Formateur — Prévention / Hygiène / Sécurité",
+    "GRETA du Var — GIP FIPAN",
+    "Académie de Nice"
+  ].join("\n");
+  window.location.href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+document.getElementById("btnCorrect").addEventListener("click",()=>{ if(requireCartouche()) showScore(); });
+document.getElementById("btnReview").addEventListener("click",()=>{ if(requireCartouche()) showReview(); });
+document.getElementById("btnShowAll").addEventListener("click",()=>{ if(requireCartouche()) showAll(); });
+document.getElementById("btnPrev").addEventListener("click",()=>{ if(reviewIndex>0) renderReview(reviewIndex-1); });
+document.getElementById("btnNext").addEventListener("click",()=>{ if(reviewIndex<reviewItems.length-1) renderReview(reviewIndex+1); });
+document.getElementById("btnMail").addEventListener("click", openMailto);
+document.getElementById("matchMode").addEventListener("change",(e)=>{
+  MATCH_MODE=e.target.value;
+  if(document.getElementById("results").style.display==="block"){
+    showScore();
+    if(document.getElementById("review").style.display==="block") renderReview(reviewIndex);
+    if(document.getElementById("allCorrections").style.display==="block") showAll();
+  }
+});
+
+document.getElementById("btnPrint").addEventListener("click",()=>window.print());
+
+document.getElementById("btnReset").addEventListener("click",()=>{
+  document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(i=>i.checked=false);
+  document.querySelectorAll("textarea").forEach(t=>t.value="");
+  document.getElementById("results").style.display="none";
+  document.getElementById("review").style.display="none";
+  document.getElementById("allCorrections").style.display="none";
+  calcProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+(function init(){
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  document.getElementById("candDate").value = `${yyyy}-${mm}-${dd}`;
+  calcProgress();
+  updateLocks();
+})();
+</script>
+
+<!-- Bouton retour haut -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+        style="position: fixed; bottom: 20px; right: 20px; background: var(--bleu-gip, #0055a4); 
+               color: white; border: none; border-radius: 50%; width: 50px; height: 50px; 
+               font-size: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+               z-index: 9999; transition: all 0.3s;"
+        onmouseover="this.style.background='var(--bleu-fonce, #003a78)'"
+        onmouseout="this.style.background='var(--bleu-gip, #0055a4)'"
+        title="Retour en haut">
+  ↑
+</button>
+
+</body>
+</html>
