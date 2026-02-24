@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Boucle de non-conformité">
+<rect width="720" height="360" rx="18" fill="#f7fbff"/>
+<g font-family="system-ui" font-size="18" fill="#102845" text-anchor="middle">
+<circle cx="360" cy="74" r="52" fill="#ffe8e8" stroke="#bf4040"/><text x="360" y="80">Détection</text>
+<circle cx="540" cy="145" r="52" fill="#fff4df" stroke="#c78300"/><text x="540" y="151">Enregistrement</text>
+<circle cx="540" cy="260" r="52" fill="#eaf5ff" stroke="#1677ff"/><text x="540" y="266">Action corrective</text>
+<circle cx="180" cy="260" r="52" fill="#e9f7ef" stroke="#2e8b57"/><text x="180" y="266">Vérification</text>
+<circle cx="180" cy="145" r="52" fill="#eaf5ff" stroke="#16508f"/><text x="180" y="151">Clôture</text>
+</g>
+<path d="M406 97l86 34m35 57v45m-303 36h264m-316-46v-43m34-59l95-37" stroke="#335b90" stroke-width="4" fill="none"/>
+</svg>
