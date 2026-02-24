@@ -82,6 +82,7 @@
   if (header) header.insertAdjacentElement('afterend', buildNav('operator-nav operator-nav--top'));
   const footer = document.querySelector('.core-footer');
   if (footer) footer.insertAdjacentElement('beforebegin', buildNav('operator-nav operator-nav--bottom'));
+  document.documentElement.dataset.nav = 'core';
 
   document.querySelectorAll('.scroll-top, .btn-scroll-left, .btn-scroll-right, .app-nav-bottom, .back-home').forEach((el) => el.remove());
 
