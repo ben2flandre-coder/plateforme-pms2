@@ -2,75 +2,75 @@ import fs from "node:fs";
 import path from "node:path";
 
 const cfg = JSON.parse(fs.readFileSync(path.join("tools","link-audit.config.json"), "utf8"));
-const BASE = cfg.base;
 
-function isSkippable(u){
+const exts = new Set(cfg.extensions || []);
+const visited = new Set();
+const rows = [["from","url","resolved_path","exists"]];
+
+function isExternal(u){
   return u.startsWith("http") || u.startsWith("mailto:") || u.startsWith("tel:") || u.startsWith("#");
 }
-function abs(u){
-  return new URL(u, BASE).toString();
-}
-function extract(html){
-  const out = new Set();
+function extractLinks(html){
+  const out = [];
   const re = /(href|src)=["']([^"']+)["']/gi;
   let m;
   while((m = re.exec(html))){
-    const u = (m[2]||"").trim();
-    if(!u || isSkippable(u)) continue;
-    out.add(u);
+    const u = (m[2] || "").trim();
+    if(!u || isExternal(u)) continue;
+    out.push(u);
   }
-  return [...out];
+  return out;
 }
-async function getText(url){
-  const r = await fetch(url);
-  if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return await r.text();
+function shouldCheck(u){
+  const lower = u.toLowerCase();
+  for(const e of exts){
+    if(lower.includes(e)) return true;
+  }
+  return lower.endsWith(".html") || lower.endsWith("/");
 }
-async function check(url){
+function resolveFrom(fromFile, rel){
+  const base = path.dirname(fromFile);
+  const p = rel.endsWith("/") ? rel + "index.html" : rel;
+  return path.normalize(path.join(base, p));
+}
+
+function fileExists(p){
   try{
-    let r = await fetch(url, { method:"HEAD" });
-    if(!r.ok) r = await fetch(url, { method:"GET" });
-    return { ok: r.ok, status: r.status };
-  }catch(e){
-    return { ok:false, status:"ERR" };
-  }
-}
-function shouldIncludeBinary(u){
-  return (cfg.includeBinaryExtensions||[]).some(ext => u.toLowerCase().includes(ext));
+    return fs.existsSync(p) && fs.statSync(p).isFile();
+  }catch{ return false; }
 }
 
-(async () => {
-  const seen = new Map(); // url -> rel
-  const pages = cfg.pages || ["index.html"];
+function crawl(file){
+  if(visited.has(file)) return;
+  visited.add(file);
 
-  for(const p of pages){
-    const url = abs(p);
-    let html;
-    try{
-      html = await getText(url);
-    }catch(e){
-      seen.set(url, p);
-      continue;
-    }
-    const links = extract(html);
-    for(const rel of links){
-      if(shouldIncludeBinary(rel) || rel.endsWith(".html") || rel.endsWith("/")){
-        seen.set(abs(rel), rel);
-      }
-    }
+  if(!fileExists(file)){
+    rows.push([file, "(self)", file, "false"]);
+    return;
   }
 
-  const rows = [["url","rel","status","ok"]];
-  for(const [url, rel] of seen.entries()){
-    const res = await check(url);
-    rows.push([url, rel, String(res.status), String(res.ok)]);
+  const html = fs.readFileSync(file, "utf8");
+  for(const u of extractLinks(html)){
+    if(!shouldCheck(u)) continue;
+    const resolved = resolveFrom(file, u);
+    const ok = fileExists(resolved);
+    rows.push([file, u, resolved, String(ok)]);
+    if(u.endsWith(".html") || u.endsWith("/")){
+      crawl(resolved);
+    }
   }
-  const csv = rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
-  fs.writeFileSync(path.join("tools","link-report.csv"), csv, "utf8");
-  console.log("Wrote tools/link-report.csv");
-  const failed = rows.filter(r => r[3] === "false");
-  if(failed.length > 1){
-    console.error("Some links failed. See tools/link-report.csv");
-    process.exit(2);
-  }
-})();
+}
+
+for(const p of (cfg.pages || [])){
+  crawl(p);
+}
+
+const csv = rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
+fs.writeFileSync(path.join("tools","link-report.csv"), csv, "utf8");
+
+const failures = rows.slice(1).filter(r => r[3] === "false");
+if(failures.length){
+  console.error("LINK AUDIT FAILURES:", failures.length);
+  process.exit(2);
+}
+console.log("OK: all audited links exist.");
