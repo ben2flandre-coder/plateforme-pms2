@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" role="img" aria-label="Flux HACCP">
+<rect width="960" height="220" rx="18" fill="#f5f9ff"/>
+<g font-family="system-ui" font-size="18" fill="#0f2f57" text-anchor="middle">
+<rect x="20" y="70" width="130" height="70" rx="10" fill="#dce9ff" stroke="#16508f"/><text x="85" y="112">Réception</text>
+<rect x="175" y="70" width="130" height="70" rx="10" fill="#e9f4ff" stroke="#16508f"/><text x="240" y="112">Stockage</text>
+<rect x="330" y="70" width="130" height="70" rx="10" fill="#eef9f0" stroke="#2d7c4e"/><text x="395" y="112">Préparation</text>
+<rect x="485" y="70" width="130" height="70" rx="10" fill="#fff4e4" stroke="#b27400"/><text x="550" y="112">Cuisson</text>
+<rect x="640" y="70" width="130" height="70" rx="10" fill="#ffeceb" stroke="#b63b3b"/><text x="705" y="112">Maintien</text>
+<rect x="795" y="70" width="140" height="70" rx="10" fill="#dce9ff" stroke="#16508f"/><text x="865" y="112">Service</text>
+</g>
+<g stroke="#335b90" stroke-width="4" fill="none" stroke-linecap="round"><path d="M150 105h20m135 0h20m135 0h20m135 0h20m135 0h20"/></g>
+</svg>
