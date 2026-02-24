@@ -669,3 +669,129 @@ a.pms-btn{
 .pms-panel:first-child{
   border-left-color:#2c7be5;
 }
+
+/* ===========================
+   TMS SCROLLABILITY LAYER
+   Mobile-first deck + snap
+=========================== */
+
+/* 1) Safe area: bottom nav / iOS */
+:root{
+  --pms-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* reserve space so bottom nav never hides content */
+body{
+  padding-bottom: calc(76px + var(--pms-safe-bottom));
+}
+
+/* 2) Sticky context: KPI becomes "system bar" */
+.pms-kpi{
+  position: sticky;
+  top: 0;               /* keeps context visible on mobile */
+  z-index: 20;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  background: rgba(230, 237, 245, .92);
+}
+
+/* KPI chips-like: allow horizontal scroll when cramped */
+.pms-kpi{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.pms-kpi::-webkit-scrollbar{ display:none; }
+.pms-kpi__item{
+  white-space: nowrap;
+}
+
+/* 3) Make cockpit deck on small screens */
+@media (max-width: 820px){
+
+  /* turn grid into horizontal deck */
+  .pms-cockpit{
+    display: flex !important;
+    gap: 14px !important;
+    overflow-x: auto;
+    padding: 6px 4px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pms-cockpit::-webkit-scrollbar{ display:none; }
+
+  /* each panel becomes a "card" with snap */
+  .pms-panel{
+    flex: 0 0 88vw;
+    max-width: 88vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    border-left-width: 6px;
+  }
+
+  /* density adjustments */
+  .pms-panel{ padding: 14px; }
+  .pms-panel__title{ font-size: 16px; }
+  .pms-panel__sub{ font-size: 13px; margin-bottom: 10px; }
+
+  .pms-item{
+    min-height: 52px;
+    padding: 8px 10px;
+  }
+  .pms-item__desc{ font-size: 12px; }
+
+  /* CTA ergonomics */
+  a.pms-btn{
+    min-width: 88px;
+    padding: 9px 12px;
+  }
+}
+
+/* 4) Comodalité (split screen / tablette portrait): keep grid but tighten */
+@media (min-width: 821px) and (max-width: 1180px){
+  .pms-cockpit{
+    grid-template-columns: repeat(2, minmax(320px, 1fr)) !important;
+  }
+}
+
+/* 5) “Fun but pro” micro-feedback (no gimmick) */
+.pms-panel{
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.pms-item{
+  transition: transform .12s ease, background .12s ease;
+}
+a.pms-btn{
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+/* desktop hover */
+@media (hover:hover){
+  .pms-panel:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0,0,0,.12);
+    border-left-color:#2c7be5;
+  }
+  .pms-item:hover{
+    background:#f5f9ff;
+    transform: translateX(3px);
+  }
+  a.pms-btn:hover{
+    transform: scale(1.04);
+    box-shadow: 0 4px 10px rgba(0,0,0,.14);
+  }
+}
+
+/* mobile active feedback */
+.pms-item:active{ transform: scale(.995); }
+a.pms-btn:active{ transform: scale(.98); }
+
+/* 6) Accessibility: focus visible */
+.pms-panel :focus-visible,
+.pms-item :focus-visible,
+a.pms-btn:focus-visible{
+  outline: 3px solid rgba(44,123,229,.35);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
