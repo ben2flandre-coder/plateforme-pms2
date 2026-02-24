@@ -626,3 +626,46 @@ a.pms-btn{
 
 /* Option: rendre les liens internes moins "violets" si déjà un style global existe.
    Ne pas casser le DS existant: pas de reset global. */
+
+/* ===== PMS DYNAMIC INTERACTION LAYER (TMS FEEL) ===== */
+.pms-panel{
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease;
+  cursor:default;
+  opacity:.96;
+}
+
+.pms-panel:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 28px rgba(0,0,0,.12);
+  border-left-color:#2c7be5;
+  opacity:1;
+}
+
+.pms-item{
+  transition:
+    background .15s ease,
+    transform .12s ease;
+}
+
+.pms-item:hover{
+  background:#f5f9ff;
+  transform:translateX(4px);
+}
+
+.pms-btn{
+  transition:
+    transform .12s ease,
+    box-shadow .12s ease;
+}
+
+.pms-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.pms-panel:first-child{
+  border-left-color:#2c7be5;
+}
