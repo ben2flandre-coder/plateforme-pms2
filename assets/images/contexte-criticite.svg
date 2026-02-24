@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="Matrice criticité HACCP">
+<rect width="640" height="320" rx="24" fill="#f8fbff"/>
+<rect x="120" y="60" width="400" height="200" rx="18" fill="#fff" stroke="#c7d5ea"/>
+<line x1="253" y1="60" x2="253" y2="260" stroke="#d5dfef"/>
+<line x1="386" y1="60" x2="386" y2="260" stroke="#d5dfef"/>
+<line x1="120" y1="126" x2="520" y2="126" stroke="#d5dfef"/>
+<line x1="120" y1="193" x2="520" y2="193" stroke="#d5dfef"/>
+<rect x="386" y="193" width="134" height="67" fill="#ffe5e5"/>
+<rect x="253" y="193" width="133" height="67" fill="#fff1d6"/>
+<rect x="120" y="193" width="133" height="67" fill="#e6f4eb"/>
+</svg>

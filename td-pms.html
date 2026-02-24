@@ -413,11 +413,21 @@
     </div>
   </nav>
 </header>
+<section class="app-hero app-hero--formation">
+  <div class="core-container">
+    <h2 class="app-hero-title">Travaux dirigés PMS</h2>
+    <p class="app-hero-sub">Mise en pratique guidée des procédures et contrôles.</p>
+    <div class="app-kpis">
+      <span class="app-kpi">Objectif:Application terrain</span><span class="app-kpi">Étape:Exercices</span><span class="app-kpi">Durée:Atelier</span><span class="app-kpi">Statut:Actif</span>
+    </div>
+  </div>
+</section>
 
-  <main>
+
+  <main class="workspace">
     
     <!-- Introduction -->
-    <div class="intro-card card-module">
+    <div class="intro-card card-module panel panel--work">
       <h2>🎯 Construire son Plan de Maîtrise Sanitaire</h2>
       
       <div class="alert-info">
@@ -443,6 +453,10 @@
         <p><strong>💡 Conseil :</strong> Vos réponses sont automatiquement sauvegardées dans votre navigateur. Vous pouvez revenir compléter ce TD ultérieurement.</p>
       </div>
     </div>
+    <section class="panel panel--info context-panel">
+      <h3>Contexte métier</h3>
+      <img src="assets/images/contexte-atelier.svg" alt="Pictogramme atelier de mise en pratique" class="context-visual">
+    </section>
 
     <!-- Barre de progression -->
     <div class="progress-container">
@@ -514,7 +528,7 @@
         <textarea id="diag_commentaires" placeholder="Notez vos observations..."></textarea>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-primary" onclick="nextStep(2)">Étape suivante →</button>
       </div>
     </div>
@@ -573,7 +587,7 @@
         <textarea id="struct_priorites" placeholder="Ex: Finaliser le plan HACCP, créer les fiches de traçabilité..."></textarea>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-secondary" onclick="nextStep(1)">← Étape précédente</button>
         <button class="btn btn-primary" onclick="nextStep(3)">Étape suivante →</button>
       </div>
@@ -649,7 +663,7 @@
         </div>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-secondary" onclick="nextStep(2)">← Étape précédente</button>
         <button class="btn btn-primary" onclick="nextStep(4)">Étape suivante →</button>
       </div>
@@ -747,7 +761,7 @@
         </div>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-secondary" onclick="nextStep(3)">← Étape précédente</button>
         <button class="btn btn-primary" onclick="nextStep(5)">Étape suivante →</button>
       </div>
@@ -839,7 +853,7 @@
         </div>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-secondary" onclick="nextStep(4)">← Étape précédente</button>
         <button class="btn btn-primary" onclick="nextStep(6)">Étape suivante →</button>
       </div>
@@ -918,7 +932,7 @@
         </ul>
       </div>
       
-      <div class="btn-group card-actions">
+      <div class="btn-group card-actions panel panel--actions">
         <button class="btn btn-secondary" onclick="nextStep(5)">← Étape précédente</button>
         <button class="btn btn-success" onclick="window.print()">🖨️ Imprimer mon TD</button>
         <a href="#" class="btn btn-secondary" target="_blank">📄 Version PDF</a>
@@ -927,7 +941,7 @@
     </div>
 
   
-<div class="card-actions" style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
+<div class="card-actions panel panel--actions" style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
   <a href="index.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; display: inline-block; 
      background: var(--bleu-gip, #0055a4); color: white; text-decoration: none; border-radius: 999px; 
      font-weight: 600; transition: all 0.3s;"

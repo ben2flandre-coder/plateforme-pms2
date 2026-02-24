@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="Contrôle audit PMS">
+<rect width="640" height="320" rx="24" fill="#f7faff"/>
+<rect x="110" y="56" width="290" height="210" rx="20" fill="#fff" stroke="#c7d5ea"/>
+<circle cx="450" cy="160" r="88" fill="#dbe9ff"/>
+<circle cx="450" cy="160" r="56" fill="#fff" stroke="#1677ff" stroke-width="10"/>
+<line x1="180" y1="110" x2="340" y2="110" stroke="#d1ddf0" stroke-width="10"/>
+<line x1="180" y1="155" x2="320" y2="155" stroke="#d1ddf0" stroke-width="10"/>
+<line x1="180" y1="200" x2="300" y2="200" stroke="#d1ddf0" stroke-width="10"/>
+<path d="M428 160l16 18 30-34" stroke="#2e8b57" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg>
