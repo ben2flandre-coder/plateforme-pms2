@@ -95,7 +95,7 @@ body {
 main,
 .container,
 .container-grid {
-  width: min(1180px, 100% - 2rem);
+  width: min(1100px, 100% - 2rem);
   margin-inline: auto;
 }
 
@@ -199,6 +199,7 @@ table th {
 
 .card-module,
 .card-section,
+.card-context,
 .card-actions {
   background: var(--core-white);
   border: 1px solid var(--core-border);
@@ -206,6 +207,24 @@ table th {
   box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
   padding: clamp(1rem, 2vw, 1.5rem);
   margin-block: 1.1rem;
+}
+
+.card-module {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  border-color: #d3dce7;
+}
+
+.card-context {
+  background: #f7f9fc;
+  border-left: 6px solid var(--core-orange);
+  margin-top: 24px;
+}
+
+.card-context img {
+  display: block;
+  width: min(100%, 600px);
+  height: auto;
+  margin: 0 auto 1rem;
 }
 
 main > * + * {
@@ -252,5 +271,6 @@ button,
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  background: #f1f4f8;
   border-top: 1px solid rgba(36, 52, 71, 0.12);
 }
