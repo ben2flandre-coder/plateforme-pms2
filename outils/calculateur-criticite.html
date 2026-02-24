@@ -29,14 +29,24 @@
     </div>
   </nav>
 </header>
+<section class="app-hero app-hero--outils">
+  <div class="core-container">
+    <h2 class="app-hero-title">Calculateur HACCP</h2>
+    <p class="app-hero-sub">Évaluer rapidement la criticité et orienter les actions HACCP.</p>
+    <div class="app-kpis">
+      <span class="app-kpi">Objectif:Prioriser</span><span class="app-kpi">Étape:Analyse danger</span><span class="app-kpi">Durée:< 5 min</span><span class="app-kpi">Statut:Interactif</span>
+    </div>
+  </div>
+</section>
+
   <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
 
 
-  <main>
+  <main class="workspace">
     
-    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    <a href="../outils-modeles.html" class="back-home">← Retour aux outils</a>
     
-    <div class="intro-card card-module">
+    <div class="intro-card card-module panel panel--work">
       <h2>📊 Évaluation de la Criticité d'un Danger HACCP</h2>
       <p>
         Cet outil permet de calculer automatiquement le score de criticité d'un danger identifié 
@@ -46,8 +56,12 @@
         <p><strong>💡 Méthodologie :</strong> Cette évaluation vous aide à déterminer si un danger doit être considéré comme un CCP (Point Critique de Contrôle), un PRPo (Programme Prérequis Opérationnel) ou un PRP (Programme Prérequis de base).</p>
       </div>
     </div>
+    <section class="panel panel--info context-panel">
+      <h3>Contexte métier</h3>
+      <img src="../assets/images/contexte-criticite.svg" alt="Schéma d'évaluation criticité HACCP" class="context-visual">
+    </section>
 
-    <div class="calculator-container card-section">
+    <div class="calculator-container card-section panel panel--work">
       <h3>🔬 Évaluation du Danger</h3>
       
       <div class="form-group">
@@ -80,7 +94,7 @@
         </select>
       </div>
 
-      <div class="card-actions">
+      <div class="card-actions panel panel--actions">
         <button onclick="calculer()" class="btn btn-primary">
           🧮 Calculer la Criticité
         </button>
@@ -125,7 +139,7 @@
         <p id="recommandation">-</p>
       </div>
 
-      <div class="card-actions">
+      <div class="card-actions panel panel--actions">
         <button onclick="exporterAnalyse()" class="btn btn-primary">
           📄 Exporter l'Analyse (TXT)
         </button>
@@ -162,6 +176,12 @@
         </table>
       </div>
 
+    </div>
+
+  
+    <div class="card-actions panel panel--actions app-nav-bottom">
+      <a href="../outils-modeles.html" class="btn btn-secondary">← Retour aux outils</a>
+      <a href="../index.html" class="btn btn-ghost">🏠 Hub</a>
     </div>
 
   </main>

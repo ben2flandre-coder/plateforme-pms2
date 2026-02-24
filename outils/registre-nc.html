@@ -29,14 +29,24 @@
     </div>
   </nav>
 </header>
+<section class="app-hero app-hero--outils">
+  <div class="core-container">
+    <h2 class="app-hero-title">Registre Non-Conformités</h2>
+    <p class="app-hero-sub">Tracer chaque NC et sécuriser le suivi des corrections.</p>
+    <div class="app-kpis">
+      <span class="app-kpi">Objectif:Traçabilité</span><span class="app-kpi">Étape:Enregistrement</span><span class="app-kpi">Durée:Continu</span><span class="app-kpi">Statut:Interactif</span>
+    </div>
+  </div>
+</section>
+
   <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
 
 
-  <main>
+  <main class="workspace">
     
-    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    <a href="../outils-modeles.html" class="back-home">← Retour aux outils</a>
     
-    <div class="intro-card card-module">
+    <div class="intro-card card-module panel panel--work">
       <h2>🚨 Registre des Non-Conformités PMS</h2>
       <p>
         Outil de traçabilité réglementaire pour l'enregistrement et le suivi des non-conformités 
@@ -46,6 +56,10 @@
         <p><strong>⚖️ Obligation réglementaire :</strong> Le registre des NC doit être tenu à jour en permanence et conservé 1 an minimum. Il peut être consulté lors d'un contrôle DDPP.</p>
       </div>
     </div>
+    <section class="panel panel--info context-panel">
+      <h3>Contexte métier</h3>
+      <img src="../assets/images/contexte-registre.svg" alt="Pictogramme suivi non-conformités" class="context-visual">
+    </section>
 
     <!-- Formulaire d'enregistrement NC -->
     <div class="nc-form card-section">
@@ -128,7 +142,7 @@
           </div>
         </div>
 
-        <div class="card-actions">
+        <div class="card-actions panel panel--actions">
           <button type="submit" class="btn btn-primary">
             ✅ Enregistrer la NC
           </button>
@@ -141,7 +155,7 @@
     <div class="nc-list card-section">
       <div>
         <h2>📋 Non-Conformités Enregistrées</h2>
-        <div class="card-actions">
+        <div class="card-actions panel panel--actions">
           <button onclick="filtrerNC('toutes')" class="btn btn-secondary">Toutes</button>
           <button onclick="filtrerNC('ouvertes')" class="btn btn-secondary">Ouvertes</button>
           <button onclick="filtrerNC('closes')" class="btn btn-secondary">Clôturées</button>
@@ -154,6 +168,12 @@
           Aucune non-conformité enregistrée. Utilisez le formulaire ci-dessus pour déclarer une NC.
         </p>
       </div>
+    </div>
+
+  
+    <div class="card-actions panel panel--actions app-nav-bottom">
+      <a href="../outils-modeles.html" class="btn btn-secondary">← Retour aux outils</a>
+      <a href="../index.html" class="btn btn-ghost">🏠 Hub</a>
     </div>
 
   </main>

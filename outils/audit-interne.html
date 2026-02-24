@@ -29,14 +29,24 @@
     </div>
   </nav>
 </header>
+<section class="app-hero app-hero--outils">
+  <div class="core-container">
+    <h2 class="app-hero-title">Audit Interne PMS</h2>
+    <p class="app-hero-sub">Mesurer la conformité et préparer les actions correctives.</p>
+    <div class="app-kpis">
+      <span class="app-kpi">Objectif:Auto-contrôle</span><span class="app-kpi">Étape:Audit</span><span class="app-kpi">Durée:15-20 min</span><span class="app-kpi">Statut:Interactif</span>
+    </div>
+  </div>
+</section>
+
   <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
 
 
-  <main>
+  <main class="workspace">
     
-    <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
+    <a href="../outils-modeles.html" class="back-home">← Retour aux outils</a>
     
-    <div class="intro-card card-module">
+    <div class="intro-card card-module panel panel--work">
       <h2>✅ Grille d'Audit Interne PMS</h2>
       <p>
         Outil d'auto-évaluation pour vérifier la conformité de votre Plan de Maîtrise Sanitaire 
@@ -46,11 +56,15 @@
         <p><strong>📋 Utilisation :</strong> Répondez à chaque critère en sélectionnant le niveau de conformité. Le score s'affichera automatiquement en fin d'audit.</p>
       </div>
     </div>
+    <section class="panel panel--info context-panel">
+      <h3>Contexte métier</h3>
+      <img src="../assets/images/contexte-audit.svg" alt="Pictogramme audit interne PMS" class="context-visual">
+    </section>
 
     <form id="auditForm">
       
       <!-- SECTION 1 : Hygiène du personnel -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>1️⃣ Hygiène du Personnel (BPH)</h2>
         
         <div class="audit-item">
@@ -94,7 +108,7 @@
       </div>
 
       <!-- SECTION 2 : Températures -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>2️⃣ Maîtrise des Températures (CCP)</h2>
         
         <div class="audit-item">
@@ -139,7 +153,7 @@
       </div>
 
       <!-- SECTION 3 : Traçabilité -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>3️⃣ Traçabilité</h2>
         
         <div class="audit-item">
@@ -174,7 +188,7 @@
       </div>
 
       <!-- SECTION 4 : HACCP -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>4️⃣ Plan HACCP</h2>
         
         <div class="audit-item">
@@ -209,7 +223,7 @@
       </div>
 
       <!-- SECTION 5 : Nettoyage -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>5️⃣ Plan de Nettoyage & Désinfection</h2>
         
         <div class="audit-item">
@@ -244,7 +258,7 @@
       </div>
 
       <!-- SECTION 6 : Non-conformités -->
-      <div class="audit-section card-section">
+      <div class="audit-section card-section panel panel--work">
         <h2>6️⃣ Gestion des Non-Conformités</h2>
         
         <div class="audit-item">
@@ -278,7 +292,7 @@
         </div>
       </div>
 
-      <div class="card-actions">
+      <div class="card-actions panel panel--actions">
         <button type="submit" class="btn btn-primary">
           📊 Calculer le Score
         </button>
@@ -292,6 +306,12 @@
       <div class="score-value" id="scoreValue">-</div>
       <div class="score-interpretation" id="scoreInterp">-</div>
       <p id="scoreDetail">-</p>
+    </div>
+
+  
+    <div class="card-actions panel panel--actions app-nav-bottom">
+      <a href="../outils-modeles.html" class="btn btn-secondary">← Retour aux outils</a>
+      <a href="../index.html" class="btn btn-ghost">🏠 Hub</a>
     </div>
 
   </main>

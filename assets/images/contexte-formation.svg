@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="Parcours formation PMS">
+<rect width="640" height="320" rx="24" fill="#f3f7ff"/>
+<rect x="50" y="78" width="150" height="66" rx="14" fill="#dbe9ff" stroke="#2563eb"/>
+<rect x="245" y="78" width="150" height="66" rx="14" fill="#e6f4eb" stroke="#2e8b57"/>
+<rect x="440" y="78" width="150" height="66" rx="14" fill="#fff1d6" stroke="#c78300"/>
+<path d="M200 111h45m150 0h45" stroke="#33527a" stroke-width="8" stroke-linecap="round"/>
+<circle cx="320" cy="210" r="56" fill="#fff" stroke="#1677ff" stroke-width="8"/>
+<path d="M292 210l18 18 38-40" stroke="#2e8b57" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

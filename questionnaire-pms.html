@@ -220,11 +220,26 @@ button:disabled{opacity:.5;cursor:not-allowed}
     </div>
   </nav>
 </header>
+<section class="app-hero app-hero--formation">
+  <div class="core-container">
+    <h2 class="app-hero-title">Questionnaire PMS</h2>
+    <p class="app-hero-sub">Évaluation progressive des acquis en contexte professionnel.</p>
+    <div class="app-kpis">
+      <span class="app-kpi">Objectif:Validation</span><span class="app-kpi">Étape:Évaluation</span><span class="app-kpi">Durée:10-15 min</span><span class="app-kpi">Statut:À compléter</span>
+    </div>
+  </div>
+</section>
 
-<main class="wrap">
+
+<main class="wrap workspace">
   <div class="grid">
+    <section class="panel panel--info context-panel">
+      <h3>Contexte métier</h3>
+      <img src="assets/images/contexte-formation.svg" alt="Pictogramme évaluation PMS" class="context-visual">
+    </section>
 
-    <section class="card card-module">
+
+    <section class="card card-module panel panel--work">
       <h2>Version stagiaire — Situations professionnelles</h2>
       <p class="hint">
         Les réponses courtes (Q2, Q7, Q12) sont évaluées via une grille de mots-clés pondérés.
@@ -488,7 +503,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
         </ul>
       </div>
 
-      <div class="btn-row card-actions">
+      <div class="btn-row card-actions panel panel--actions">
         <button class="btn-primary" id="btnCorrect">Corriger & afficher la note</button>
         <button class="btn-ghost" id="btnReset">Réinitialiser</button>
         <button class="btn-ghost" id="btnPrint">Imprimer / PDF</button>
@@ -506,7 +521,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
           </p>
         </div>
 
-        <div class="btn-row card-actions" style="margin-top:12px">
+        <div class="btn-row card-actions panel panel--actions" style="margin-top:12px">
           <button class="btn-orange" id="btnReview">Découvrir les corrections</button>
           <button class="btn-ghost" id="btnShowAll">Afficher toutes les corrections</button>
           <button class="btn-ghost" id="btnMail">Préparer l'e-mail aux formateurs</button>
@@ -569,7 +584,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
     </section>
   </div>
 
-<section class="card-actions" style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
+<section class="card-actions panel panel--actions" style="text-align: center; margin: 3rem 0; padding: 2rem 0; border-top: 2px solid #dde1e7;">
   <a href="index.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; display: inline-block; 
      background: var(--bleu-gip, #0055a4); color: white; text-decoration: none; border-radius: 999px; 
      font-weight: 600; transition: all 0.3s;"
