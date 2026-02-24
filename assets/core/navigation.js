@@ -86,6 +86,12 @@
 
   document.querySelectorAll('.scroll-top, .btn-scroll-left, .btn-scroll-right, .app-nav-bottom, .back-home').forEach((el) => el.remove());
 
+  const headers = Array.from(document.querySelectorAll('.core-header'));
+  headers.slice(1).forEach((el) => el.remove());
+
+  const topNavs = Array.from(document.querySelectorAll('.operator-nav--top'));
+  topNavs.slice(1).forEach((el) => el.remove());
+
   const left = document.createElement('button');
   const right = document.createElement('button');
   [left, right].forEach((btn, i) => {
@@ -112,4 +118,62 @@
     const key = a.textContent.trim();
     if (headerMap[key]) a.setAttribute('href', headerMap[key]);
   });
+
+  function normalizeLayout() {
+    const rootMain = document.querySelector('main');
+    if (rootMain) {
+      rootMain.classList.add('pms-container', 'pms-stack', 'pms-main');
+      rootMain.querySelectorAll(':scope > section, :scope > article, :scope > .section, :scope > .panel').forEach((section) => {
+        section.classList.add('pms-section');
+      });
+    }
+
+    document.querySelectorAll('.tool-grid, .cards-grid, .section-grid, .listing-grid, .container-grid').forEach((grid) => {
+      grid.classList.add('pms-grid');
+    });
+
+    document.querySelectorAll('.card, .section-card, .content-bloc, .intro-card, .info-box, .box, .tool-card, .panel, .card-module, .card-section, .card-context, .result-box, .result-details, .card-modern').forEach((card) => {
+      card.classList.add('pms-uniform-card');
+    });
+  }
+
+  function syncStickyOffset() {
+    const primaryHeader = document.querySelector('.core-header');
+    const headerHeight = primaryHeader ? Math.round(primaryHeader.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--pms-header-offset', `${headerHeight}px`);
+    document.body.classList.toggle('pms-has-sticky-top', headerHeight > 0);
+  }
+
+  function applySvgFallback() {
+    const shapeSelectors = 'path, circle, rect, polygon, polyline, line, ellipse, use, image, text';
+    document.querySelectorAll('svg').forEach((svg) => {
+      const hasShape = Boolean(svg.querySelector(shapeSelectors));
+      if (hasShape) return;
+      if (svg.dataset.svgFallback === 'true') return;
+      svg.dataset.svgFallback = 'true';
+      svg.setAttribute('role', 'img');
+      if (!svg.getAttribute('aria-label')) svg.setAttribute('aria-label', 'Icône indisponible');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.innerHTML = '<rect x="2" y="2" width="20" height="20" rx="4" fill="#eaf1fb" stroke="#16508f"/><path d="M12 6v7" stroke="#16508f" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.2" fill="#16508f"/>';
+    });
+
+    document.querySelectorAll('img[src$=".svg"]').forEach((img) => {
+      img.addEventListener('error', () => {
+        if (img.dataset.svgFallbackApplied === 'true') return;
+        img.dataset.svgFallbackApplied = 'true';
+        const fallback = document.createElement('div');
+        fallback.className = `${img.className || ''} context-visual`;
+        fallback.dataset.svgFallback = 'true';
+        fallback.textContent = '🧩 Illustration indisponible';
+        fallback.setAttribute('role', 'img');
+        fallback.setAttribute('aria-label', img.alt || 'Illustration indisponible');
+        img.replaceWith(fallback);
+      }, { once: true });
+    });
+  }
+
+  normalizeLayout();
+  applySvgFallback();
+  syncStickyOffset();
+  window.addEventListener('resize', syncStickyOffset, { passive: true });
 })();
