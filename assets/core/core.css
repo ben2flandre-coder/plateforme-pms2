@@ -795,3 +795,133 @@ a.pms-btn:focus-visible{
   outline-offset: 2px;
   border-radius: 10px;
 }
+
+/* ===========================
+   APP SHELL (TMS-like)
+=========================== */
+
+:root{
+  --app-max: 1240px;
+  --rail-w: 240px;
+  --app-gap: 18px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* keep space for bottom nav (if present) */
+body{ padding-bottom: calc(76px + var(--safe-b)); }
+
+/* app shell layout */
+.pms-app{
+  max-width: var(--app-max);
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.pms-app__inner{
+  display: grid;
+  grid-template-columns: var(--rail-w) 1fr;
+  gap: var(--app-gap);
+  align-items: start;
+  margin-top: 12px;
+}
+
+/* rail */
+.pms-rail{
+  position: sticky;
+  top: 12px;
+  align-self: start;
+  border: 1px solid rgba(0,0,0,.06);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+.pms-rail__item{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 900;
+  border: 1px solid transparent;
+}
+
+@media (hover:hover){
+  .pms-rail__item:hover{
+    background: #f5f9ff;
+    border-color: rgba(44,123,229,.25);
+    transform: translateX(2px);
+  }
+}
+
+.pms-viewport{
+  min-height: 70vh;
+}
+
+/* make the content scroll feel app-like without forcing inner scroll (safer for tools pages) */
+.pms-viewport .pms-container{
+  padding-bottom: 40px;
+}
+
+/* KPI stays visible while scrolling */
+.pms-kpi{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  background: rgba(230,237,245,.92);
+  border-radius: 10px;
+}
+
+/* Comodality / split screen: rail becomes top tabs */
+@media (max-width: 980px){
+  .pms-app__inner{
+    grid-template-columns: 1fr;
+  }
+
+  .pms-rail{
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pms-rail::-webkit-scrollbar{ display:none; }
+
+  .pms-rail__item{
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+}
+
+/* Mobile: keep cockpit deck behavior if already present; otherwise it remains stacked */
+@media (max-width: 820px){
+  .pms-cockpit{
+    display:flex !important;
+    gap: 14px !important;
+    overflow-x: auto;
+    padding: 6px 4px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pms-cockpit::-webkit-scrollbar{ display:none; }
+  .pms-panel{
+    flex: 0 0 88vw;
+    max-width: 88vw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* focus visible */
+.pms-rail__item:focus-visible{
+  outline: 3px solid rgba(44,123,229,.35);
+  outline-offset: 2px;
+}
