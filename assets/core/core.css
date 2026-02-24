@@ -196,3 +196,61 @@ table th {
   .core-footer-content,
   .core-footer-info { text-align: center; justify-content: center; }
 }
+
+.card-module,
+.card-section,
+.card-actions {
+  background: var(--core-white);
+  border: 1px solid var(--core-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  margin-block: 1.1rem;
+}
+
+main > * + * {
+  margin-top: 1rem;
+}
+
+.card-section + .card-section,
+.card-module + .card-section,
+.card-section + .card-actions {
+  margin-top: 1.25rem;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+}
+
+input,
+select,
+textarea,
+button {
+  font-size: 1rem;
+}
+
+input,
+select,
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.btn-download,
+.btn-retour {
+  min-height: 44px;
+}
+
+.form-group,
+.audit-item {
+  margin-bottom: 1rem;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(36, 52, 71, 0.12);
+}
