@@ -190,3 +190,107 @@ html[data-nav="core"] .operator-nav--top ~ .operator-nav--top {
   .operator-nav .app-nav-wrap { flex-direction: column; }
   .operator-nav .app-nav-wrap > * { width: 100%; }
 }
+html[data-nav-core="1"] nav:not(.pms-op-nav):not(.pms-bottom-nav),
+html[data-nav-core="1"] .legacy-nav,
+html[data-nav-core="1"] .old-nav,
+html[data-nav-core="1"] .nav-legacy {
+  display: none !important;
+}
+
+/* Operator nav as contextual bar (NOT a sticky navbar) */
+.pms-op-nav {
+  position: relative;
+  margin: 16px auto 24px;
+  max-width: 1100px;
+  background: #f5f7fa;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+
+.pms-op-nav__inner {
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Bottom nav */
+.pms-bottom-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  background: rgba(255,255,255,0.96);
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.pms-bottom-nav__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Float buttons */
+.pms-float-btn {
+  position: fixed;
+  bottom: 22px;
+  z-index: 60;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.pms-float-btn--left { left: 18px; }
+.pms-float-btn--right { right: 18px; }
+
+.pms-float-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Buttons alignment */
+.btn, a.btn, button.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 44px;
+}
+
+/* SVG alignment */
+svg {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  vertical-align: middle;
+}
+
+/* Safe media fallback */
+img.pms-media-broken {
+  display: none !important;
+}
+
+.pms-media-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  line-height: 1;
+  font-size: 1em;
+  vertical-align: middle;
+  opacity: .75;
+}
+
+.pms-svg-empty {
+  width: 1.25em !important;
+  height: 1.25em !important;
+}
