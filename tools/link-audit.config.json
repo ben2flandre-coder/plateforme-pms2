@@ -1,0 +1,5 @@
+{
+  "base": "https://ben2flandre-coder.github.io/plateforme-pms2/",
+  "pages": ["index.html","documents-pms.html","outils-modeles.html","cours-pms.html","td-pms.html","questionnaire-pms.html"],
+  "includeBinaryExtensions": [".pdf",".xlsx",".xls",".doc",".docx",".ppt",".pptx",".png",".jpg",".jpeg",".svg",".webp",".css",".js"]
+}
