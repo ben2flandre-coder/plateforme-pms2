@@ -36,7 +36,7 @@
     
     <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
     
-    <div class="intro-card">
+    <div class="intro-card card-module">
       <h2>🚨 Registre des Non-Conformités PMS</h2>
       <p>
         Outil de traçabilité réglementaire pour l'enregistrement et le suivi des non-conformités 
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Formulaire d'enregistrement NC -->
-    <div class="nc-form">
+    <div class="nc-form card-section">
       <h2>📝 Déclarer une Non-Conformité</h2>
       
       <form id="ncForm">
@@ -128,7 +128,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="card-actions">
           <button type="submit" class="btn btn-primary">
             ✅ Enregistrer la NC
           </button>
@@ -138,10 +138,10 @@
     </div>
 
     <!-- Liste des NC enregistrées -->
-    <div class="nc-list">
+    <div class="nc-list card-section">
       <div>
         <h2>📋 Non-Conformités Enregistrées</h2>
-        <div>
+        <div class="card-actions">
           <button onclick="filtrerNC('toutes')" class="btn btn-secondary">Toutes</button>
           <button onclick="filtrerNC('ouvertes')" class="btn btn-secondary">Ouvertes</button>
           <button onclick="filtrerNC('closes')" class="btn btn-secondary">Clôturées</button>

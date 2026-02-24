@@ -36,7 +36,7 @@
     
     <a href="outils-modeles.html" class="back-home">← Retour aux outils</a>
     
-    <div class="intro-card">
+    <div class="intro-card card-module">
       <h2>📊 Évaluation de la Criticité d'un Danger HACCP</h2>
       <p>
         Cet outil permet de calculer automatiquement le score de criticité d'un danger identifié 
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="calculator-container">
+    <div class="calculator-container card-section">
       <h3>🔬 Évaluation du Danger</h3>
       
       <div class="form-group">
@@ -80,7 +80,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="card-actions">
         <button onclick="calculer()" class="btn btn-primary">
           🧮 Calculer la Criticité
         </button>
@@ -125,14 +125,14 @@
         <p id="recommandation">-</p>
       </div>
 
-      <div>
+      <div class="card-actions">
         <button onclick="exporterAnalyse()" class="btn btn-primary">
           📄 Exporter l'Analyse (TXT)
         </button>
       </div>
 
       <!-- Tableau de référence -->
-      <div>
+      <div class="card-section">
         <h4>📊 Grille de Classification</h4>
         <table>
           <thead>
