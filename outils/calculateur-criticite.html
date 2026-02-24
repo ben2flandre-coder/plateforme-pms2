@@ -6,18 +6,29 @@
   <title>Calculateur de Criticité HACCP | GRETA GIP-FIPAN</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/calculateur.js" defer></script>
+  <link rel="stylesheet" href="../assets/core/core.css">
 </head>
 <body>
-  <header class="header-modern">
-    <div class="header-content">
-      <div class="logos-header">
-        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
-        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+  <header class="core-header">
+  <div class="core-container core-header-top">
+    <div class="core-branding">
+      <img src="../images/logo-republique.png" alt="République Française" class="core-logo-rf">
+      <div class="core-brand-text">
+        <p class="core-kicker">GRETA GIP-FIPAN • Académie de Nice</p>
+        <h1>📚 Plateforme PMS</h1>
       </div>
-      <h1>Calculateur de Criticité HACCP</h1>
-      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+      <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="core-logo-forpro">
     </div>
-  </header>
+  </div>
+  <nav class="core-main-nav" aria-label="Navigation principale">
+    <div class="core-container core-nav-wrap">
+      <a href="/plateforme-pms2/" class="core-nav-link">🏠 Hub</a>
+      <a href="/plateforme-pms2/cours-pms.html" class="core-nav-link">📘 Formation</a>
+      <a href="/plateforme-pms2/outils-modeles.html" class="core-nav-link is-active">🧰 Outils</a>
+      <a href="/plateforme-pms2/documents-pms.html" class="core-nav-link">📂 Ressources</a>
+    </div>
+  </nav>
+</header>
   <a href="../index.html" class="back-home">← Retour au hub d'accueil</a>
 
 
@@ -155,12 +166,20 @@
 
   </main>
 
-  <footer>
-    <p><strong>GRETA du Var / GIP FIPAN</strong></p>
-    <p>Académie de Nice • Formation continue professionnelle</p>
-    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
-    <p>Calculateur HACCP V18 - Conforme CE 852/2004</p>
-  </footer>
+  <footer class="core-footer">
+  <div class="core-container core-footer-content">
+    <div class="core-footer-logos">
+      <img src="../images/logo-republique.png" alt="République Française" class="core-footer-logo">
+      <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="core-footer-logo">
+    </div>
+    <div class="core-footer-info">
+      <p><strong>Créé par Benoît Deflandre</strong></p>
+      <p>GRETA du Var / GIP FIPAN • Académie de Nice</p>
+      <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+      <p class="core-version">Plateforme PMS V18.0 • Janvier 2025</p>
+    </div>
+  </div>
+</footer>
 
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
           class="scroll-top" id="scrollTopBtn"
