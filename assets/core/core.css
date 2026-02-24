@@ -1301,7 +1301,6 @@ body{ background: var(--tms-bg); color: var(--tms-ink); }
    - modules inline (comme TMS)
    - stat-strip + inserts emoji
    - densité + micro-interactions pro
-============================================================ */
 
 :root{
   --tms-navy:#0b3a66;
