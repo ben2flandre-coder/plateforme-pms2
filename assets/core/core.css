@@ -577,5 +577,52 @@ a.pms-btn{
   white-space:nowrap;
 }
 
+/* ===== PMS COCKPIT HARDENED – SOFTWARE DENSITY PASS ===== */
+.pms-cockpit{
+  align-items:stretch;
+}
+
+.pms-panel{
+  height:100%;
+  border-left:6px solid #1f4e79;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+  padding:14px;
+}
+
+.pms-item{
+  padding:8px 12px;
+  min-height:54px;
+}
+
+.pms-item__desc{
+  font-size:12px;
+}
+
+.pms-kpi{
+  background:#e6edf5;
+  border-radius:8px;
+  font-weight:600;
+}
+
+.pms-kpi__k{
+  opacity:.6;
+  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.04em;
+}
+
+.pms-op-nav{
+  opacity:.85;
+}
+
+.pms-op-nav:hover{
+  opacity:1;
+}
+
+.pms-btn{
+  min-width:92px;
+  justify-content:center;
+}
+
 /* Option: rendre les liens internes moins "violets" si déjà un style global existe.
    Ne pas casser le DS existant: pas de reset global. */
