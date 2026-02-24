@@ -31,20 +31,13 @@
 
 
 
-  <main class="pms-app" role="main">
-    <div class="pms-app__inner">
+  <main class="pms-container">
 
-      <aside class="pms-rail" aria-label="Modules PMS">
-        <a class="pms-rail__item" href="#module-formation">Formation</a>
-        <a class="pms-rail__item" href="#module-outils">Outils</a>
-        <a class="pms-rail__item" href="#module-ressources">Ressources</a>
-      </aside>
-
-      <section class="pms-viewport">
-        <div class="pms-container">
-
-  <h2>Cockpit PMS</h2>
-  <p>Pilotage formation, outils et ressources en accès direct.</p>
+  <div class="pms-hero">
+    <h2 class="pms-hero__title">Plateforme PMS</h2>
+    <p class="pms-hero__tagline">Pilotage formation, outils et ressources en accès direct.</p>
+    <div class="pms-hero__meta">GRETA GIP-FIPAN • Académie de Nice • 2025 — Version PMS V18</div>
+  </div>
 
   <div class="pms-kpi" aria-label="Contexte session PMS">
     <div class="pms-kpi__item"><span class="pms-kpi__k">Objectif</span><span class="pms-kpi__v">Déploiement PMS</span></div>
@@ -53,127 +46,146 @@
     <div class="pms-kpi__item"><span class="pms-kpi__k">Statut</span><span class="pms-kpi__v">Opérationnel</span></div>
   </div>
 
-  <section class="pms-cockpit" aria-label="Modules cockpit PMS">
+  <!-- TMS-like impact strip (PMS indicators) -->
+  <div class="tms-stats" aria-label="Indicateurs PMS">
+    <div class="tms-stat"><span class="tms-stat__v">CCP</span><span class="tms-stat__k">pilotage</span></div>
+    <div class="tms-stat"><span class="tms-stat__v">HACCP</span><span class="tms-stat__k">analyse</span></div>
+    <div class="tms-stat"><span class="tms-stat__v">NC</span><span class="tms-stat__k">registre</span></div>
+    <div class="tms-stat"><span class="tms-stat__v">DDPP</span><span class="tms-stat__k">inspection</span></div>
+  </div>
 
-    <article class="pms-panel" id="module-formation">
-      <h3 class="pms-panel__title">FORMATION</h3>
-      <p class="pms-panel__sub">Parcours pédagogique complet.</p>
-      <ul class="pms-list">
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="cours-pms.html">Cours PMS Complet</a></p>
-            <p class="pms-item__desc">Formation théorique complète</p>
-          </div>
-          <a class="pms-btn" href="cours-pms.html">Ouvrir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="td-pms.html">Travaux Dirigés</a></p>
-            <p class="pms-item__desc">Exercices pratiques</p>
-          </div>
-          <a class="pms-btn" href="td-pms.html">Démarrer</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="questionnaire-pms.html">Questionnaire</a></p>
-            <p class="pms-item__desc">Évaluation connaissances</p>
-          </div>
-          <a class="pms-btn" href="questionnaire-pms.html">Lancer</a>
-        </li>
-
-      </ul>
-    </article>
-
-    <article class="pms-panel" id="module-outils">
-      <h3 class="pms-panel__title">OUTILS PROFESSIONNELS</h3>
-      <p class="pms-panel__sub">Calcul, audit, registres et scénarios.</p>
-      <ul class="pms-list">
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/calculateur-criticite.html">Calculateur HACCP</a></p>
-            <p class="pms-item__desc">Criticité des dangers</p>
-          </div>
-          <a class="pms-btn" href="outils/calculateur-criticite.html">Ouvrir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/audit-interne.html">Audit Interne PMS</a></p>
-            <p class="pms-item__desc">Grille d'évaluation</p>
-          </div>
-          <a class="pms-btn" href="outils/audit-interne.html">Auditer</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/registre-nc.html">Registre NC</a></p>
-            <p class="pms-item__desc">Non-conformités</p>
-          </div>
-          <a class="pms-btn" href="outils/registre-nc.html">Ouvrir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/inspection-ddpp.html">Inspection DDPP</a></p>
-            <p class="pms-item__desc">Scénario immersif</p>
-          </div>
-          <a class="pms-btn" href="outils/inspection-ddpp.html">Ouvrir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/pms-reception.html">PMS Réception</a></p>
-            <p class="pms-item__desc">Procédure opposable</p>
-          </div>
-          <a class="pms-btn" href="outils/pms-reception.html">Ouvrir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils/pms-temperature.html">PMS Températures</a></p>
-            <p class="pms-item__desc">CCP Critique</p>
-          </div>
-          <a class="pms-btn" href="outils/pms-temperature.html">Ouvrir</a>
-        </li>
-
-      </ul>
-    </article>
-
-    <article class="pms-panel" id="module-ressources">
-      <h3 class="pms-panel__title">RESSOURCES</h3>
-      <p class="pms-panel__sub">Documents opposables et bibliothèque.</p>
-      <ul class="pms-list">
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="outils-modeles.html">Outils & Modèles</a></p>
-            <p class="pms-item__desc">Bibliothèque complète</p>
-          </div>
-          <a class="pms-btn" href="outils-modeles.html">Parcourir</a>
-        </li>
-
-        <li class="pms-item">
-          <div class="pms-item__meta">
-            <p class="pms-item__name"><a href="documents-pms.html">Documents PMS</a></p>
-            <p class="pms-item__desc">7 Excel + 12 PDF</p>
-          </div>
-          <a class="pms-btn" href="documents-pms.html">Ouvrir</a>
-        </li>
-
-      </ul>
-
-    </article>
-
-  </section>
+  <section aria-label="FORMATION">
+    <h3 class="tms-section-title"><span class="tms-section-title__emoji">🎓</span>FORMATION</h3>
+    <ul class="tms-tiles">
+      <li class="tms-tile">
+        <div class="tms-tile__icon">📘</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Cours PMS Complet</p>
+          <p class="tms-tile__desc">Formation théorique complète</p>
         </div>
-      </section>
+        <a class="tms-tile__cta" href="cours-pms.html">Ouvrir</a>
+      </li>
 
+      <li class="tms-tile">
+        <div class="tms-tile__icon">🧩</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Travaux Dirigés</p>
+          <p class="tms-tile__desc">Exercices pratiques</p>
+        </div>
+        <a class="tms-tile__cta" href="td-pms.html">Démarrer</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">✅</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Questionnaire</p>
+          <p class="tms-tile__desc">Évaluation connaissances</p>
+        </div>
+        <a class="tms-tile__cta" href="questionnaire-pms.html">Lancer</a>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-label="OUTILS PROFESSIONNELS" style="margin-top:18px;">
+    <h3 class="tms-section-title"><span class="tms-section-title__emoji">🧰</span>OUTILS PROFESSIONNELS</h3>
+    <ul class="tms-tiles">
+      <li class="tms-tile">
+        <div class="tms-tile__icon">🧪</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Calculateur HACCP</p>
+          <p class="tms-tile__desc">Criticité des dangers</p>
+        </div>
+        <a class="tms-tile__cta" href="calculateur-haccp.html">Ouvrir</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">📝</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Audit Interne PMS</p>
+          <p class="tms-tile__desc">Grille d’évaluation</p>
+        </div>
+        <a class="tms-tile__cta" href="audit-interne.html">Auditer</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">📒</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Registre NC</p>
+          <p class="tms-tile__desc">Non-conformités</p>
+        </div>
+        <a class="tms-tile__cta" href="outils/registre-nc.html">Ouvrir</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">🕵️</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Inspection DDPP</p>
+          <p class="tms-tile__desc">Scénario immersif</p>
+        </div>
+        <a class="tms-tile__cta" href="inspection-ddpp.html">Ouvrir</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">📦</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">PMS Réception</p>
+          <p class="tms-tile__desc">Procédure opposable</p>
+        </div>
+        <a class="tms-tile__cta" href="pms-reception.html">Ouvrir</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">🌡️</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">PMS Températures</p>
+          <p class="tms-tile__desc">CCP Critique</p>
+        </div>
+        <a class="tms-tile__cta" href="pms-temperatures.html">Ouvrir</a>
+      </li>
+    </ul>
+
+    <!-- TMS-like insert -->
+    <div class="tms-insert tms-warn">
+      <div class="tms-insert__icon">⚠️</div>
+      <div>
+        <p class="tms-insert__title">Points de vigilance</p>
+        <p class="tms-insert__text">Utiliser HACCP + CCP + registres NC en séquence pour conserver la traçabilité.</p>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <section aria-label="RESSOURCES" style="margin-top:18px;">
+    <h3 class="tms-section-title"><span class="tms-section-title__emoji">📚</span>RESSOURCES</h3>
+    <ul class="tms-tiles">
+      <li class="tms-tile">
+        <div class="tms-tile__icon">🗂️</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Outils & Modèles</p>
+          <p class="tms-tile__desc">Bibliothèque complète</p>
+        </div>
+        <a class="tms-tile__cta" href="outils-modeles.html">Parcourir</a>
+      </li>
+
+      <li class="tms-tile">
+        <div class="tms-tile__icon">📄</div>
+        <div class="tms-tile__body">
+          <p class="tms-tile__title">Documents PMS</p>
+          <p class="tms-tile__desc">7 Excel + 12 PDF</p>
+        </div>
+        <a class="tms-tile__cta" href="documents-pms.html">Ouvrir</a>
+      </li>
+    </ul>
+
+    <div class="tms-insert tms-info">
+      <div class="tms-insert__icon">ℹ️</div>
+      <div>
+        <p class="tms-insert__title">Documents opposables</p>
+        <p class="tms-insert__text">Accès direct aux preuves et modèles exploitables en audit.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
 
   <footer class="core-footer">
   <div class="core-container core-footer-content">
