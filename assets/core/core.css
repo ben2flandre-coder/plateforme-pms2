@@ -324,3 +324,144 @@ img.pms-media-broken {
   width: 1.25em !important;
   height: 1.25em !important;
 }
+
+/* ===============================
+   PMS TMS-LIKE COMPOSITION
+================================ */
+
+:root{
+  --pms-max:1120px;
+  --pms-gap:24px;
+  --pms-radius:14px;
+  --pms-border:1px solid rgba(0,0,0,.06);
+  --pms-shadow:0 10px 22px rgba(0,0,0,.06);
+}
+
+/* IMPORTANT:
+   ne masquer QUE les anciennes nav explicites */
+html[data-nav-core="1"] .legacy-nav,
+html[data-nav-core="1"] .old-nav,
+html[data-nav-core="1"] .nav-legacy,
+html[data-nav-core="1"] [data-legacy-nav="1"]{
+  display:none!important;
+}
+
+.pms-container{
+  max-width:var(--pms-max);
+  margin:0 auto;
+  padding:0 16px;
+}
+
+/* ===== CONTEXTE SESSION ===== */
+
+.pms-kpi{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:14px;
+  border:var(--pms-border);
+  border-radius:var(--pms-radius);
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
+}
+
+.pms-kpi__item{
+  display:flex;
+  gap:8px;
+  font-size:14px;
+}
+
+.pms-kpi__k{opacity:.7}
+.pms-kpi__v{font-weight:800}
+
+/* ===== COCKPIT GRID ===== */
+
+.pms-cockpit{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+  gap:var(--pms-gap);
+  margin:28px 0 40px;
+}
+
+/* ===== PANELS ===== */
+
+.pms-panel{
+  background:#fff;
+  border:var(--pms-border);
+  border-radius:var(--pms-radius);
+  box-shadow:var(--pms-shadow);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+}
+
+.pms-panel__title{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.pms-panel__sub{
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:14px;
+}
+
+/* ===== LISTE MODULE ===== */
+
+.pms-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.pms-item{
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.pms-item__name{
+  font-weight:800;
+  margin:0;
+}
+
+.pms-item__desc{
+  font-size:13px;
+  opacity:.75;
+}
+
+.pms-tags{
+  display:flex;
+  gap:6px;
+  margin-top:6px;
+}
+
+.pms-tag{
+  font-size:12px;
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.08);
+  background:#f3f5f7;
+}
+
+/* ===== CTA ===== */
+
+a.pms-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.1);
+  text-decoration:none;
+  font-weight:800;
+  white-space:nowrap;
+}
