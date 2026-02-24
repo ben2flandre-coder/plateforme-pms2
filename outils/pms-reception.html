@@ -21,18 +21,29 @@
     .nc-majeure { background: #FFEBEE; padding: 1rem; border-left: 5px solid #F44336; margin: 1rem 0; }
     .ref-reglem { background: #FFF9C4; padding: 0.5rem; margin: 0.5rem 0; font-size: 0.9rem; border-left: 3px solid #FDD835; }
   </style>
+  <link rel="stylesheet" href="../assets/core/core.css">
 </head>
 <body>
-  <header class="header-modern">
-    <div class="header-content">
-      <div class="logos-header">
-        <img src="../images/logo-republique.png" alt="République Française" class="logo-rf">
-        <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="logo-forpro">
+  <header class="core-header">
+  <div class="core-container core-header-top">
+    <div class="core-branding">
+      <img src="../images/logo-republique.png" alt="République Française" class="core-logo-rf">
+      <div class="core-brand-text">
+        <p class="core-kicker">GRETA GIP-FIPAN • Académie de Nice</p>
+        <h1>📚 Plateforme PMS</h1>
       </div>
-      <h1>Procédure Réception Marchandises</h1>
-      <p class="subtitle">GRETA GIP-FIPAN • Académie de Nice</p>
+      <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="core-logo-forpro">
     </div>
-  </header>
+  </div>
+  <nav class="core-main-nav" aria-label="Navigation principale">
+    <div class="core-container core-nav-wrap">
+      <a href="/plateforme-pms2/" class="core-nav-link">🏠 Hub</a>
+      <a href="/plateforme-pms2/cours-pms.html" class="core-nav-link">📘 Formation</a>
+      <a href="/plateforme-pms2/outils-modeles.html" class="core-nav-link is-active">🧰 Outils</a>
+      <a href="/plateforme-pms2/documents-pms.html" class="core-nav-link">📂 Ressources</a>
+    </div>
+  </nav>
+</header>
 
 
   <main class="container">
@@ -376,12 +387,20 @@
 
   </main>
 
-  <footer>
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="scroll-top" title="Retour en haut">↑</button>
-    <p><strong>Document PMS V18.7 - Créé par Benoît Deflandre</strong></p>
-    <p>GRETA du Var / GIP FIPAN • Académie de Nice</p>
-    <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
-  </footer>
+  <footer class="core-footer">
+  <div class="core-container core-footer-content">
+    <div class="core-footer-logos">
+      <img src="../images/logo-republique.png" alt="République Française" class="core-footer-logo">
+      <img src="../images/logoFORPROPaca.png" alt="FORPRO PACA" class="core-footer-logo">
+    </div>
+    <div class="core-footer-info">
+      <p><strong>Créé par Benoît Deflandre</strong></p>
+      <p>GRETA du Var / GIP FIPAN • Académie de Nice</p>
+      <p><a href="mailto:benoit.deflandre@ac-nice.fr">benoit.deflandre@ac-nice.fr</a></p>
+      <p class="core-version">Plateforme PMS V18.0 • Janvier 2025</p>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
