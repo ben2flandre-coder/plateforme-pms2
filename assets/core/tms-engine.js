@@ -1,154 +1,139 @@
-(() => {
-  "use strict";
+/* TMS-like UX engine — PMS2 (hard) */
+(function () {
+  const doc = document;
+  const body = doc.body;
+  if (!body || body.dataset.uxEngine === "1") return;
+  body.dataset.uxEngine = "1";
 
-  const $ = (sel, root=document) => root.querySelector(sel);
-  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const $ = (sel, root = doc) => root.querySelector(sel);
+  const $$ = (sel, root = doc) => Array.from(root.querySelectorAll(sel));
 
-  // -------- utilities
-  const text = (el) => (el?.textContent || "").replace(/\s+/g," ").trim();
-  const isHeading = (el) => el && /^H[1-6]$/.test(el.tagName);
-
-  // Wrap helpers (non destructifs)
-  function wrapNodes(nodes, wrapper){
-    const first = nodes[0];
-    if(!first || !first.parentNode) return;
-    first.parentNode.insertBefore(wrapper, first);
-    nodes.forEach(n => wrapper.appendChild(n));
-  }
-
-  // -------- 1) Global: tag body for CSS
-  document.body.dataset.tmsEngine = "1";
-
-  // -------- 2) Make page sections “TMS rhythm” (safe)
-  // If main exists, wrap major blocks into .tms-section when possible
-  const main = $("main") || $("#main") || $(".main") || document.body;
-  // Avoid wrapping if already looks like cards grid hub
-  const already = $(".tms-section", main);
-  if(!already){
-    // Wrap each top-level <section> or large <div> blocks
-    const topBlocks = $$(".section, main > section, main > div", main)
-      .filter(el => el.parentElement === main)
-      .filter(el => el.offsetHeight > 120);
-
-    topBlocks.forEach(el => {
-      if(el.classList.contains("tms-section")) return;
-      // Do not wrap nav injected blocks
-      if(el.id && String(el.id).includes("pms-")) return;
-      el.classList.add("tms-section");
+  // Ensure <main>
+  let main = $("main");
+  if (!main) {
+    main = doc.createElement("main");
+    const nodes = Array.from(body.childNodes);
+    nodes.forEach((n) => {
+      if (n.nodeType !== 1) return;
+      const tag = n.tagName.toLowerCase();
+      if (tag === "script" || tag === "header" || tag === "footer") return;
+      main.appendChild(n);
     });
+    body.appendChild(main);
   }
 
-  // -------- 3) Questionnaire engine: transform into question cards if page looks like a quiz
-  // Heuristics: title contains "Questionnaire" OR many inputs radio
-  const h1 = $("h1") || $("h2");
-  const looksQuiz =
-    /Questionnaire/i.test(text(h1)) ||
-    $$('input[type="radio"]').length >= 6;
+  // Kill legacy nav
+  $$(".legacy-nav, nav.legacy, #legacy-nav, .old-nav, .pms-nav-legacy").forEach((n) => n.remove());
 
-  if(looksQuiz){
-    // Try to find question headings like "1." "2." etc
-    const candidates = $$("h2, h3, strong").filter(el => /^\d+\./.test(text(el)));
-    // If no headings, just style labels as options
-    if(candidates.length){
-      candidates.forEach((head) => {
-        // Skip if already wrapped
-        if(head.closest(".question-card")) return;
+  // META -> chips
+  const metaCandidates = $$("p,div", main).filter((el) => {
+    const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+    return t.startsWith("Objectif") && t.includes("Étape") && t.includes("Durée") && t.includes("Statut");
+  });
+  metaCandidates.forEach((el) => {
+    const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+    const get = (k) => {
+      const m = t.match(new RegExp(k + "\\s*[:]?\\s*([^:]+?)(?=\\s+(Objectif|Étape|Durée|Statut)\\b|$)", "i"));
+      return m ? m[1].trim() : "";
+    };
+    const meta = doc.createElement("div");
+    meta.className = "pms-meta";
+    const mk = (label, val) => {
+      const chip = doc.createElement("span");
+      chip.className = "pms-chip";
+      chip.innerHTML = `${label} <small>${val || "-"}</small>`;
+      return chip;
+    };
+    meta.appendChild(mk("🎯 Objectif", get("Objectif")));
+    meta.appendChild(mk("🧭 Étape", get("Étape")));
+    meta.appendChild(mk("⏱️ Durée", get("Durée")));
+    meta.appendChild(mk("✅ Statut", get("Statut")));
+    el.replaceWith(meta);
+  });
 
-        // Collect nodes until next candidate heading
-        const nodes = [head];
-        let cur = head.nextSibling;
-        while(cur){
-          const nextEl = cur.nodeType === 1 ? cur : cur.nextSibling;
-          const el = cur.nodeType === 1 ? cur : null;
-          if(el && ( (el.matches("h2,h3,strong") && /^\d+\./.test(text(el))) )) break;
-          nodes.push(cur);
-          cur = cur.nextSibling;
-        }
+  // Wrap H2 sections
+  const h2s = $$("h2", main);
+  h2s.forEach((h2) => {
+    const wrap = doc.createElement("section");
+    wrap.className = "pms-section";
+    const title = doc.createElement("div");
+    title.className = "pms-section-title";
+    title.textContent = (h2.textContent || "").trim();
+    wrap.appendChild(title);
 
-        const card = document.createElement("div");
-        card.className = "question-card";
-
-        // Build header
-        const m = text(head).match(/^(\d+)\.\s*(.*)$/);
-        const idx = m ? m[1] : "";
-        const title = m ? m[2] : text(head);
-
-        const headWrap = document.createElement("div");
-        headWrap.className = "q-head";
-        headWrap.innerHTML = `
-          <div class="q-index">${idx ? idx+"." : "•"}</div>
-          <div class="q-title">${title || "Question"}</div>
-        `;
-
-        // Replace original head by headWrap inside card
-        // Put everything in card, then remove the original head text node if needed
-        wrapNodes(nodes.filter(n => n.nodeType===1 || n.nodeType===3), card);
-        // head is inside card; replace it with headWrap
-        head.parentNode && head.parentNode.replaceChild(headWrap, head);
-
-        // Context blocks: if paragraph contains "Contexte" or italic quote
-        $$(".question-card p, .question-card em, .question-card blockquote", card).forEach(p => {
-          if(/Contexte/i.test(text(p)) || p.tagName === "EM" || p.tagName === "BLOCKQUOTE"){
-            const c = document.createElement("div");
-            c.className = "context";
-            c.appendChild(p.cloneNode(true));
-            p.replaceWith(c);
-          }
-        });
-
-        // Options: if there are radios/checkbox inside card, group labels
-        const inputs = $$('input[type="radio"], input[type="checkbox"]', card);
-        if(inputs.length){
-          // ensure labels wrap inputs
-          inputs.forEach(inp => {
-            const lbl = inp.closest("label");
-            if(!lbl){
-              // if input is followed by text node, create label
-              const lab = document.createElement("label");
-              inp.parentNode.insertBefore(lab, inp);
-              lab.appendChild(inp);
-              // move immediate text siblings into label
-              let sib = lab.nextSibling;
-              if(sib && sib.nodeType===3){
-                lab.appendChild(sib);
-              }
-            }
-          });
-
-          // Create options container
-          const firstInput = inputs[0];
-          const optionsContainer = document.createElement("div");
-          optionsContainer.className = "options tms-options";
-
-          // Move all labels that contain inputs into container
-          const labels = $$("label", card).filter(l => l.querySelector('input[type="radio"],input[type="checkbox"]'));
-          if(labels.length){
-            labels.forEach(l => optionsContainer.appendChild(l));
-            // insert options container after context or after head
-            const after = $(".context", card) || $(".q-head", card);
-            after && after.insertAdjacentElement("afterend", optionsContainer);
-          }
-        }
-      });
-    }else{
-      // fallback: style any label+input as options
-      const wrap = document.createElement("div");
-      wrap.className = "tms-options";
-      const labels = $$("label").filter(l=>l.querySelector('input[type="radio"],input[type="checkbox"]'));
-      if(labels.length){
-        labels[0].parentNode.insertBefore(wrap, labels[0]);
-        labels.forEach(l=>wrap.appendChild(l));
-      }
+    let n = h2.nextSibling;
+    const toMove = [h2];
+    while (n) {
+      if (n.nodeType === 1 && n.tagName.toLowerCase() === "h2") break;
+      const next = n.nextSibling;
+      toMove.push(n);
+      n = next;
     }
-  }
-
-  // -------- 4) Forms: add section wrappers for long admin forms (registre-nc)
-  const looksForm = $$("form").length >= 1 && $$('textarea, select, input[type="text"], input[type="date"]').length >= 6;
-  if(looksForm){
-    $$("form").forEach(form => {
-      if(form.classList.contains("tms-section")) return;
-      form.classList.add("tms-section");
+    h2.parentNode.insertBefore(wrap, h2);
+    toMove.forEach((x) => {
+      if (x === h2) x.remove();
+      else wrap.appendChild(x);
     });
+  });
+
+  // Quiz detection + cards + tap-friendly choices
+  const isQuiz = (main.textContent || "").includes("Questionnaire") &&
+                ($$("input[type=radio],input[type=checkbox]", main).length > 5);
+
+  if (isQuiz) {
+    const nodes = Array.from(main.children);
+    const qBlocks = [];
+    let current = null;
+    const isQStart = (el) => {
+      const t = (el.textContent || "").trim();
+      return /^\d+\.\s/.test(t) || /^Q\d+\s/.test(t) || t.startsWith("1.");
+    };
+    nodes.forEach((el) => {
+      if (isQStart(el)) {
+        current = { items: [el] };
+        qBlocks.push(current);
+      } else if (current) current.items.push(el);
+    });
+
+    if (qBlocks.length) {
+      const container = doc.createElement("div");
+      container.className = "pms-quiz";
+      qBlocks.forEach((qb, idx) => {
+        const card = doc.createElement("section");
+        card.className = "pms-card pms-question-card";
+        const head = doc.createElement("div");
+        head.className = "pms-question-head";
+        head.innerHTML = `<b>🧩 Question ${idx + 1}</b>`;
+        card.appendChild(head);
+        qb.items.forEach((it) => card.appendChild(it));
+        container.appendChild(card);
+      });
+      // keep nav injected, then append quiz
+      main.appendChild(container);
+    }
+
+    $$("label", main).forEach((label) => {
+      const inp = $("input[type=radio],input[type=checkbox]", label);
+      if (!inp) return;
+      if (label.classList.contains("pms-choice")) return;
+      label.classList.add("pms-choice");
+      const txt = doc.createElement("span");
+      txt.className = "txt";
+      const keep = Array.from(label.childNodes).filter((n) => n !== inp);
+      keep.forEach((n) => txt.appendChild(n));
+      label.appendChild(txt);
+    });
+
+    const call = doc.createElement("div");
+    call.className = "pms-callout";
+    call.innerHTML = `<b>🎯 Mode Quiz</b><br><span class="muted">Cartes + choix cliquables larges (comodality/mobile).</span>`;
+    main.prepend(call);
   }
 
+  // Forms: keep submit visible
+  const form = $("form", main);
+  if (form) {
+    const submit = $("button[type=submit],input[type=submit]", form);
+    if (submit) submit.classList.add("pms-submit");
+  }
 })();
