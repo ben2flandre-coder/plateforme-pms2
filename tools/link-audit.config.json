@@ -1,5 +1,4 @@
 {
-  "roots": ["."],
-  "pages": ["index.html", "outils-modeles.html", "documents-pms.html"],
+  "pages": ["index.html","outils-modeles.html","documents-pms.html"],
   "extensions": [".html",".css",".js",".pdf",".xlsx",".xls",".doc",".docx",".png",".jpg",".jpeg",".svg",".webp"]
 }
