@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Outils & Modèles PMS | GRETA GIP-FIPAN</title>
-    <link rel="stylesheet" href="assets/core/core.css">
+  <link rel="stylesheet" href="assets/core/core.css">
   <link rel="stylesheet" href="css/tms-parity.css">
-
 </head>
 <body>
 
@@ -31,9 +30,9 @@
   </nav>
 </header>
 
-  <main class="pms-container">
-  <h2>Outils & Modèles PMS</h2>
-  <p>Bibliothèque opérationnelle pour produire et piloter les preuves PMS.</p>
+<main class="pms-container">
+  <h2 class="pms-title">Outils & Modèles PMS</h2>
+  <p class="pms-lead">Bibliothèque opérationnelle pour produire et piloter les preuves PMS.</p>
 
   <div class="pms-kpi" aria-label="Contexte outils et modèles">
     <div class="pms-kpi__item"><span class="pms-kpi__k">Objectif</span><span class="pms-kpi__v">Standardiser</span></div>
@@ -42,50 +41,33 @@
     <div class="pms-kpi__item"><span class="pms-kpi__k">Statut</span><span class="pms-kpi__v">Disponible</span></div>
   </div>
 
-  <h3 class="tms-section-title"><span class="tms-section-title__emoji">🧰</span>Outils interactifs</h3>
-  <ul class="tms-tiles">
-    <li class="tms-tile"><div class="tms-tile__icon">📊</div><div class="tms-tile__body"><p class="tms-tile__title">Calculateur de Criticité HACCP</p><p class="tms-tile__desc">Calcul automatique Fréquence × Gravité × Maîtrise.</p></div><a class="tms-tile__cta" href="outils/calculateur-criticite.html">Ouvrir</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📅</div><div class="tms-tile__body"><p class="tms-tile__title">Générateur de Planning PMS</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Version interactive en développement.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🔍</div><div class="tms-tile__body"><p class="tms-tile__title">Simulateur Contrôle DDPP</p><p class="tms-tile__desc">Auto-évaluation avec rapport détaillé.</p></div><a class="tms-tile__cta" href="outils/inspection-ddpp.html">Ouvrir</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📋</div><div class="tms-tile__body"><p class="tms-tile__title">Planning Nettoyage & Désinfection</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Organisation des opérations de nettoyage.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📊</div><div class="tms-tile__body"><p class="tms-tile__title">Tableau de Bord PMS</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Suivi des indicateurs clés de performance.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📆</div><div class="tms-tile__body"><p class="tms-tile__title">Calendrier des Revues PMS</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Planification des audits internes et revues annuelles.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🔬</div><div class="tms-tile__body"><p class="tms-tile__title">Matrice HACCP Dynamique</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Génération guidée d'une analyse HACCP complète.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📈</div><div class="tms-tile__body"><p class="tms-tile__title">Suivi des Actions Correctives</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Pilotage des écarts, actions et relances.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🏢</div><div class="tms-tile__body"><p class="tms-tile__title">Évaluation des Fournisseurs</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Évaluation du risque fournisseur.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📋</div><div class="tms-tile__body"><p class="tms-tile__title">Procédures CCP Standardisées</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Bibliothèque de procédures opérationnelles conformes CE 852/2004.</p></div><span class="badge badge-new">Bientôt</span></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🥜</div><div class="tms-tile__body"><p class="tms-tile__title">Gestion des Allergènes</p><p><span class="badge badge-new">En cours</span></p><p class="tms-tile__desc">Identification, traçabilité et information client.</p></div><span class="badge badge-new">Bientôt</span></li>
-  </ul>
+  <section class="pms-section">
+    <h3>🧰 Outils interactifs</h3>
+    <div class="pms-grid">
+      <article class="pms-card"><div class="pms-card__icon">📊</div><div class="pms-card__body"><h4 class="pms-card__title">Calculateur de Criticité HACCP</h4><p class="pms-card__desc">Calcul automatique Fréquence × Gravité × Maîtrise.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/calculateur-criticite.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📅</div><div class="pms-card__body"><h4 class="pms-card__title">Générateur de Planning PMS</h4><p class="pms-card__desc">Version interactive en développement.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/planning-pms.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🔍</div><div class="pms-card__body"><h4 class="pms-card__title">Simulateur Contrôle DDPP</h4><p class="pms-card__desc">Auto-évaluation avec rapport détaillé.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/inspection-ddpp.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📋</div><div class="pms-card__body"><h4 class="pms-card__title">Planning Nettoyage & Désinfection</h4><p class="pms-card__desc">Organisation des opérations de nettoyage.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/planning-nettoyage.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📈</div><div class="pms-card__body"><h4 class="pms-card__title">Tableau de Bord PMS</h4><p class="pms-card__desc">Suivi des indicateurs clés de performance.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/tableau-bord-pms.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📆</div><div class="pms-card__body"><h4 class="pms-card__title">Calendrier des Revues PMS</h4><p class="pms-card__desc">Planification des audits internes et revues annuelles.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/calendrier-revues.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🔬</div><div class="pms-card__body"><h4 class="pms-card__title">Matrice HACCP Dynamique</h4><p class="pms-card__desc">Génération guidée d'une analyse HACCP complète.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/matrice-haccp.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">✅</div><div class="pms-card__body"><h4 class="pms-card__title">Audit interne</h4><p class="pms-card__desc">Évaluation structurée de votre niveau de conformité.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/audit-interne.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🗂️</div><div class="pms-card__body"><h4 class="pms-card__title">Registre NC</h4><p class="pms-card__desc">Suivi des non-conformités, actions et clôtures.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/registre-nc.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🏢</div><div class="pms-card__body"><h4 class="pms-card__title">Évaluation des Fournisseurs</h4><p class="pms-card__desc">Évaluation du risque fournisseur.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/evaluation-fournisseurs.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📋</div><div class="pms-card__body"><h4 class="pms-card__title">Procédures CCP Standardisées</h4><p class="pms-card__desc">Bibliothèque de procédures opérationnelles conformes CE 852/2004.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/procedures-ccp.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🥜</div><div class="pms-card__body"><h4 class="pms-card__title">Gestion des Allergènes</h4><p class="pms-card__desc">Identification, traçabilité et information client.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/gestion-allergenes.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📦</div><div class="pms-card__body"><h4 class="pms-card__title">PMS Réception</h4><p class="pms-card__desc">Contrôle à réception avec points critiques.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/pms-reception.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🌡️</div><div class="pms-card__body"><h4 class="pms-card__title">PMS Températures</h4><p class="pms-card__desc">Suivi des relevés et alertes de dérive.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/pms-temperature.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">🔗</div><div class="pms-card__body"><h4 class="pms-card__title">PMS Traçabilité</h4><p class="pms-card__desc">Registre de traçabilité amont/aval des lots.</p></div><a class="pms-card__cta pms-card__cta--primary" href="outils/pms-tracabilite.html">Ouvrir</a></article>
+      <article class="pms-card"><div class="pms-card__icon">📉</div><div class="pms-card__body"><h4 class="pms-card__title">Analyse des NC</h4><p class="pms-card__desc">Analyse consolidée des écarts récurrents.</p></div><a class="pms-card__cta pms-card__cta--ghost" href="outils/analyse-nc.html">Ouvrir</a></article>
+    </div>
+  </section>
 
-  <h3 class="tms-section-title"><span class="tms-section-title__emoji">📁</span>Modèles / Documents</h3>
-  <ul class="tms-tiles">
-    <li class="tms-tile"><div class="tms-tile__icon">🧽</div><div class="tms-tile__body"><p class="tms-tile__title">Plan de Nettoyage</p><p class="tms-tile__desc">Tableau complet pour organiser le nettoyage et la désinfection de votre établissement.</p></div><a class="tms-tile__cta" href="documents/Plan_Nettoyage_Desinfection.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">📦</div><div class="tms-tile__body"><p class="tms-tile__title">Fiche de Traçabilité</p><p class="tms-tile__desc">Enregistrement des réceptions : produit, fournisseur, lot, DLC, température.</p></div><a class="tms-tile__cta" href="documents/Fiche_Tracabilite_Produits.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🚨</div><div class="tms-tile__body"><p class="tms-tile__title">Registre Non-Conformités</p><p class="tms-tile__desc">Suivi complet des NC avec indicateurs.</p></div><a class="tms-tile__cta" href="documents/Registre_Non_Conformites.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🌡️</div><div class="tms-tile__body"><p class="tms-tile__title">Relevés de Température</p><p class="tms-tile__desc">Grille mensuelle avec alertes automatiques et graphiques de suivi.</p></div><a class="tms-tile__cta" href="documents/Releves_Temperature.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">✅</div><div class="tms-tile__body"><p class="tms-tile__title">Grille d'Audit Interne</p><p class="tms-tile__desc">Checklist complète pour auditer votre PMS.</p></div><a class="tms-tile__cta" href="documents/Grille_Audit_PMS.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🔬</div><div class="tms-tile__body"><p class="tms-tile__title">Tableau HACCP Vierge</p><p class="tms-tile__desc">Matrice d'analyse des dangers et CCP prête à remplir.</p></div><a class="tms-tile__cta" href="documents/Tableau_HACCP_Vierge.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🔧</div><div class="tms-tile__body"><p class="tms-tile__title">Registre de Maintenance</p><p class="tms-tile__desc">Suivi réglementaire de maintenance des équipements.</p></div><a class="tms-tile__cta" href="documents/Registre_Maintenance.xlsx" download>Télécharger</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🧼</div><div class="tms-tile__body"><p class="tms-tile__title">Procédure Lavage des Mains</p><p class="tms-tile__desc">Affiche A4 avec les 7 étapes selon les normes OMS.</p></div><a class="tms-tile__cta" href="documents/Fiche_Lavage_Mains.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🧤</div><div class="tms-tile__body"><p class="tms-tile__title">Hygiène du Personnel</p><p class="tms-tile__desc">Règles d'hygiène corporelle et obligations réglementaires.</p></div><a class="tms-tile__cta" href="documents/Fiche_Hygiene_Personnel.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🧽</div><div class="tms-tile__body"><p class="tms-tile__title">Nettoyage & Désinfection</p><p class="tms-tile__desc">Méthodologie détaillée et contrôles d'efficacité.</p></div><a class="tms-tile__cta" href="documents/Fiche_Nettoyage_Desinfection.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">❄️</div><div class="tms-tile__body"><p class="tms-tile__title">Chaîne du Froid</p><p class="tms-tile__desc">Maîtrise des températures et conduite à tenir.</p></div><a class="tms-tile__cta" href="documents/Fiche_Chaine_Froid.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🔥</div><div class="tms-tile__body"><p class="tms-tile__title">Cuisson & Remise en Température</p><p class="tms-tile__desc">Températures réglementaires et traçabilité.</p></div><a class="tms-tile__cta" href="documents/Fiche_Cuisson_Temperature.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🚮</div><div class="tms-tile__body"><p class="tms-tile__title">Gestion des Déchets</p><p class="tms-tile__desc">Organisation du tri et prévention des contaminations croisées.</p></div><a class="tms-tile__cta" href="documents/Fiche_Gestion_Dechets.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🚨</div><div class="tms-tile__body"><p class="tms-tile__title">Gestion d'une TIAC</p><p class="tms-tile__desc">Procédure d'urgence et contacts ARS/DDPP.</p></div><a class="tms-tile__cta" href="documents/Fiche_Gestion_TIAC.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">⚠️</div><div class="tms-tile__body"><p class="tms-tile__title">Procédure Rappel Produit</p><p class="tms-tile__desc">Guide de retrait/rappel et obligations légales.</p></div><a class="tms-tile__cta" href="documents/Fiche_Rappel_Produit.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">✓</div><div class="tms-tile__body"><p class="tms-tile__title">Contrôle à la Réception</p><p class="tms-tile__desc">Checklist des points de contrôle obligatoires.</p></div><a class="tms-tile__cta" href="documents/Fiche_Controle_Reception.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">⚠️</div><div class="tms-tile__body"><p class="tms-tile__title">Principaux Dangers Alimentaires</p><p class="tms-tile__desc">Synthèse des dangers biologiques, chimiques et physiques.</p></div><a class="tms-tile__cta" href="documents/Fiche_Dangers_Alimentaires.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🌡️</div><div class="tms-tile__body"><p class="tms-tile__title">Tableau des Températures</p><p class="tms-tile__desc">Référentiel des températures réglementaires.</p></div><a class="tms-tile__cta" href="documents/Tableau_Temperatures_Reglementaires.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">🧾</div><div class="tms-tile__body"><p class="tms-tile__title">Traçabilité Aval & Clients</p><p class="tms-tile__desc">Conservation des informations clients et gestion des réclamations.</p></div><a class="tms-tile__cta" href="documents/Fiche_Tracabilite_Aval.pdf" target="_blank">Accéder</a></li>
-    <li class="tms-tile"><div class="tms-tile__icon">💬</div><div class="tms-tile__body"><p class="tms-tile__title">Besoin d'un Modèle Spécifique ?</p><p class="tms-tile__desc">Contactez-nous pour une demande personnalisée adaptée à votre activité.</p></div><a class="tms-tile__cta" href="mailto:benoit.deflandre@ac-nice.fr?subject=Demande modèle PMS personnalisé">Accéder</a></li>
-  </ul>
-
-  <h3 class="tms-section-title"><span class="tms-section-title__emoji">🔙</span>Navigation</h3>
-  <ul class="tms-inline">
-    <li><a class="tms-chip" href="index.html">← Retour au hub d'accueil <span class="tms-chip__desc">Cockpit principal</span></a></li>
-    <li><a class="tms-chip" href="outils-modeles.html">🧰 Outils <span class="tms-chip__desc">Actualiser la page</span></a></li>
-  </ul>
+  <section class="pms-section">
+    <h3>📁 Modèles / Documents</h3>
+    <div class="pms-callout pms-callout--ok"><strong>Téléchargement immédiat :</strong> tous les modèles ci-dessous sont disponibles instantanément.</div>
+    <p><a class="pms-chip" href="documents-pms.html">Voir la bibliothèque complète des documents</a></p>
+  </section>
 </main>
 
   <footer class="core-footer">
@@ -103,8 +85,7 @@
   </div>
 </footer>
 
-  <!-- Bouton scroll top -->
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
           class="scroll-top" id="scrollTopBtn"
           title="Retour en haut">
     ↑

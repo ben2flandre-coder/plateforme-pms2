@@ -1,7 +1,7 @@
 (() => {
   const doc = document;
 
-  // Clean emoji junk that appears as empty glyphs
+  // 1) Remove emoji junk/variation selectors that create empty lines
   const JUNK_RE = /[\uFE0F\uFE0E\u200D]/g;
   const tw = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
   const texts = [];
@@ -11,30 +11,27 @@
     if (JUNK_RE.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(JUNK_RE, "");
   });
 
-  // Convert KPI line if present: "Objectif:... Étape:... Durée:... Statut:..."
-  function convertKpiLine() {
+  // 2) Convert raw KPI line "Objectif:... Étape:... Durée:... Statut:..."
+  function convertKpiLine(){
     const nodes = [...doc.querySelectorAll("p,div,li")];
-    nodes.forEach(el => {
+    for (const el of nodes) {
       const t0 = (el.textContent || "").replace(/\s+/g, " ").trim();
-      if (!t0.includes("Objectif:") || !t0.includes("Étape:") || !t0.includes("Durée:") || !t0.includes("Statut:")) return;
-
+      if (!(t0.includes("Objectif:") && t0.includes("Étape:") && t0.includes("Durée:") && t0.includes("Statut:"))) continue;
       const m = t0.match(/Objectif:([^]+?)Étape:([^]+?)Durée:([^]+?)Statut:([^]+)$/);
-      if (!m) return;
+      if (!m) continue;
 
-      const objectif = m[1].trim();
-      const etape = m[2].trim();
-      const duree = m[3].trim();
-      const statut = m[4].trim();
-
+      const [_, objectif, etape, duree, statut] = m.map(x => (x||"").trim());
       const kpi = doc.createElement("div");
       kpi.className = "pms-kpi";
+
       const items = [
         ["Objectif", objectif],
         ["Étape", etape],
         ["Durée", duree],
         ["Statut", statut],
       ];
-      items.forEach(([k, v]) => {
+
+      for (const [k,v] of items) {
         const it = doc.createElement("div");
         it.className = "pms-kpi__item";
         const kk = doc.createElement("span");
@@ -45,27 +42,36 @@
         vv.textContent = v;
         it.append(kk, vv);
         kpi.appendChild(it);
-      });
+      }
       el.replaceWith(kpi);
-    });
+      break;
+    }
   }
 
-  // Replace fake "Accéder" without href by a "Bientôt" badge
-  function fixFakeAccess() {
-    [...doc.querySelectorAll("li")].forEach(li => {
-      const hasLink = !!li.querySelector("a[href]");
-      const text = (li.textContent || "").trim();
-      if (hasLink) return;
-      if (!/accéder$/i.test(text)) return;
+  // 3) Fix "Accéder" fake CTA in outils-modeles:
+  // - if no <a href>, replace with badge "En cours" (non clickable)
+  function fixFakeAccess(){
+    const candidates = [...doc.querySelectorAll("p,div,li")];
+    for (const el of candidates) {
+      const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+      if (!/^accéder\b/i.test(t) && !/^accéder à la page\b/i.test(t)) continue;
+      if (el.querySelector && el.querySelector("a[href]")) continue;
 
       const badge = doc.createElement("span");
-      badge.className = "badge badge-new";
-      badge.textContent = "Bientôt";
-      li.appendChild(document.createTextNode(" "));
-      li.appendChild(badge);
-    });
+      badge.className = "pms-badge pms-badge--soon";
+      badge.textContent = "En cours";
+      el.textContent = "";
+      el.appendChild(badge);
+    }
+  }
+
+  // 4) Add bottom-safe padding to body when bottom nav exists
+  function bottomSafe(){
+    const hasBottom = !!doc.querySelector(".pms-bottom-nav, .pms-bottom, .bottom-nav, nav[data-nav='bottom']");
+    if (hasBottom) doc.body.classList.add("pms-bottom-safe");
   }
 
   convertKpiLine();
   fixFakeAccess();
+  bottomSafe();
 })();

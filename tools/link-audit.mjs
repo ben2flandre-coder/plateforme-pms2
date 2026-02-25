@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 
 const cfg = JSON.parse(fs.readFileSync(path.join("tools","link-audit.config.json"), "utf8"));
-
 const exts = new Set(cfg.extensions || []);
 const visited = new Set();
 const rows = [["from","url","resolved_path","exists"]];
@@ -23,9 +22,7 @@ function extractLinks(html){
 }
 function shouldCheck(u){
   const lower = u.toLowerCase();
-  for(const e of exts){
-    if(lower.includes(e)) return true;
-  }
+  for(const e of exts){ if(lower.includes(e)) return true; }
   return lower.endsWith(".html") || lower.endsWith("/");
 }
 function resolveFrom(fromFile, rel){
@@ -33,19 +30,15 @@ function resolveFrom(fromFile, rel){
   const p = rel.endsWith("/") ? rel + "index.html" : rel;
   return path.normalize(path.join(base, p));
 }
-
 function fileExists(p){
-  try{
-    return fs.existsSync(p) && fs.statSync(p).isFile();
-  }catch{ return false; }
+  try{ return fs.existsSync(p) && fs.statSync(p).isFile(); } catch { return false; }
 }
-
 function crawl(file){
   if(visited.has(file)) return;
   visited.add(file);
 
   if(!fileExists(file)){
-    rows.push([file, "(self)", file, "false"]);
+    rows.push([file,"(self)",file,"false"]);
     return;
   }
 
@@ -54,16 +47,12 @@ function crawl(file){
     if(!shouldCheck(u)) continue;
     const resolved = resolveFrom(file, u);
     const ok = fileExists(resolved);
-    rows.push([file, u, resolved, String(ok)]);
-    if(u.endsWith(".html") || u.endsWith("/")){
-      crawl(resolved);
-    }
+    rows.push([file,u,resolved,String(ok)]);
+    if(u.endsWith(".html") || u.endsWith("/")) crawl(resolved);
   }
 }
 
-for(const p of (cfg.pages || [])){
-  crawl(p);
-}
+for(const p of (cfg.pages || [])) crawl(p);
 
 const csv = rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
 fs.writeFileSync(path.join("tools","link-report.csv"), csv, "utf8");
