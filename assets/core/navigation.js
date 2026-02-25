@@ -38,24 +38,24 @@
     return "../".repeat(up);
   }
 
-  function injectTmsEngineAssets(){
+  function injectPmsUxEngineAssets(){
     const root = baseToRoot();
-    const cssHref = root + "assets/core/tms-engine.css";
-    const jsSrc  = root + "assets/core/tms-engine.js";
+    const cssHref = root + "assets/core/pms-ux-engine.css";
+    const jsSrc  = root + "assets/core/pms-ux-engine.js";
 
-    if (!document.querySelector("link[data-tms-engine]")) {
+    if (!document.querySelector("link[data-pms-ux-engine]")) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.href = cssHref;
-      link.dataset.tmsEngine = "1";
+      link.dataset.pmsUxEngine = "1";
       document.head.appendChild(link);
     }
 
-    if (!document.querySelector("script[data-tms-engine]")) {
+    if (!document.querySelector("script[data-pms-ux-engine]")) {
       const script = document.createElement("script");
       script.src = jsSrc;
       script.defer = true;
-      script.dataset.tmsEngine = "1";
+      script.dataset.pmsUxEngine = "1";
       document.head.appendChild(script);
     }
   }
@@ -134,6 +134,7 @@
 
     document.documentElement.dataset.navCore = "1";
     document.body.dataset.navCore = "1";
+    document.documentElement.dataset.nav = "core";
 
     if (main && !opNav.isConnected) {
       main.insertAdjacentElement("afterbegin", opNav);
@@ -209,6 +210,13 @@
     });
   }
 
+
+  function ensureBodyBottomPadding() {
+    const nav = document.getElementById(IDS.bottomNav);
+    const h = nav ? nav.offsetHeight : 0;
+    document.body.style.paddingBottom = `${Math.max(96, h + 24)}px`;
+  }
+
   function dedupeIfAny() {
     $all(".old-nav, .legacy-nav, #legacy-nav, .pms-nav-legacy").forEach((n) => n.remove());
 
@@ -226,13 +234,14 @@
   }
 
   function init() {
-    injectTmsEngineAssets();
+    injectPmsUxEngineAssets();
     placeNav();
     bindActions();
     safeMediaFallback();
 
     toggleFloatVisibility();
     dedupeIfAny();
+    ensureBodyBottomPadding();
 
     window.addEventListener("scroll", () => {
       toggleFloatVisibility();
@@ -240,10 +249,11 @@
 
     window.addEventListener("resize", () => {
       dedupeIfAny();
+      ensureBodyBottomPadding();
     }, { passive: true });
 
-    setTimeout(() => { dedupeIfAny(); }, 250);
-    setTimeout(() => { dedupeIfAny(); }, 1000);
+    setTimeout(() => { dedupeIfAny(); ensureBodyBottomPadding(); }, 250);
+    setTimeout(() => { dedupeIfAny(); ensureBodyBottomPadding(); }, 1000);
   }
 
   if (document.readyState === "loading") {
