@@ -1,0 +1,72 @@
+html{
+  scroll-behavior:smooth;
+}
+
+.tms-app{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 24px 120px;
+}
+
+.tms-section{
+  background:white;
+  border-radius:14px;
+  padding:28px;
+  margin-bottom:28px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+.tms-form{
+  display:grid;
+  gap:18px;
+}
+
+.tms-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.tms-choice{
+  flex-direction:row;
+  align-items:center;
+  gap:12px;
+}
+
+input,select,textarea{
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #d0d7e2;
+}
+
+button{
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+.tms-nc-grid{
+  display:grid;
+  gap:12px 16px;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+}
+
+.tms-nc-gravite{ grid-column:1; grid-row:1; }
+.tms-nc-detecte{ grid-column:2; grid-row:1; }
+.tms-nc-cause{ grid-column:1; grid-row:2; }
+.tms-nc-action{ grid-column:2; grid-row:2; }
+
+@media (max-width: 800px) {
+  .tms-nc-grid{
+    grid-template-columns:1fr;
+  }
+  .tms-nc-gravite,
+  .tms-nc-detecte,
+  .tms-nc-cause,
+  .tms-nc-action{
+    grid-column:auto;
+    grid-row:auto;
+  }
+}
