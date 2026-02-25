@@ -23,6 +23,43 @@
     return el;
   }
 
+  function baseToRoot(){
+    const script = document.currentScript || $all("script[src]").find((el) => String(el.src || "").includes("/assets/core/navigation.js"));
+    if (script?.src) {
+      return String(script.src).replace(/assets\/core\/navigation\.js(?:\?.*)?$/, "");
+    }
+
+    // renvoie "" à la racine, "../" si /outils/, "../../" si /outils/sub/
+    const depth = location.pathname.split("/").filter(Boolean).length;
+    // ex: /plateforme-pms2/outils/registre-nc.html => ["plateforme-pms2","outils","registre-nc.html"] => depth 3
+    // root of site folder = first segment
+    // so we need (depth-2) "../"
+    const up = Math.max(0, depth - 2);
+    return "../".repeat(up);
+  }
+
+  function injectTmsEngineAssets(){
+    const root = baseToRoot();
+    const cssHref = root + "assets/core/tms-engine.css";
+    const jsSrc  = root + "assets/core/tms-engine.js";
+
+    if (!document.querySelector("link[data-tms-engine]")) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = cssHref;
+      link.dataset.tmsEngine = "1";
+      document.head.appendChild(link);
+    }
+
+    if (!document.querySelector("script[data-tms-engine]")) {
+      const script = document.createElement("script");
+      script.src = jsSrc;
+      script.defer = true;
+      script.dataset.tmsEngine = "1";
+      document.head.appendChild(script);
+    }
+  }
+
   function getMainEl() {
     return $("main") || $("#main") || null;
   }
@@ -96,6 +133,7 @@
     const bottomNav = injectBottomNavOnce();
 
     document.documentElement.dataset.navCore = "1";
+    document.body.dataset.navCore = "1";
 
     if (main && !opNav.isConnected) {
       main.insertAdjacentElement("afterbegin", opNav);
@@ -172,11 +210,13 @@
   }
 
   function dedupeIfAny() {
+    $all(".old-nav, .legacy-nav, #legacy-nav, .pms-nav-legacy").forEach((n) => n.remove());
+
     const op = $all(`#${IDS.opNav}`);
     if (op.length > 1) op.slice(1).forEach(n => n.remove());
 
-    const bottom = $all(`#${IDS.bottomNav}`);
-    if (bottom.length > 1) bottom.slice(1).forEach(n => n.remove());
+    const bottom = $all(`#${IDS.bottomNav}, .pms-bottom-nav`);
+    if (bottom.length > 1) bottom.slice(0, -1).forEach(n => n.remove());
 
     const fL = $all(`#${IDS.floatL}`);
     if (fL.length > 1) fL.slice(1).forEach(n => n.remove());
@@ -186,6 +226,7 @@
   }
 
   function init() {
+    injectTmsEngineAssets();
     placeNav();
     bindActions();
     safeMediaFallback();

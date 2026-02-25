@@ -1426,3 +1426,11 @@ a.tms-chip:focus-visible{
   .tms-stats{ overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .tms-stats::-webkit-scrollbar{ display:none; }
 }
+
+/* --- HOTFIX overlay nav bottom --- */
+body[data-nav-core="1"]{
+  scroll-padding-top: calc(var(--pms-sticky-offset, 72px) + 12px);
+}
+body[data-nav-core="1"] main{
+  padding-bottom: calc(var(--tms-bottom-h, 74px) + 28px) !important;
+}
