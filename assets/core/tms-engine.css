@@ -1,0 +1,227 @@
+:root{
+  --tms-bg:#f5f8fc;
+  --tms-card:#ffffff;
+  --tms-ink:#0f1f33;
+  --tms-muted:#5b6b7f;
+  --tms-line:rgba(15,31,51,.12);
+  --tms-shadow:0 10px 28px rgba(15,31,51,.08);
+  --tms-shadow-2:0 18px 50px rgba(15,31,51,.12);
+  --tms-radius:16px;
+  --tms-radius-sm:12px;
+  --tms-gap:18px;
+  --tms-max:1180px;
+
+  /* on s’aligne sur la charte PMS/TMS existante si dispo */
+  --tms-primary: var(--pms-primary, #0b4aa2);
+  --tms-primary-2: var(--pms-primary-2, #0a3b82);
+  --tms-accent: var(--pms-accent, #2f7df6);
+  --tms-success:#2e7d32;
+  --tms-warn:#f9a825;
+  --tms-danger:#c62828;
+
+  --tms-nav-h: 72px;
+  --tms-bottom-h: 74px;
+}
+
+/* ==== base reset (non destructif) ==== */
+html,body{height:100%}
+body{
+  background:var(--tms-bg);
+  color:var(--tms-ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height:1.45;
+}
+
+/* Conteneur app-like */
+main, .main, #main, .container, .pms-container{
+  max-width:var(--tms-max);
+  margin:0 auto;
+}
+
+/* Evite que la nav bottom recouvre le contenu */
+body[data-nav-core="1"] main{
+  padding-bottom: calc(var(--tms-bottom-h) + 32px) !important;
+}
+
+/* Sections “TMS rhythm” */
+.tms-section{
+  background:var(--tms-card);
+  border:1px solid var(--tms-line);
+  border-radius:var(--tms-radius);
+  box-shadow:var(--tms-shadow);
+  padding:22px;
+  margin:22px auto;
+}
+
+/* Titres + sous-titres */
+h1,h2,h3{letter-spacing:-.02em}
+h1{font-size:1.9rem; margin:.2rem 0 1rem}
+h2{font-size:1.35rem; margin:1.2rem 0 .8rem}
+h3{font-size:1.1rem; margin:1rem 0 .6rem}
+p{color:var(--tms-muted)}
+
+/* Callouts TMS-like */
+.tms-callout{
+  border-radius:14px;
+  padding:14px 16px;
+  border:1px solid var(--tms-line);
+  background: linear-gradient(135deg, rgba(47,125,246,.10), rgba(11,74,162,.06));
+  color:var(--tms-ink);
+}
+.tms-callout strong{color:var(--tms-primary)}
+
+/* Cards actions */
+.tms-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:var(--tms-gap);
+}
+.tms-col-4{grid-column: span 4;}
+.tms-col-6{grid-column: span 6;}
+.tms-col-12{grid-column: span 12;}
+
+@media (max-width: 980px){
+  .tms-col-4,.tms-col-6{grid-column: span 12;}
+}
+
+/* Liens / boutons visuellement cohérents */
+a{color:var(--tms-primary)}
+a:hover{text-decoration:underline}
+
+.tms-btn, button, input[type="button"], input[type="submit"]{
+  appearance:none;
+  border:1px solid rgba(11,74,162,.18);
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:800;
+  background:#fff;
+  color:var(--tms-primary);
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(15,31,51,.06);
+}
+.tms-btn.primary, button.primary{
+  background:linear-gradient(135deg, var(--tms-accent), var(--tms-primary));
+  color:#fff;
+  border-color:transparent;
+}
+.tms-btn:disabled, button:disabled{opacity:.55; cursor:not-allowed}
+
+/* ==== FORM ENGINE (répare le “laid + non opérationnel”) ==== */
+form{
+  background:var(--tms-card);
+  border:1px solid var(--tms-line);
+  border-radius:var(--tms-radius);
+  box-shadow:var(--tms-shadow);
+  padding:22px;
+}
+label{font-weight:700; color:var(--tms-ink)}
+input[type="text"], input[type="email"], input[type="number"], input[type="date"],
+textarea, select{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid rgba(15,31,51,.18);
+  border-radius:12px;
+  padding:12px 12px;
+  margin-top:6px;
+  background:#fff;
+  color:var(--tms-ink);
+}
+textarea{min-height:110px; resize:vertical}
+input:focus, textarea:focus, select:focus{
+  outline:3px solid rgba(47,125,246,.18);
+  border-color:rgba(47,125,246,.55);
+}
+
+/* Radios/checkbox : FINI les bulles au milieu du vide */
+.tms-options,
+.question-card .options{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
+}
+.tms-options label,
+.question-card .options label{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:12px 14px;
+  background:rgba(15,31,51,.03);
+  border:1px solid transparent;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.15s;
+}
+.tms-options label:hover,
+.question-card .options label:hover{
+  background:rgba(47,125,246,.10);
+  border-color:rgba(47,125,246,.28);
+}
+.tms-options input,
+.question-card .options input{
+  margin-top:2px;
+  flex:0 0 auto;
+}
+
+/* “Question cards” (reprend la logique TMS) */
+.question-card{
+  background:var(--tms-card);
+  border:1px solid var(--tms-line);
+  border-radius:var(--tms-radius);
+  box-shadow:var(--tms-shadow);
+  padding:18px 18px;
+  margin:18px 0;
+}
+.question-card .q-head{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  margin-bottom:10px;
+}
+.question-card .q-index{
+  font-weight:900;
+  color:var(--tms-primary);
+}
+.question-card .q-title{
+  font-weight:900;
+  color:var(--tms-ink);
+}
+.question-card .context{
+  margin:10px 0 12px;
+  padding:12px 14px;
+  border-radius:12px;
+  background: linear-gradient(135deg, rgba(47,125,246,.10), rgba(11,74,162,.06));
+  border:1px solid rgba(47,125,246,.15);
+}
+
+/* TD / tableaux : stop colonnes qui partent à droite */
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--tms-line);
+  border-radius:14px;
+  background:#fff;
+}
+th,td{
+  padding:12px 12px;
+  border-bottom:1px solid var(--tms-line);
+  vertical-align:top;
+}
+tr:last-child td{border-bottom:none}
+th{background:rgba(15,31,51,.04); text-align:left}
+td input[type="checkbox"], td input[type="radio"]{
+  transform:scale(1.1);
+}
+
+/* Sticky bottom nav : visuel propre, pas “bande blanche sale” */
+.pms-bottom-nav, #pms-bottom-nav, .bottom-nav, .nav-bottom{
+  backdrop-filter: blur(12px);
+  background:rgba(245,248,252,.86) !important;
+  border-top:1px solid rgba(15,31,51,.12) !important;
+}
+
+/* petits détails */
+hr{border:none; border-top:1px solid var(--tms-line); margin:18px 0}
+small, .muted{color:var(--tms-muted)}
